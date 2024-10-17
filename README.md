@@ -81,7 +81,7 @@ cd SynergiX
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/SynergiX.git
+   git clone [https://github.com/JackSmack1971/synergix.git]
    cd SynergiX
    ```
 
