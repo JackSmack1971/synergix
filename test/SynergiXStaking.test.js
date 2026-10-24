@@ -58,6 +58,16 @@ describe("SynergiXStaking", function () {
         expect(await staking.stakeActive(0, user.address)).to.equal(true);
     });
 
+    it("leaves balances and positions unchanged when transferFrom fails", async function () {
+        await token.connect(admin).mint(user.address, minimumStake);
+
+        await expectRevert(token.connect(user).stake(minimumStake, 30), "insufficient allowance");
+
+        expect((await token.balanceOf(user.address)).eq(minimumStake)).to.equal(true);
+        expect((await token.balanceOf(staking.address)).isZero()).to.equal(true);
+        expect((await staking.numStakes(user.address)).isZero()).to.equal(true);
+    });
+
     it("rejects stakes below the configured minimum and invalid durations", async function () {
         const belowMinimum = minimumStake.sub(1);
         await token.connect(admin).mint(user.address, minimumStake);

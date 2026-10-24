@@ -6,9 +6,8 @@
   "scripts": {
     "test": "node scripts/hardhat.js test",
     "compile": "node scripts/hardhat.js compile",
-    "deploy": "node scripts/hardhat.js run scripts/SynergixDeployment.js --network rinkeby",
-    "deploy:mainnet": "node scripts/hardhat.js run scripts/SynergixDeployment.js --network mainnet",
-    "upgrade": "node scripts/hardhat.js run scripts/UpgradeSynergixContracts.js --network rinkeby"
+    "deploy": "node scripts/hardhat.js run scripts/SynergixDeployment.js",
+    "deploy:mainnet": "node scripts/hardhat.js run scripts/SynergixDeployment.js --network mainnet"
   },
   "keywords": [
     "ethereum",

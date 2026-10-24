@@ -13,6 +13,11 @@ import "./ISynergiXStaking.sol";
 /// @title SynergiXToken
 /// @notice ERC20 Token with Staking, Access Control, and Upgradeability Features
 contract SynergiXToken is Initializable, ERC20BurnableUpgradeable, AccessControlUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable {
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
     // Roles Definitions
     bytes32 public constant STAKING_ROLE = keccak256("STAKING_ROLE");
     bytes32 public constant TRUSTED_CONTRACT_ROLE = keccak256("TRUSTED_CONTRACT_ROLE");

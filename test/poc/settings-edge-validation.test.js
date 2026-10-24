@@ -1,8 +1,18 @@
 const { expect } = require("chai");
 const { ethers, upgrades } = require("hardhat");
 
-describe("Settings validation: invalid minimum stake duration setting", function () {
-    it("shows owner-set maxStakeDays 0 or 1 prevents valid stakes", async function () {
+async function expectRevert(promise, message) {
+    try {
+        await promise;
+    } catch (error) {
+        expect(error.message).to.include(message);
+        return;
+    }
+    expect.fail("Expected transaction to revert");
+}
+
+describe("Settings validation: max stake duration lower bound", function () {
+    it("rejects maxStakeDays 0 or 1 and keeps valid stakes available", async function () {
         const [owner, admin, user] = await ethers.getSigners();
         const principal = ethers.utils.parseEther("1000000");
 
@@ -24,22 +34,19 @@ describe("Settings validation: invalid minimum stake duration setting", function
         await token.connect(admin).mint(user.address, principal);
         await token.connect(user).approve(staking.address, principal);
 
-        await staking.connect(owner).setMaxStakeDays(1);
-        let oneDaySettingRejectedStake = false;
-        try {
-            await token.connect(user).stake(principal, 1);
-        } catch (error) {
-            oneDaySettingRejectedStake = Boolean(error);
-        }
-        expect(oneDaySettingRejectedStake).to.equal(true);
+        await expectRevert(
+            staking.connect(owner).setMaxStakeDays(1),
+            "Must allow at least two stake days."
+        );
+        await expectRevert(
+            staking.connect(owner).setMaxStakeDays(0),
+            "Must allow at least two stake days."
+        );
+        expect(Number(await staking.maxStakeDays())).to.equal(5555);
+        await expectRevert(staking.calcStakeShares(principal, 0), "Invalid stake days.");
+        await expectRevert(staking.calcStakeShares(principal, 5556), "Invalid stake days.");
 
-        await staking.connect(owner).setMaxStakeDays(0);
-        let zeroDaySettingRejectedStake = false;
-        try {
-            await token.connect(user).stake(principal, 1);
-        } catch (error) {
-            zeroDaySettingRejectedStake = String(error.message).includes("Invalid stake days.");
-        }
-        expect(zeroDaySettingRejectedStake).to.equal(true);
+        await token.connect(user).stake(principal, 1);
+        expect((await staking.numStakes(user.address)).toNumber()).to.equal(1);
     });
 });

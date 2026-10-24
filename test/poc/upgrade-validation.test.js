@@ -17,6 +17,7 @@ describe("Upgrade validation: UUPS authorization and basic storage retention", f
         await token.connect(admin).grantRole(role("STAKING_ROLE"), admin.address);
         await token.connect(admin).mint(user.address, amount);
 
+        await upgrades.validateUpgrade(token.address, Token);
         const nextImplementation = await Token.deploy();
         await nextImplementation.deployed();
 
@@ -37,7 +38,7 @@ describe("Upgrade validation: UUPS authorization and basic storage retention", f
         expect(await upgrades.erc1967.getImplementationAddress(token.address)).to.equal(nextImplementation.address);
     });
 
-    it("confirms direct implementation initialization cannot upgrade or change proxy roles", async function () {
+    it("locks the standalone implementation against initialization", async function () {
         const [deployer, admin, attacker] = await ethers.getSigners();
         const role = (name) => ethers.utils.keccak256(ethers.utils.toUtf8Bytes(name));
         const Token = await ethers.getContractFactory("SynergiXToken");
@@ -51,16 +52,15 @@ describe("Upgrade validation: UUPS authorization and basic storage retention", f
         const implementation = await Token.deploy();
         await implementation.deployed();
         const standalone = Token.attach(implementation.address);
-        await standalone.connect(attacker).initialize(attacker.address, ethers.constants.AddressZero);
-        expect(await standalone.hasRole(role("ADMIN_ROLE"), attacker.address)).to.equal(true);
 
-        let directUpgradeRejected = false;
+        let directInitializationRejected = false;
         try {
-            await standalone.connect(attacker).upgradeTo(implementation.address);
+            await standalone.connect(attacker).initialize(attacker.address, ethers.constants.AddressZero);
         } catch (error) {
-            directUpgradeRejected = String(error.message).includes("through delegatecall");
+            directInitializationRejected = String(error.message).includes("already initialized");
         }
-        expect(directUpgradeRejected).to.equal(true);
+        expect(directInitializationRejected).to.equal(true);
+        expect(await standalone.hasRole(role("ADMIN_ROLE"), attacker.address)).to.equal(false);
         expect(await upgrades.erc1967.getImplementationAddress(proxy.address)).to.not.equal(implementation.address);
         expect(await proxy.hasRole(role("ADMIN_ROLE"), admin.address)).to.equal(true);
         expect(await proxy.hasRole(role("ADMIN_ROLE"), attacker.address)).to.equal(false);

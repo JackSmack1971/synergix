@@ -1,10 +1,12 @@
 # SynergiX V1 Economic Specification
 
-**Status:** Proposal for product and engineering review. This document does not describe deployed behavior, approve tokenomics, or certify the current contracts. Numeric parameters and testnet selection remain open.
+**Status:** Proposal for product and engineering review. The architecture direction has conditional approval; this document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. Numeric parameters remain open; testnet selection is deferred to deployment planning.
+
+The decision register, illustrative sustainability sensitivities, and machine-testable economic acceptance criteria are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). That draft does not approve parameters; this specification remains subject to its Phase 1 approval gate.
 
 ## Purpose and baseline
 
-This specification proposes the economic model for a first release. Its evidence baseline is the current repository checkout and [`audit/REPORT.md`](../audit/REPORT.md), which remains `STATUS: INCOMPLETE`. The report records a source-only review, no supplied deployment address, unknown payout intent, and unresolved economic and operational assumptions. It also records compile and test results for its audit-session working tree, while the repository guidance says recovered source defects must be reconciled before implementation. These claims describe different points and evidence in the checkout; establish the exact implementation baseline and resolve the discrepancy before building V1. None of the recorded checks establishes production readiness.
+This specification proposes the economic model for a first release. Its evidence baseline is the current repository checkout and [`audit/REPORT.md`](../audit/REPORT.md), which remains `STATUS: INCOMPLETE`. The report records a source-only review, no supplied deployment address, unknown payout intent, and unresolved economic and operational assumptions. The current remediation record separately reconciles the exact `main` and branch revisions, documents the present token-proxy/staking-constructor architecture, and records current build and test evidence. That reconciliation does not amend the historical report, supply the missing economics, establish deployment state, or establish production readiness.
 
 The audit report is historical evidence and must not be rewritten to make this proposal appear validated. Any discovered live deployment requires a separate compatibility and migration assessment before changing contracts or token economics.
 
@@ -60,9 +62,9 @@ Unless product review explicitly adds and specifies them, V1 excludes proxy upgr
 | Reward reserve | Accepted funding asset, required prefunding, accounting method, and behavior when funds are insufficient |
 | Exit rules | Maturity definition, claim timing, early exit availability, and any disclosed penalties |
 | Administration | Role holders, multisig threshold, timelock, mutable settings, pause authority, and recovery procedures |
-| Supported testnet | Select and name the network, chain ID, RPC/deployment process, and explorer verification procedure; do not infer it from legacy configuration |
+| Supported testnet (deployment planning) | Deferred until Phase 4; then select and name the network, chain ID, RPC/deployment process, and explorer verification procedure. Do not infer it from legacy configuration. |
 
-No numeric rate, token cap, stake limit, network, or other unresolved value in this document should be treated as settled. Product owners must approve these decisions in a versioned economic schedule before implementation acceptance.
+No economic rate, token cap, stake limit, or other unresolved tokenomics value in this document should be treated as settled. Product owners must approve these decisions in a versioned economic schedule before implementation acceptance. Testnet selection is deferred until deployment planning in Phase 4.
 
 ## Acceptance boundary
 
