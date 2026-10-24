@@ -4,19 +4,23 @@ pragma solidity ^0.8.0;
 // Import OpenZeppelin Contracts
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Burnable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./ISynergiXStaking.sol";
 
 /// @title ISynergiXToken Interface
 /// @notice Interface for the SynergiXToken Contract (mint function)
-interface ISynergiXToken {
+interface ISynergiXToken is IERC20 {
     function mint(address to, uint256 amount) external;
+    function burn(uint256 amount) external;
 }
 
 /// @title SynergiXStaking
 /// @notice Staking Contract for SynergiXToken
 contract SynergiXStaking is ISynergiXStaking, Ownable, AccessControl, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+
     // Roles Definitions
     bytes32 public constant STAKING_OPERATOR_ROLE = keccak256("STAKING_OPERATOR_ROLE");
 
@@ -113,9 +117,14 @@ contract SynergiXStaking is ISynergiXStaking, Ownable, AccessControl, Reentrancy
         require(stakeValue >= MIN_STAKE_VALUE, "Stake value must be at least 1 million SYN.");
         require(stakeDays > 0 && stakeDays <= maxStakeDays, "Invalid stake days.");
 
-        // Transfer tokens from the staker to the staking contract
-        bool success = token.transferFrom(staker, address(this), stakeValue);
-        require(success, "Token transfer failed.");
+        // Principal accounting assumes the staking contract receives the exact amount.
+        uint256 balanceBefore = token.balanceOf(address(this));
+        IERC20(address(token)).safeTransferFrom(staker, address(this), stakeValue);
+        uint256 balanceAfter = token.balanceOf(address(this));
+        require(
+            balanceAfter >= balanceBefore && balanceAfter - balanceBefore == stakeValue,
+            "Unexpected token amount received."
+        );
 
         uint256 sShares = calcStakeShares(stakeValue, uint32(stakeDays));
         uint256 startTimestamp = block.timestamp;
@@ -174,6 +183,7 @@ contract SynergiXStaking is ISynergiXStaking, Ownable, AccessControl, Reentrancy
     /// @param stakeDays The duration of the stake in days
     /// @return sShares The calculated stake shares
     function calcStakeShares(uint256 stakeValue, uint32 stakeDays) public view returns (uint256 sShares) {
+        require(stakeDays > 0 && stakeDays <= maxStakeDays, "Invalid stake days.");
         uint256 bonusMultiplier = (BONUS_MAX * (stakeDays - 1)) / (maxStakeDays - 1);
         uint256 bonus = 0;
 
@@ -350,6 +360,7 @@ contract SynergiXStaking is ISynergiXStaking, Ownable, AccessControl, Reentrancy
     /// @notice Sets the maximum stake days
     /// @param _maxStakeDays The new maximum stake days
     function setMaxStakeDays(uint32 _maxStakeDays) external override onlyOwner {
+        require(_maxStakeDays > 1, "Must allow at least two stake days.");
         require(_maxStakeDays <= MAX_STAKE_DAYS, "Exceeds maximum allowed stake days.");
         maxStakeDays = _maxStakeDays;
         emit MaxStakeDaysUpdated(_maxStakeDays);
@@ -403,6 +414,7 @@ contract SynergiXStaking is ISynergiXStaking, Ownable, AccessControl, Reentrancy
     /// @param totalSShares The total stake shares for the day
     /// @param interestPool The interest pool for the day
     function addDailyData(uint256 totalSShares, uint256 interestPool) external onlyOwner {
+        require(totalSShares > 0, "Total stake shares must be greater than zero.");
         uint256 cumulativeInterest = dailyData.length > 0 ? dailyData[dailyData.length - 1].cumulativeInterest : 0;
         cumulativeInterest += interestPool;
         dailyData.push(DailyData({
