@@ -1,12 +1,13 @@
 # SynergiX Security Audit and Remediation Gate
 
-**Status: INCOMPLETE — the V1 payout architecture is owner-approved and implemented in a new contract; legacy H-01, numeric schedule approval, compatibility, and independent review remain open.**
+STATUS: INCOMPLETE
+Blocker: This PR addresses one owner-approved V1 settlement invariant only. Numeric economics, administrative authority, full per-control checklist verification, and static analysis remain open. An independent reviewer approved the implementation diff at commit 5b0ce1fb3fe7cefba6829d93ce7d344fcea22469.
 
 ## 1. Executive summary
 
-Audited base revision `6496f7d666e95eb4707d3f81526cf46af0122f60` and the V1 implementation worktree on 2026-10-24. The user self-identified as owner `JackSmack1971` and gave durable in-session approval for position-based immutable entry terms, fixed simple rewards, separately prefunded liabilities, escrowed principal, keeper-independent settlement, and inclusive exact-timestamp maturity. The new `SynergiXStakingV1` implements that architecture with deployment-supplied immutable parameters. The legacy `SynergiXStaking` still contains H-01: current-only daily records can leave a matured claim reverting at a Unix-day array index. H-01 is verified by local PoC and remains open for legacy positions/deployment. Numeric rate/duration/stake bounds, referral policy, reserve loss behavior, governance/custody and chain remain unapproved. No Critical finding was validated. Coverage and Slither are unavailable.
+Audited base revision `e13f7fceec35849bf2f85e390206138dacd7bd29` (`origin/main`) on 2026-10-24. The owner has approved separate V1 principal and reward claims at maturity, principal priority after reserve loss, and attested that no contracts are deployed and no legacy holders or enforceable off-chain obligations exist; the decision and its limits are recorded in `docs/V1_OWNER_DECISION_ADDENDUM_2026-10-24.md`. Legacy H-01 remains a reproduced source defect but is retired from planned V1 work under that owner attestation; the legacy contracts must not be deployed. This slice addresses V1 failure isolation and principal solvency: reward failure must not block otherwise available principal, and reward claims cannot reduce balance below aggregate principal liabilities. Numeric economics, administrative authority, and deployment/release remain open. No Critical finding was validated. Coverage and Slither were unavailable.
 
-The next V1 avoids the legacy temporal data model rather than attempting to repair its daily indexes. V1 stores each position's fixed reward and maturity timestamp at entry, checks full reward prefunding before accepting the position, and returns principal plus reward at or after maturity. The new contract has no admin or reserve withdrawal method. Legacy H-01 remains open because the new contract does not migrate or settle legacy positions; deployment/off-chain obligations have not been inventoried. This PR must not merge while H-01 remains open under the requested gate.
+V1 stores each position's fixed reward and maturity timestamp at entry and checks full reward prefunding before accepting the position. This change settles principal and reward independently, and reward payout checks that remaining balance covers aggregate principal liabilities. After reserve loss, rewards may wait until principal is withdrawn or funds are restored. Token-level restrictions that prevent all transfers can still block both claims. The legacy payout bug is not repaired because the owner attests there are no deployed legacy contracts or related obligations; it remains unsafe legacy source and is excluded from new V1 settlement.
 
 ## 2. Scope and assumptions
 
@@ -54,7 +55,7 @@ This is a focused checklist mapping, not a claim that every one of the 370 promp
 
 ## 4. Findings
 
-### H-01 — Unix-day indexes can make ordinary matured claims revert
+### H-01 — Unix-day indexes can make ordinary matured claims revert (historical; retired for V1)
 
 - **Severity:** High (conditional on a current-period schedule that has not been backfilled).
 - **Location:** `contracts/SynergiXStaking.sol:222-231` computes Unix-day indexes and uses them directly as array indexes; `:413-420` appends one row at a time without an epoch offset or explicit day key. Claim path: `:153-175`; token wrapper: `contracts/SynergiXToken.sol:119-126`.
@@ -63,7 +64,18 @@ This is a focused checklist mapping, not a claim that every one of the 370 promp
 - **Reachability/evidence:** An ordinary staker stakes and waits for maturity while the owner/keeper has appended only current-period rows. `npm test` executed the local H-01 PoC successfully; the assertion confirms `Invalid end day index.`
 - **Counterargument:** Sequentially backfilling every historical day can make the direct Unix-day indexes exist. No deployment schedule was provided; the source has no base-day mapping or batch backfill. This limits certainty about deployed impact but does not remove the demonstrated ordinary schedule failure.
 - **Recommendation:** Use the approved position-based V1 for new positions and do not reuse daily records. Separately identify any deployed or off-chain legacy positions and preserve an approved claim/migration path; do not silently replace legacy storage or payout semantics.
-- **Status:** OPEN for legacy positions/deployment until compatibility and obligation inventory proves the daily-index path can be retired or safely resolved. The new V1 does not close H-01 for existing legacy positions.
+- **Status:** Retired from this V1 remediation scope based on the owner attestation in `docs/V1_OWNER_DECISION_ADDENDUM_2026-10-24.md`. The legacy source still has the defect; do not deploy the legacy contracts. This is not an on-chain independent verification of the owner's statement.
+
+### M-01 — Reward transfer failure also blocks principal settlement
+
+- **Severity:** Medium, conditional on a reward shortfall or reward-only transfer failure while enough tokens remain to return principal.
+- **Location:** Base `contracts/SynergiXStakingV1.sol:187-215` reads the combined payout and performs one transfer; the function updates both liabilities together. The relevant guard rejects the entire settlement if the token cannot deliver the combined amount.
+- **Checklist:** `SOL-Defi-Staking-2`, `SOL-EC-13`, `SOL-AM-DOSA-1`.
+- **Impact:** A matured beneficiary cannot recover principal through the only settlement function if reward delivery fails even when the principal amount remains transferable.
+- **Reachability/evidence:** A local regression reduces the contract's test-token balance by the reserved reward while leaving principal covered. The updated V1 implementation returns principal, leaves reward liability outstanding when reward payment fails, and permits reward retry after funds are restored. This models an external reserve shortfall; it does not assert that the selected production token can rebase or confiscate balances.
+- **Counterargument:** V1 fully reserves rewards, has no admin withdrawal, and explicitly rejects fee-on-transfer behavior, so a shortfall is outside the expected token model. The owner nevertheless selected explicit failure isolation, and arbitrary ERC20 reserve loss or reward-only transfer failure must not couple the two entitlements.
+- **Recommendation:** Keep separate at-most-once principal and reward claims; apply checks-effects-interactions and exact transfer validation independently to each.
+- **Status:** Addressed in this slice; focused and full-suite verification pending.
 
 ## 5. Centralization and trust risks
 
@@ -88,14 +100,12 @@ Token admin can authorize arbitrary UUPS implementation upgrades and administer 
 
 ## 7. Discarded candidates and implementation decision
 
-The owner approved replacing the legacy daily-index mechanism with a position-based V1. A separate immutable-terms implementation now exists; it does not migrate or rewrite legacy positions because deployment and off-chain obligations remain unverified. Numeric schedule terms and the existing Hardhat 2 development dependency advisories also remain open. No candidate was claimed disproven; deployment/release requires those gates to close.
-
-## 9. PR and independent review status
-
-PR [#7](https://github.com/JackSmack1971/synergix/pull/7) is open on `feat/v1-position-based-staking` at commit `c354c919aff7c2009e1856b61c37cc7f4fef6ef8`. GitHub reported `MERGEABLE`, no configured status checks, and no GitHub reviews at last inspection. The independent follow-up reviewer returned **CHANGES REQUIRED**: the new tests close previously noted V1 coverage gaps and found no new V1 Critical/High code defect, while legacy H-01 and 13 High development dependency advisories remain blocking findings. The selected token's pause/blacklist/admin powers remain a Medium deployment risk. The PR was not merged because the requested no-open-High gate is not met.
-
-**Selected slice:** introduce an immutable-terms V1 lifecycle that does not depend on daily keeper rows. Its constructor requires explicit token, rate, principal bounds, and duration bounds; no draft schedule values are defaults. Acceptance evidence includes exact receipt/payout checks, no underfunded position acceptance, one-time beneficiary withdrawal, inclusive timestamp maturity, delayed-claim fixed rewards, and reentrancy rejection. The owner’s approval is recorded in `docs/V1_TOKENOMICS_DECISION_RECORD.md`; numeric terms remain for an approved deployment schedule. The slice does not migrate or modify legacy positions. Legacy H-01 and 13 high development dependency advisories remain open, so do not merge under the requested gate.
+The owner attests that there are no deployed legacy contracts or enforceable legacy obligations, so H-01 is preserved as a historical defect rather than patched. Numeric schedule terms and administrative authority remain open and are not changed by this slice. No claim is made about release readiness or deployment authorization.
 
 ## 8. Appendix
 
-Primary local evidence: `contracts/SynergiXToken.sol`, `contracts/SynergiXStaking.sol`, `contracts/SynergiXStakingV1.sol`, `contracts/ISynergiXStaking.sol`, `checklist.json`, V1 decision documents, and the local tests named above. Pre-existing worktree changes were preserved. This report is not release approval and does not establish deployed-contract safety.
+Primary evidence: `contracts/SynergiXToken.sol`, `contracts/SynergiXStaking.sol`, `contracts/SynergiXStakingV1.sol`, `contracts/ISynergiXStaking.sol`, `checklist.json` (370 items; SHA-256 `f33ad4227e866f97372b291eaa88951c52d72a241aca51da5ca3038680168cce`), the owner decision addendum, and named tests. The tracked base is GitHub default-branch commit `e13f7fceec35849bf2f85e390206138dacd7bd29`; this feature branch records one follow-up slice. PR #7 is closed/merged at that base and has no submitted GitHub review; its prior state is not an approval of this change. This report is pre-merge evidence, not release approval or a safety certification.
+
+**Selected slice:** separate matured V1 principal withdrawal and reward claim operations. Acceptance criteria: each is beneficiary-only, mature-only and independently at-most-once; failure of either operation preserves its own liability and does not block success of the other when the token can transfer the relevant amount; both claim orders work; zero reward settles once without a token transfer; and reentrancy/transfer failure cannot duplicate or erase either entitlement.
+
+**Independent review:** APPROVE on implementation commit `5b0ce1fb3fe7cefba6829d93ce7d344fcea22469`; reviewer confirmed the ECON-04 guard closes the partial-loss counterexample and independently ran its targeted regression. **Pre-merge status:** not ready; hosted CI and required human reviews are absent, and explicit merge authorization is required.

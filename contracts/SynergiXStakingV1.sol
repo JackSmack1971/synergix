@@ -40,7 +40,7 @@ contract SynergiXStakingV1 is ReentrancyGuard {
     /// @notice Funded rewards not yet committed to a position.
     uint256 public availableRewardReserve;
 
-    /// @notice Position terms are set once at entry; only `withdrawn` changes at settlement.
+    /// @notice Position terms are set once at entry; claim flags change at settlement.
     struct Position {
         /// @notice Account that deposited principal and receives settlement.
         address beneficiary;
@@ -50,8 +50,10 @@ contract SynergiXStakingV1 is ReentrancyGuard {
         uint256 fixedReward;
         /// @notice Inclusive withdrawal timestamp in Unix seconds.
         uint64 maturityTimestamp;
-        /// @notice Whether this position has already been settled.
-        bool withdrawn;
+        /// @notice Whether principal has been returned to the beneficiary.
+        bool principalWithdrawn;
+        /// @notice Whether the fixed reward has been paid to the beneficiary.
+        bool rewardClaimed;
     }
 
     /// @notice Positions indexed by their unique identifier.
@@ -67,12 +69,18 @@ contract SynergiXStakingV1 is ReentrancyGuard {
         uint256 fixedReward,
         uint64 maturityTimestamp
     );
-    /// @notice Emitted when a matured position is settled to its beneficiary.
-    event PositionWithdrawn(
+    /// @notice Emitted when matured principal is returned to its beneficiary.
+    event PrincipalWithdrawn(
         uint256 indexed positionId,
         address indexed beneficiary,
         address indexed caller,
-        uint256 principal,
+        uint256 principal
+    );
+    /// @notice Emitted when a matured fixed reward is paid to its beneficiary.
+    event RewardClaimed(
+        uint256 indexed positionId,
+        address indexed beneficiary,
+        address indexed caller,
         uint256 reward
     );
 
@@ -81,9 +89,11 @@ contract SynergiXStakingV1 is ReentrancyGuard {
     error AmountOutOfRange();
     error DurationOutOfRange();
     error InsufficientRewardReserve();
+    error PrincipalCoverageRequired();
     error PositionNotFound();
     error PositionNotMatured();
-    error PositionAlreadyWithdrawn();
+    error PrincipalAlreadyWithdrawn();
+    error RewardAlreadyClaimed();
     error NotBeneficiary();
     error UnsupportedTokenBehavior();
     error TimestampOutOfRange();
@@ -165,7 +175,8 @@ contract SynergiXStakingV1 is ReentrancyGuard {
             principal: amount,
             fixedReward: reward,
             maturityTimestamp: uint64(maturity),
-            withdrawn: false
+            principalWithdrawn: false,
+            rewardClaimed: false
         });
         totalPrincipalLiability += amount;
         availableRewardReserve -= reward;
@@ -181,37 +192,71 @@ contract SynergiXStakingV1 is ReentrancyGuard {
         emit PositionCreated(positionId, msg.sender, amount, reward, uint64(maturity));
     }
 
-    /// @notice Settles a matured position to its beneficiary.
+    /// @notice Returns a matured position's principal independently of its reward claim.
     /// @dev Effects precede the token transfer. Exact recipient delivery is required.
-    /// @param positionId Identifier of the position to settle.
-    function withdraw(uint256 positionId) external nonReentrant {
+    /// @param positionId Identifier of the position whose principal to return.
+    function withdrawPrincipal(uint256 positionId) external nonReentrant {
         Position storage position = positions[positionId];
         if (position.beneficiary == address(0)) revert PositionNotFound();
-        if (position.withdrawn) revert PositionAlreadyWithdrawn();
+        if (position.principalWithdrawn) revert PrincipalAlreadyWithdrawn();
         if (msg.sender != position.beneficiary) revert NotBeneficiary();
         if (block.timestamp < position.maturityTimestamp) revert PositionNotMatured();
 
         address beneficiary = position.beneficiary;
         uint256 principal = position.principal;
-        uint256 reward = position.fixedReward;
-        uint256 payout = principal + reward;
         uint256 contractBalanceBefore = stakingToken.balanceOf(address(this));
         uint256 recipientBalanceBefore = stakingToken.balanceOf(beneficiary);
 
-        position.withdrawn = true;
+        position.principalWithdrawn = true;
         totalPrincipalLiability -= principal;
-        totalReservedRewardLiability -= reward;
 
-        stakingToken.safeTransfer(beneficiary, payout);
+        stakingToken.safeTransfer(beneficiary, principal);
         uint256 contractBalanceAfter = stakingToken.balanceOf(address(this));
         uint256 recipientBalanceAfter = stakingToken.balanceOf(beneficiary);
         if (
             contractBalanceAfter > contractBalanceBefore ||
-            contractBalanceBefore - contractBalanceAfter != payout ||
+            contractBalanceBefore - contractBalanceAfter != principal ||
             recipientBalanceAfter < recipientBalanceBefore ||
-            recipientBalanceAfter - recipientBalanceBefore != payout
+            recipientBalanceAfter - recipientBalanceBefore != principal
         ) revert UnsupportedTokenBehavior();
 
-        emit PositionWithdrawn(positionId, beneficiary, msg.sender, principal, reward);
+        emit PrincipalWithdrawn(positionId, beneficiary, msg.sender, principal);
+    }
+
+    /// @notice Claims a matured position's fixed reward independently of principal return.
+    /// @dev A failed reward transfer reverts only this claim and leaves principal withdrawable.
+    /// @param positionId Identifier of the position whose reward to claim.
+    function claimReward(uint256 positionId) external nonReentrant {
+        Position storage position = positions[positionId];
+        if (position.beneficiary == address(0)) revert PositionNotFound();
+        if (position.rewardClaimed) revert RewardAlreadyClaimed();
+        if (msg.sender != position.beneficiary) revert NotBeneficiary();
+        if (block.timestamp < position.maturityTimestamp) revert PositionNotMatured();
+
+        address beneficiary = position.beneficiary;
+        uint256 reward = position.fixedReward;
+        position.rewardClaimed = true;
+        totalReservedRewardLiability -= reward;
+
+        if (reward > 0) {
+            uint256 contractBalanceBefore = stakingToken.balanceOf(address(this));
+            if (
+                contractBalanceBefore < totalPrincipalLiability ||
+                contractBalanceBefore - totalPrincipalLiability < reward
+            ) revert PrincipalCoverageRequired();
+            uint256 recipientBalanceBefore = stakingToken.balanceOf(beneficiary);
+
+            stakingToken.safeTransfer(beneficiary, reward);
+            uint256 contractBalanceAfter = stakingToken.balanceOf(address(this));
+            uint256 recipientBalanceAfter = stakingToken.balanceOf(beneficiary);
+            if (
+                contractBalanceAfter > contractBalanceBefore ||
+                contractBalanceBefore - contractBalanceAfter != reward ||
+                recipientBalanceAfter < recipientBalanceBefore ||
+                recipientBalanceAfter - recipientBalanceBefore != reward
+            ) revert UnsupportedTokenBehavior();
+        }
+
+        emit RewardClaimed(positionId, beneficiary, msg.sender, reward);
     }
 }
