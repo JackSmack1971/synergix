@@ -1,0 +1,38 @@
+---
+title: "SC05:2025 Reentrancy"
+source_url: "https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/"
+host: "scs.owasp.org"
+depth: 1
+selector: "article,main,[role=main]"
+fetched_at: "2026-10-24T02:29:02.567Z"
+---
+# SC05:2025 Reentrancy
+
+## Vulnerability: Reentrancy Attacks[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#vulnerability-reentrancy-attacks "Permanent link")
+
+### Description:[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#description "Permanent link")
+
+A reentrancy attack exploits the vulnerability in smart contracts when a function makes an external call to another contract before updating its own state. This allows the external contract, possibly malicious, to reenter the original function and repeat certain actions, like withdrawals, using the same state. Through such attacks, an attacker can possibly drain all the funds from a contract.
+
+### Example (Vulnerable contract):[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#example-vulnerable-contract "Permanent link")
+
+`[](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-1)// SPDX-License-Identifier: MIT [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-2)pragma solidity ^0.8.0; [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-3)[](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-4)contract Solidity_Reentrancy {     [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-5)    mapping(address => uint) public balances; [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-6)    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-7)    function deposit() external payable {        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-8)        balances[msg.sender] += msg.value;    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-9)    } [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-10)    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-11)    function withdraw() external {        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-12)        uint amount = balances[msg.sender];        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-13)        require(amount > 0, "Insufficient balance"); [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-14)        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-15)        // Vulnerability: Ether is sent before updating the user's balance, allowing reentrancy.        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-16)        (bool success, ) = msg.sender.call{value: amount}("");        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-17)        require(success, "Transfer failed"); [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-18)        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-19)        // Update balance after sending Ether        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-20)        balances[msg.sender] = 0;    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-21)    } [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-0-22)}`
+
+### Impact:[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#impact "Permanent link")
+
+-   The most immediate and impactful consequence is the draining of funds. Attackers exploit vulnerabilities to withdraw more money than they are entitled to, potentially emptying the contract's balance completely.
+-   An attacker can trigger unauthorized function calls. This can lead to unintended actions being executed within the contract or related systems.
+
+### Remediation:[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#remediation "Permanent link")
+
+-   Always ensure that every state change happens before calling external contracts, i.e., update balances or code internally before calling external code.
+-   Use function modifiers that prevent reentrancy, like OpenZeppelin’s Re-entrancy Guard.
+
+### Example (Fixed version):[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#example-fixed-version "Permanent link")
+
+`[](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-1)// SPDX-License-Identifier: MIT [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-2)pragma solidity ^0.8.0; [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-3)[](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-4)contract Solidity_Reentrancy {     [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-5)    mapping(address => uint) public balances; [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-6)    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-7)    function deposit() external payable {        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-8)        balances[msg.sender] += msg.value;    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-9)    } [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-10)    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-11)    function withdraw() external {        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-12)        uint amount = balances[msg.sender];        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-13)        require(amount > 0, "Insufficient balance"); [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-14)        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-15)        // Fix: Update the user's balance before sending Ether        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-16)        balances[msg.sender] = 0; [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-17)        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-18)        // Then send Ether        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-19)        (bool success, ) = msg.sender.call{value: amount}("");        [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-20)        require(success, "Transfer failed");    [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-21)    } [](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#__codelineno-1-22)}`
+
+### Examples of Smart Contracts that fell victim to Reentrancy Attacks:[¶](https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/#examples-of-smart-contracts-that-fell-victim-to-reentrancy-attacks "Permanent link")
+
+1.  [Rari Capital](https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code) : A Comprehensive [Hack Analysis](https://blog.solidityscan.com/rari-capital-re-entrancy-vulnerability-analysis-25df2bbfc803)
+2.  [Orion Protocol](https://etherscan.io/address/0x98a877bb507f19eb43130b688f522a13885cf604#code) : A Comprehensive [Hack Analysis](https://blog.solidityscan.com/orion-protocol-hack-analysis-missing-reentrancy-protection-f9af6995acb3)

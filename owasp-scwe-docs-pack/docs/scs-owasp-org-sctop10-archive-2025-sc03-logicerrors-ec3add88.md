@@ -1,0 +1,52 @@
+---
+title: "SC03:2025 Logic Errors"
+source_url: "https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/"
+host: "scs.owasp.org"
+depth: 1
+selector: "article,main,[role=main]"
+fetched_at: "2026-10-24T02:29:02.290Z"
+---
+# SC03:2025 Logic Errors
+
+## Vulnerability: Logic Errors[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#vulnerability-logic-errors "Permanent link")
+
+### Description:[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#description "Permanent link")
+
+Logic errors, also known as business logic vulnerabilities, are subtle flaws in smart contracts. They occur when the contract's code does not match its intended behavior. These errors can manifest in various forms, such as faulty math in reward distribution, improper token minting mechanisms, or incorrect calculations in lending and borrowing logic. Such vulnerabilities are elusive, hiding within the contract's logic and waiting to be discovered.
+
+#### Examples of Logic Errors:[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#examples-of-logic-errors "Permanent link")
+
+1.  **Faulty Reward Distribution:** Miscalculations in dividing rewards among stakeholders, leading to unfair allocations.
+2.  **Improper Token Minting:** Unchecked or erroneous minting logic that allows infinite or unintended token generation.
+3.  **Lending Pool Imbalances:** Incorrect tracking of deposits and withdrawals, causing inconsistencies in pool reserves.
+
+### Example (Vulnerable contract):[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#example-vulnerable-contract "Permanent link")
+
+`[](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-1)// SPDX-License-Identifier: MIT [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-2)pragma solidity ^0.8.0; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-3)[](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-4)contract Solidity_LogicErrors {     [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-5)    mapping(address => uint256) public userBalances;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-6)    uint256 public totalLendingPool; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-7)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-8)    function deposit() public payable {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-9)        userBalances[msg.sender] += msg.value;        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-10)        totalLendingPool += msg.value;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-11)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-12)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-13)    function withdraw(uint256 amount) public {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-14)        require(userBalances[msg.sender] >= amount, "Insufficient balance"); [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-15)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-16)        // Faulty calculation: Incorrectly reducing the user's balance without updating the total lending pool        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-17)        userBalances[msg.sender] -= amount; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-18)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-19)        // This should update the total lending pool, but it's omitted here. [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-20)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-21)        (bool ok, ) = msg.sender.call{value: amount}("");        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-22)        require(ok, "Transfer failed");    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-23)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-24)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-25)    function mintReward(address to, uint256 rewardAmount) public {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-26)        // Faulty minting logic: Reward amount not validated        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-27)        userBalances[to] += rewardAmount;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-28)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-0-29)}`
+
+### Impact:[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#impact "Permanent link")
+
+-   Logic errors can cause a smart contract to behave unexpectedly or even become entirely unusable. These errors can lead to:
+-   **Loss of Funds:** Incorrect reward distribution or pool imbalances draining contract funds.
+-   **Excessive Token Minting:** Inflating token supply, undermining trust and value.
+-   **Operational Failures:** Contracts failing to perform their intended functions.
+-   These consequences can result in significant financial and operational losses for users and stakeholders.
+
+### Remediation:[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#remediation "Permanent link")
+
+-   Always validate your code by writing comprehensive test cases that cover all possible business logic scenarios.
+-   Conduct thorough code reviews and audits to identify and fix potential logic errors.
+-   Document the intended behavior of each function and module, and compare it to the actual implementation to ensure alignment.
+-   Implement guardrails, such as:
+-   Safe math libraries to prevent calculation errors.
+-   Proper checks and balances for token minting.
+-   Auditable reward distribution algorithms.
+
+### Example (Fixed version):[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#example-fixed-version "Permanent link")
+
+`[](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-1)// SPDX-License-Identifier: MIT [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-2)pragma solidity ^0.8.0; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-3)[](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-4)contract Solidity_LogicErrors {     [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-5)    mapping(address => uint256) public userBalances;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-6)    uint256 public totalLendingPool; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-7)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-8)    function deposit() public payable {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-9)        userBalances[msg.sender] += msg.value;        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-10)        totalLendingPool += msg.value;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-11)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-12)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-13)    function withdraw(uint256 amount) public {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-14)        require(userBalances[msg.sender] >= amount, "Insufficient balance"); [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-15)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-16)        // Correctly reducing the user's balance and updating the total lending pool        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-17)        userBalances[msg.sender] -= amount;        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-18)        totalLendingPool -= amount; [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-19)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-20)        (bool ok, ) = msg.sender.call{value: amount}("");        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-21)        require(ok, "Transfer failed");    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-22)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-23)    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-24)    function mintReward(address to, uint256 rewardAmount) public {        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-25)        require(rewardAmount > 0, "Reward amount must be positive"); [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-26)        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-27)        // Safeguarded minting logic        [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-28)        userBalances[to] += rewardAmount;    [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-29)    } [](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#__codelineno-1-30)}`
+
+### Examples of Smart Contracts That Fell Victim to Business Logic Attacks:[¶](https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/#examples-of-smart-contracts-that-fell-victim-to-business-logic-attacks "Permanent link")
+
+1.  [Level Finance Hack](https://bscscan.com/address/0x9f00fbd6c095d2c542687ed5afb68d9c3fb2f464#code#F11#L165) : A Comprehensive [Hack Analysis](https://blog.solidityscan.com/level-finance-hack-analysis-16fda3996ecb)
+2.  [BNO Hack](https://bscscan.com/address/0xdca503449899d5649d32175a255a8835a03e4006#code) : A Comprehensive [Hack Analysis](https://blog.solidityscan.com/bno-hack-analysis-15436d73e44e)

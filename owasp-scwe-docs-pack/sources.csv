@@ -1,0 +1,401 @@
+path,title,url,host,depth,status
+docs/cloud-google-com-security-resources-m-trends-executive-edition-f4f6e05f.md,M-Trends 2026 Report,https://cloud.google.com/security/resources/m-trends-executive-edition,cloud.google.com,2,packaged
+docs/developer-hashicorp-com-vault-cloud-66013957.md,What is HCP Vault Dedicated?,https://developer.hashicorp.com/vault/cloud,developer.hashicorp.com,2,packaged
+docs/developer-mozilla-org-en-us-docs-web-http-reference-headers-content-security-policy-report-166ca7db.md,Content-Security-Policy: report-to directive,https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to,developer.mozilla.org,2,packaged
+docs/developer-mozilla-org-en-us-docs-web-security-defenses-subresource-integrity-331dac72.md,Subresource Integrity,https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity,developer.mozilla.org,2,packaged
+docs/docs-aws-amazon-com-amazons3-latest-userguide-object-lock-html-5a70367f.md,Locking objects with Object Lock,https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html,docs.aws.amazon.com,2,packaged
+docs/docs-aws-amazon-com-iam-latest-userguide-best-practices-html-1d527ed0.md,Security best practices in IAM,https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html,docs.aws.amazon.com,2,packaged
+docs/docs-aws-amazon-com-wellarchitected-latest-security-pillar-welcome-html-4ae32934.md,Security Pillar - AWS Well-Architected Framework,https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html,docs.aws.amazon.com,2,packaged
+docs/docs-ens-domains-learn-architecture-17c60439.md,ENS Documentation,https://docs.ens.domains/learn/architecture,docs.ens.domains,2,packaged
+docs/docs-github-com-en-actions-concepts-security-openid-connect-65e9db9d.md,OpenID Connect,https://docs.github.com/en/actions/concepts/security/openid-connect,docs.github.com,2,packaged
+docs/docs-github-com-en-actions-reference-security-secure-use-2889b624.md,Secure use reference,https://docs.github.com/en/actions/reference/security/secure-use,docs.github.com,2,packaged
+docs/docs-github-com-en-codespaces-the-githubdev-web-based-editor-5cfc82f0.md,Using VS Code for the Web from GitHub,https://docs.github.com/en/codespaces/the-githubdev-web-based-editor,docs.github.com,2,packaged
+docs/docs-github-com-en-discussions-7d1023d3.md,GitHub Discussions documentation,https://docs.github.com/en/discussions,docs.github.com,2,packaged
+docs/docs-github-com-en-discussions-collaborating-with-your-community-using-discussions-partici-8862b732.md,Participating in a discussion,https://docs.github.com/en/discussions/collaborating-with-your-community-using-discussions/participating-in-a-discussion,docs.github.com,2,packaged
+docs/docs-github-com-en-get-started-using-git-pushing-commits-to-a-remote-repository-d5674da8.md,Pushing commits to a remote repository,https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository,docs.github.com,2,packaged
+docs/docs-github-com-en-organizations-managing-membership-in-your-organization-removing-a-membe-90014be2.md,Removing a member from your organization,https://docs.github.com/en/organizations/managing-membership-in-your-organization/removing-a-member-from-your-organization,docs.github.com,2,packaged
+docs/docs-github-com-en-pull-requests-how-tos-create-pull-requests-creating-a-pull-request-from-933a64a4.md,Creating a pull request from a fork,https://docs.github.com/en/pull-requests/how-tos/create-pull-requests/creating-a-pull-request-from-a-fork,docs.github.com,2,packaged
+docs/docs-github-com-en-pull-requests-how-tos-work-with-forks-fork-a-repo-63d47139.md,Fork a repository,https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo,docs.github.com,2,packaged
+docs/docs-github-com-en-repositories-creating-and-managing-repositories-cloning-a-repository-dbc6c4cc.md,Cloning a repository,https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository,docs.github.com,2,packaged
+docs/docs-github-com-en-repositories-working-with-files-managing-files-editing-files-87c1b723.md,Editing files,https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files,docs.github.com,2,packaged
+docs/docs-npmjs-com-generating-provenance-statements-bbcd7cf3.md,Generating provenance statements,https://docs.npmjs.com/generating-provenance-statements/,docs.npmjs.com,2,packaged
+docs/docs-npmjs-com-trusted-publishers-d180d795.md,Trusted publishing for npm packages,https://docs.npmjs.com/trusted-publishers/,docs.npmjs.com,2,packaged
+docs/docs-npmjs-com-trusted-publishers-d180d795.md,Trusted publishing for npm packages,https://docs.npmjs.com/trusted-publishers/,docs.npmjs.com,2,packaged
+docs/docs-openzeppelin-com-contracts-5-x-api-governance-7febf819.md,Governance,https://docs.openzeppelin.com/contracts/5.x/api/governance,docs.openzeppelin.com,2,packaged
+docs/docs-openzeppelin-com-contracts-5-x-api-proxy-3af40f5b.md,Proxy,https://docs.openzeppelin.com/contracts/5.x/api/proxy,docs.openzeppelin.com,2,packaged
+docs/docs-openzeppelin-com-contracts-5-x-api-utils-6bef62ce.md,Utils,https://docs.openzeppelin.com/contracts/5.x/api/utils,docs.openzeppelin.com,2,packaged
+docs/docs-sourcify-dev-docs-intro-cabc154.md,Intro & Why Sourcify? | Sourcify Docs,https://docs.sourcify.dev/docs/intro/,docs.sourcify.dev,2,packaged
+docs/kubernetes-io-docs-concepts-overview-components-fe0dce62.md,Kubernetes Components,https://kubernetes.io/docs/concepts/overview/components/,kubernetes.io,2,packaged
+docs/learn-microsoft-com-en-us-azure-security-develop-threat-modeling-tool-threats-ab6e91f7.md,Microsoft Threat Modeling Tool threats,https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats,learn.microsoft.com,2,packaged
+docs/scs-owasp-org-49dd6a5a.md,OWASP Smart Contract Security¶,https://scs.owasp.org/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-checklists-496b6e20.md,OWASP SCS Checklist¶,https://scs.owasp.org/checklists/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-checklists-496b6e20.md,OWASP SCS Checklist¶,https://scs.owasp.org/checklists/,scs.owasp.org,2,packaged
+docs/scs-owasp-org-checklists-interactive-7cdee689.md,Interactive SCS Checklist¶,https://scs.owasp.org/checklists/interactive/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-checklists-interactive-7cdee689.md,Interactive SCS Checklist¶,https://scs.owasp.org/checklists/interactive/,scs.owasp.org,2,packaged
+docs/scs-owasp-org-contributing-1-how-can-you-contribute-660e853d.md,How Can You Contribute?¶,https://scs.owasp.org/contributing/1_How_Can_You_Contribute/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-contributing-2-getting-started-e28533d3.md,Getting Started¶,https://scs.owasp.org/contributing/2_Getting_Started/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-contributing-3-prs-and-reviews-1abdb995.md,Pull Requests & Reviews¶,https://scs.owasp.org/contributing/3_PRs_and_Reviews/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-contributing-4-add-new-language-e70f6708.md,Add a New Language¶,https://scs.owasp.org/contributing/4_Add_new_Language/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-contributing-5-style-guide-48a05c0.md,Style Guide¶,https://scs.owasp.org/contributing/5_Style_Guide/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-contributing-9ae7364f.md,Contributing to the SCS Project¶,https://scs.owasp.org/contributing/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-donate-4e545ca2.md,Donations¶,https://scs.owasp.org/donate/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-donate-how-to-donate-f84a53ef.md,How to Donate¶,https://scs.owasp.org/donate/how_to_donate/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-donate-packages-fc67210c.md,Donation Packages¶,https://scs.owasp.org/donate/packages/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-fb90cdbd.md,OWASP SCS CDN and Front-End Supply Chain Security Handbook¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part1-foundations-ccde4ac5.md,Part I: Foundations¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part2-cdn-content-delivery-d93206cc.md,Part II: CDN and Content Delivery¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part2-cdn-content-delivery/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part3-frontend-supply-chain-c53ac479.md,Part III: Front-End Supply Chain¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part3-frontend-supply-chain/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part4-threat-models-by-component-c9d8cb05.md,Part IV: Threat Models by Component¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part4-threat-models-by-component/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part5-mitigations-and-operations-42944708.md,Part V: Mitigations and Operations¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part5-mitigations-and-operations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-part6-appendices-4c7dbd8a.md,Part 6: Appendices¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/part6-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-01-frontend-cdn-supply-chain-references-6b2a5bd4.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/01-frontend-cdn-supply-chain/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-656f7749.md,OWASP SCS DNS and Hosting Security Handbook¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part1-foundations-6f5bc839.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part2-dns-security-f55586fa.md,Part 2: DNS Security¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part2-dns-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part3-ens-ethereum-name-service-b8b23b35.md,Part 3: ENS (Ethereum Name Service)¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part3-ens-ethereum-name-service/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part4-ipfs-and-decentralized-hosting-1f7a26a6.md,Part 4: IPFS and Decentralized Hosting¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part4-ipfs-and-decentralized-hosting/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part5-hosting-and-web-presence-1812f45c.md,Part 5: Hosting and Web Presence¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part5-hosting-and-web-presence/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-part6-appendices-f6e9b7fe.md,Part 6: Appendices¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/part6-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-02-dns-hosting-security-references-83b30060.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/02-dns-hosting-security/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-b4bbfba7.md,OWASP SCS Employee Lifecycle Security Handbook¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-part1-foundations-845d04d7.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-part2-onboarding-96b4537b.md,Part 2: Onboarding¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/part2-onboarding/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-part3-offboarding-ac7b9b14.md,Part 3: Offboarding¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/part3-offboarding/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-part4-special-considerations-3d6b61bb.md,Part 4: Special Considerations¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/part4-special-considerations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-part5-appendices-398b1c01.md,Part 5: Appendices¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/part5-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-03-employee-lifecycle-security-references-1ff5fe7e.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/03-employee-lifecycle-security/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-38f382a4.md,OWASP SCS EVM Forensics and DeFi Recovery Handbook¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part1-foundations-88dd3e44.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part2-evidence-collection-and-prese-b702ad1a.md,Part II: Evidence Collection and Preservation¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part2-evidence-collection-and-preservation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part3-analysis-techniques-2bf56d52.md,Part 3: Analysis Techniques¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part3-analysis-techniques/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part4-defi-recovery-patterns-427e6e61.md,Part IV: DeFi Recovery Patterns¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part4-defi-recovery-patterns/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part5-tooling-and-automation-73dc85a6.md,Part V: Tooling and Automation¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part5-tooling-and-automation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-part6-appendices-fad4119.md,Part 6: Appendices¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/part6-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-04-evm-forensics-defi-recovery-references-36f8e423.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/04-evm-forensics-defi-recovery/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-cbb47e4a.md,"OWASP SCS Hiring, Remote Work, and Insider Threat Handbook¶",https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part1-foundations-3336906a.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part2-hiring-security-34529f59.md,Part 2: Hiring Security¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part2-hiring-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part3-remote-work-and-overseas-557a7287.md,Part III: Remote Work and Overseas Consultation¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part3-remote-work-and-overseas/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part4-detection-and-response-94cf0366.md,Part 4: Detection and Response¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part4-detection-and-response/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part5-hardening-and-best-practices-cec24e8e.md,Part 5: Hardening and Best Practices¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part5-hardening-and-best-practices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-part6-appendices-6d0e78db.md,Part 6: Appendices¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/part6-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-05-hiring-remote-insider-dprk-references-c5c5011.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/05-hiring-remote-insider-dprk/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-5c87eb2e.md,OWASP SCS Incident Response Handbook¶,https://scs.owasp.org/handbooks/06-incident-response/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part1-foundations-388f02c6.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/06-incident-response/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part2-communication-strategies-67c71ed1.md,Part 2: Communication Strategies¶,https://scs.owasp.org/handbooks/06-incident-response/part2-communication-strategies/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part3-detection-and-response-b5f6e447.md,Part III: Detection and Response¶,https://scs.owasp.org/handbooks/06-incident-response/part3-detection-and-response/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part4-playbooks-975c66d5.md,Part 4: Playbooks¶,https://scs.owasp.org/handbooks/06-incident-response/part4-playbooks/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part5-lessons-learned-and-improvement-5245290a.md,Part 5: Lessons Learned and Improvement¶,https://scs.owasp.org/handbooks/06-incident-response/part5-lessons-learned-and-improvement/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-part6-appendices-67297.md,Part 6: Appendices¶,https://scs.owasp.org/handbooks/06-incident-response/part6-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-06-incident-response-references-16c73795.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/06-incident-response/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-3e956699.md,OWASP SCS Infrastructure Security Handbook¶,https://scs.owasp.org/handbooks/07-infrastructure-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part1-foundations-fad370a9.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part2-node-and-compute-infrastructure-cf72391c.md,Part 2: Node and Compute Infrastructure¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part2-node-and-compute-infrastructure/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part3-network-and-availability-dac6df7f.md,Part 3: Network and Availability¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part3-network-and-availability/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part4-dns-and-domain-security-7241daa7.md,Part 4: DNS and Domain Security¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part4-dns-and-domain-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part5-identity-and-access-management-8c880e88.md,Part 5: Identity and Access Management¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part5-identity-and-access-management/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part6-checklists-and-operations-e46efe0a.md,Part 6: Checklists and Operations¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part6-checklists-and-operations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-part7-appendices-67550da9.md,Part 7: Appendices¶,https://scs.owasp.org/handbooks/07-infrastructure-security/part7-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-07-infrastructure-security-references-e19dfaf0.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/07-infrastructure-security/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-ab331988.md,OWASP SCS SDK Security Testing Handbook¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-part1-foundations-3f3c6b80.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-part2-testing-methodology-2e12c577.md,Part II: Testing Methodology¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/part2-testing-methodology/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-part3-implementation-and-operations-6adceadd.md,Part III: Implementation and Operations¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/part3-implementation-and-operations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-part4-appendices-8b61e65f.md,Part 4: Appendices¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/part4-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-08-sdk-security-testing-references-36487b17.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/08-sdk-security-testing/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-25eb26b9.md,OWASP SCS UX Security Handbook¶,https://scs.owasp.org/handbooks/09-ux-security/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-part1-foundations-3305e7c9.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/09-ux-security/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-part2-ux-security-scoring-matrix-c2821882.md,Part 2: UX Security Scoring Matrix¶,https://scs.owasp.org/handbooks/09-ux-security/part2-ux-security-scoring-matrix/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-part3-best-practices-f63560e2.md,Part 3: Best Practices¶,https://scs.owasp.org/handbooks/09-ux-security/part3-best-practices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-part4-implementation-and-evaluation-adb4deaf.md,Part 4: Implementation and Evaluation¶,https://scs.owasp.org/handbooks/09-ux-security/part4-implementation-and-evaluation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-part5-appendices-aae3a5b3.md,Part 5: Appendices¶,https://scs.owasp.org/handbooks/09-ux-security/part5-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-09-ux-security-references-d6ec0110.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/09-ux-security/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-f39a9389.md,OWASP SCS Web3 Attack Vectors Mapping Handbook¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-part1-foundations-f90eeff9.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-part2-tactics-and-techniques-by-lay-e3a36f49.md,Part 2: Tactics and Techniques by Layer¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/part2-tactics-and-techniques-by-layer/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-part3-ttp-matrix-and-use-8771d3a1.md,Part 3: TTP Matrix and Use¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/part3-ttp-matrix-and-use/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-part4-case-studies-and-examples-cc477e76.md,Part 4: Case Studies and Examples¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/part4-case-studies-and-examples/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-part5-appendices-552dfb83.md,Part 5: Appendices¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/part5-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-10-web3-attack-vectors-mapping-references-86d4de20.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/10-web3-attack-vectors-mapping/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-22c4df88.md,OWASP SCS Web3 Operational Security Handbook¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-part1-foundations-b15c2180.md,Part 1: Foundations¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/part1-foundations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-part2-web3-specific-considerations-8d1b1ca5.md,Part 2: Web3-Specific Considerations¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/part2-web3-specific-considerations/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-part3-control-domains-a46d8017.md,Part 3: Control Domains¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/part3-control-domains/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-part4-integration-and-continuous-9df92745.md,Part IV: Integration and Continuous Improvement¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/part4-integration-and-continuous/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-part5-appendices-bd75c35c.md,Part 5: Appendices¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/part5-appendices/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-11-opsec-in-web3-references-700dbd17.md,Appendix C: References and Further Reading¶,https://scs.owasp.org/handbooks/11-opsec-in-web3/references/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-handbooks-c044252c.md,OWASP SCS Handbooks¶,https://scs.owasp.org/handbooks/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-0x01-foreword-cd809f24.md,Foreword¶,https://scs.owasp.org/SCSTG/0x01-Foreword/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-0x02a-frontispiece-69a8037.md,Frontispiece¶,https://scs.owasp.org/SCSTG/0x02a-Frontispiece/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-0x02b-scsvs-scstg-adoption-1bece461.md,OWASP SCSVS and SCSTG Adoption¶,https://scs.owasp.org/SCSTG/0x02b-SCSVS-SCSTG-Adoption/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-0x02c-acknowledgements-22d5b187.md,Acknowledgments¶,https://scs.owasp.org/SCSTG/0x02c-Acknowledgements/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-0x04a-smart-contract-taxonomy-80490b78.md,Smart Contract Taxonomy¶,https://scs.owasp.org/SCSTG/0x04a-Smart-Contract-Taxonomy/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-2644ec5.md,OWASP SCSTG¶,https://scs.owasp.org/SCSTG/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-2644ec5.md,OWASP SCSTG¶,https://scs.owasp.org/SCSTG/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-344e1a77.md,SCSTG Tests,https://scs.owasp.org/SCSTG/tests/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-arch-overview-48ced5d7.md,"Architecture, Design, and Threat Modeling",https://scs.owasp.org/SCSTG/tests/SCSVS-ARCH/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-arch-scstg-test-0007-4564cb4b.md,SCSTG-TEST-0007: Modularity and Upgradability,https://scs.owasp.org/SCSTG/tests/SCSVS-ARCH/SCSTG-TEST-0007/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-overview-79910161.md,Access Control and Authentication Vulnerabilties,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0001-f769cc07.md,SCSTG-TEST-0001: Testing Multi-Signature Schemes,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0001/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0002-7766c3f0.md,SCSTG-TEST-0002: Identity Verification Test,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0002/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0003-576452f9.md,SCSTG-TEST-0003: Least Privilege Principle Test,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0003/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0004-776246c2.md,SCSTG-TEST-0004: Test Access Control on Critical Functions,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0004/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0005-575fd5cb.md,SCSTG-TEST-0005: Test Timed Permissions,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0005/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-auth-scstg-test-0006-f75d0014.md,SCSTG-TEST-0006: Test Access Control Using Merkle Trees,https://scs.owasp.org/SCSTG/tests/SCSVS-AUTH/SCSTG-TEST-0006/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-block-overview-bf30d41a.md,Denial of Service (DoS),https://scs.owasp.org/SCSTG/tests/SCSVS-BLOCK/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-block-scstg-test-0008-f26b0917.md,SCSTG-TEST-0008: Efficient Loop and Function Design,https://scs.owasp.org/SCSTG/tests/SCSVS-BLOCK/SCSTG-TEST-0008/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-bridge-overview-36fa54fe.md,Blockchain Data and State Management,https://scs.owasp.org/SCSTG/tests/SCSVS-BRIDGE/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-bridge-scstg-test-0009-60709432.md,SCSTG-TEST-0009: Blockchain Data and State Management,https://scs.owasp.org/SCSTG/tests/SCSVS-BRIDGE/SCSTG-TEST-0009/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-code-overview-ac865a8e.md,"Policies, Procedures, and Code Management",https://scs.owasp.org/SCSTG/tests/SCSVS-CODE/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-code-scstg-test-0010-950a70b8.md,SCSTG-TEST-0010: Test Compiler Version and Deprecated Functions,https://scs.owasp.org/SCSTG/tests/SCSVS-CODE/SCSTG-TEST-0010/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-comm-overview-1433dc5f.md,Unchecked External Calls in Smart Contracts,https://scs.owasp.org/SCSTG/tests/SCSVS-COMM/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-comm-scstg-test-0011-9a372aa.md,SCSTG-TEST-0011: Test Contract Interactions,https://scs.owasp.org/SCSTG/tests/SCSVS-COMM/SCSTG-TEST-0011/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-comp-overview-6c033744.md,Component-Specific Security,https://scs.owasp.org/SCSTG/tests/SCSVS-COMP/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-comp-scstg-test-0012-3488abac.md,"SCSTG-TEST-0012: Test Token Implementations (ERC20, ERC721, ERC1155)",https://scs.owasp.org/SCSTG/tests/SCSVS-COMP/SCSTG-TEST-0012/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-crypto-overview-a31f66da.md,Cryptographic Practices,https://scs.owasp.org/SCSTG/tests/SCSVS-CRYPTO/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-crypto-scstg-test-0013-d99adbfb.md,SCSTG-TEST-0013: Secure Signature Verification,https://scs.owasp.org/SCSTG/tests/SCSVS-CRYPTO/SCSTG-TEST-0013/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-defi-overview-81ee1aad.md,"Gas Usage, Efficiency, and Limitations",https://scs.owasp.org/SCSTG/tests/SCSVS-DEFI/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-defi-scstg-test-0014-34879b31.md,SCSTG-TEST-0014: Test Gas Usage in Loops,https://scs.owasp.org/SCSTG/tests/SCSVS-DEFI/SCSTG-TEST-0014/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-gov-overview-ba30c8d7.md,Business Logic and Economic Security,https://scs.owasp.org/SCSTG/tests/SCSVS-GOV/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-gov-scstg-test-0015-63e7c8e.md,SCSTG-TEST-0015: Testing Business Logic and Economic Security,https://scs.owasp.org/SCSTG/tests/SCSVS-GOV/SCSTG-TEST-0015/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-oracle-overview-7c9f509d.md,Arithmetic and Logic Security,https://scs.owasp.org/SCSTG/tests/SCSVS-ORACLE/overview/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scstg-tests-scsvs-oracle-scstg-test-0016-61f4caaf.md,SCSTG-TEST-0016: Testing Arithmetic and Logic Security,https://scs.owasp.org/SCSTG/tests/SCSVS-ORACLE/SCSTG-TEST-0016/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-01-frontispiece-5cffa8c5.md,Frontispiece¶,https://scs.owasp.org/SCSVS/01-Frontispiece/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-02-preface-dd6d01f5.md,Preface¶,https://scs.owasp.org/SCSVS/02-Preface/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-03-using-scsvs-67b03e83.md,Utilizing the SCSVS¶,https://scs.owasp.org/SCSVS/03-Using-SCSVS/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-04-assessment-and-certification-3a278568.md,Assessment and Certification¶,https://scs.owasp.org/SCSVS/04-Assessment_and_Certification/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-05-scsvs-arch-73ba441d.md,"S1. Architecture, Design, and Threat Modeling¶",https://scs.owasp.org/SCSVS/05-SCSVS-ARCH/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-06-scsvs-code-ec41cb3f.md,"S2. Policies, Procedures, and Code Management¶",https://scs.owasp.org/SCSVS/06-SCSVS-CODE/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-07-scsvs-gov-3bba8fab.md,S3. Business Logic and Economic Security¶,https://scs.owasp.org/SCSVS/07-SCSVS-GOV/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-08-scsvs-auth-87528d1c.md,S4. Access Control and Authentication¶,https://scs.owasp.org/SCSVS/08-SCSVS-AUTH/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-09-scsvs-comm-d8aac8b1.md,S5. Secure Interactions and Communications¶,https://scs.owasp.org/SCSVS/09-SCSVS-COMM/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-10-scsvs-crypto-5df0a204.md,S6. Cryptographic Practices¶,https://scs.owasp.org/SCSVS/10-SCSVS-CRYPTO/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-11-scsvs-oracle-a19906e2.md,S7. Arithmetic and Logic Security¶,https://scs.owasp.org/SCSVS/11-SCSVS-ORACLE/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-12-scsvs-block-8f53992.md,S8. Denial of Service (DoS)¶,https://scs.owasp.org/SCSVS/12-SCSVS-BLOCK/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-13-scsvs-bridge-6da62755.md,S9. Blockchain Data and State Management¶,https://scs.owasp.org/SCSVS/13-SCSVS-BRIDGE/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-14-scsvs-defi-f2003bdd.md,"S10. Gas Usage, Efficiency, and Limitations¶",https://scs.owasp.org/SCSVS/14-SCSVS-DEFI/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-15-scsvs-comp-3f464349.md,S11. Component-Specific Security¶,https://scs.owasp.org/SCSVS/15-SCSVS-COMP/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-16-appendix-a-glossary-ab56a602.md,Appendix A: Glossary¶,https://scs.owasp.org/SCSVS/16-Appendix-A_Glossary/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-17-appendix-b-references-58c422d4.md,Appendix B: References¶,https://scs.owasp.org/SCSVS/17-Appendix-B_References/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-5b307257.md,OWASP SCSVS¶,https://scs.owasp.org/SCSVS/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-5b307257.md,OWASP SCSVS¶,https://scs.owasp.org/SCSVS/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-arch-1-9e62ec70.md,SCSVS-ARCH-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-ARCH-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-arch-2-1e65f487.md,SCSVS-ARCH-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-ARCH-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-arch-3-fe6800be.md,SCSVS-ARCH-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-ARCH-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-auth-1-7184dbc6.md,SCSVS-AUTH-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-AUTH-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-auth-2-117d88e1.md,SCSVS-AUTH-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-AUTH-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-auth-3-f17f9518.md,SCSVS-AUTH-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-AUTH-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-block-1-43d83e39.md,SCSVS-BLOCK-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BLOCK-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-block-2-c3dfc37e.md,SCSVS-BLOCK-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BLOCK-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-bridge-1-2bc19f4f.md,SCSVS-BRIDGE-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BRIDGE-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-bridge-2-bbf2e58.md,SCSVS-BRIDGE-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BRIDGE-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-bridge-3-2bbd2221.md,SCSVS-BRIDGE-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BRIDGE-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-bridge-4-bbab12a.md,SCSVS-BRIDGE-4¶,https://scs.owasp.org/SCSVS/controls/SCSVS-BRIDGE-4/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-code-1-18c5f4fb.md,SCSVS-CODE-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CODE-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-code-2-f8c38404.md,SCSVS-CODE-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CODE-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-code-3-98c0ae4d.md,SCSVS-CODE-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CODE-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comm-1-1ec5e110.md,SCSVS-COMM-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMM-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comm-2-1ec81fa7.md,SCSVS-COMM-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMM-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comm-3-7ecaf55e.md,SCSVS-COMM-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMM-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comm-4-7eb9ac3d.md,SCSVS-COMM-4¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMM-4/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-1-9f66f2b1.md,SCSVS-COMP-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-2-bf6de0d6.md,SCSVS-COMP-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-3-9f6b6fdf.md,SCSVS-COMP-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-4-1f5f6d6c.md,SCSVS-COMP-4¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-4/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-5-bf5c97b5.md,SCSVS-COMP-5¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-5/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-comp-6-3f641cfa.md,SCSVS-COMP-6¶,https://scs.owasp.org/SCSVS/controls/SCSVS-COMP-6/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-crypto-1-44bfc91f.md,SCSVS-CRYPTO-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CRYPTO-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-crypto-2-64bdbce8.md,SCSVS-CRYPTO-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CRYPTO-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-crypto-3-44bb4bf1.md,SCSVS-CRYPTO-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-CRYPTO-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-defi-1-c28e1616.md,SCSVS-DEFI-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-DEFI-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-defi-2-a28727f1.md,SCSVS-DEFI-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-DEFI-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-gov-1-cf606afe.md,SCSVS-GOV-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-GOV-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-gov-2-4f58e5b9.md,SCSVS-GOV-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-GOV-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-gov-3-6f5b56b0.md,SCSVS-GOV-3¶,https://scs.owasp.org/SCSVS/controls/SCSVS-GOV-3/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-oracle-1-bf5341ae.md,SCSVS-ORACLE-1¶,https://scs.owasp.org/SCSVS/controls/SCSVS-ORACLE-1/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scsvs-controls-scsvs-oracle-2-3f4bbc69.md,SCSVS-ORACLE-2¶,https://scs.owasp.org/SCSVS/controls/SCSVS-ORACLE-2/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2023-top10-3a2023-96419dd3.md,Top10:2023,https://scs.owasp.org/sctop10/archive/2023/Top10%3A2023/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc01-accesscontrolvulnerabilities-5444caac.md,SC01:2025 Access Control Vulnerabilities,https://scs.owasp.org/sctop10/archive/2025/SC01-AccessControlVulnerabilities/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc02-priceoraclemanipulation-6b9d21d0.md,SC02:2025 Price Oracle Manipulation,https://scs.owasp.org/sctop10/archive/2025/SC02-PriceOracleManipulation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc03-logicerrors-ec3add88.md,SC03:2025 Logic Errors,https://scs.owasp.org/sctop10/archive/2025/SC03-LogicErrors/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc04-lackofinputvalidation-2ac44f91.md,SC04:2025 Lack of Input Validation,https://scs.owasp.org/sctop10/archive/2025/SC04-LackOfInputValidation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc05-reentrancy-262bab94.md,SC05:2025 Reentrancy,https://scs.owasp.org/sctop10/archive/2025/SC05-Reentrancy/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc06-uncheckedexternalcalls-66593590.md,SC06:2025 Unchecked External Calls,https://scs.owasp.org/sctop10/archive/2025/SC06-UncheckedExternalCalls/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc07-flashloanattacks-8232c5c4.md,SC07:2025 Flash Loan Attacks,https://scs.owasp.org/sctop10/archive/2025/SC07-FlashLoanAttacks/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc08-integeroverunderflow-13faa7bc.md,SC08:2025 Integer Overflow and Underflow,https://scs.owasp.org/sctop10/archive/2025/SC08-IntegerOverUnderFlow/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc09-insecurerandomness-3294b79f.md,SC09:2025 Insecure Randomness,https://scs.owasp.org/sctop10/archive/2025/SC09-InsecureRandomness/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-sc10-denialofservice-af835160.md,SC10:2025 Denial Of Service,https://scs.owasp.org/sctop10/archive/2025/SC10-DenialOfService/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-archive-2025-top10-3a2025-3de317b7.md,Top10:2025,https://scs.owasp.org/sctop10/archive/2025/Top10%3A2025/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-da3297f7.md,OWASP Smart Contract Top 10 : 2026¶,https://scs.owasp.org/sctop10/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-data-sources-e3ad6f15.md,Data Sources for the 2026 Ranking¶,https://scs.owasp.org/sctop10/data-sources/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-methodology-3f368ad3.md,Ranking Methodology¶,https://scs.owasp.org/sctop10/methodology/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc01-accesscontrolvulnerabilities-25bb6513.md,SC01:2026 Access Control Vulnerabilities,https://scs.owasp.org/sctop10/SC01-AccessControlVulnerabilities/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc02-businesslogicvulnerabilities-9a36df09.md,SC02:2026 Business Logic Vulnerabilities,https://scs.owasp.org/sctop10/SC02-BusinessLogicVulnerabilities/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc03-priceoraclemanipulation-f6a7f0cc.md,SC03:2026 Price Oracle Manipulation,https://scs.owasp.org/sctop10/SC03-PriceOracleManipulation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc04-flashloanattacks-e6ea9a96.md,SC04:2026 Flash Loan–Facilitated Attacks,https://scs.owasp.org/sctop10/SC04-FlashLoanAttacks/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc05-lackofinputvalidation-2f71586d.md,SC05:2026 Lack of Input Validation,https://scs.owasp.org/sctop10/SC05-LackOfInputValidation/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc06-uncheckedexternalcalls-34fff167.md,SC06:2026 Unchecked External Calls,https://scs.owasp.org/sctop10/SC06-UncheckedExternalCalls/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc07-arithmeticerrors-c5afb70d.md,SC07:2026 Arithmetic Errors (Rounding & Precision),https://scs.owasp.org/sctop10/SC07-ArithmeticErrors/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc08-reentrancyattacks-5e7cc5bd.md,SC08:2026 Reentrancy Attacks,https://scs.owasp.org/sctop10/SC08-ReentrancyAttacks/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc09-integeroverflowunderflow-7546f03c.md,SC09:2026 Integer Overflow and Underflow,https://scs.owasp.org/sctop10/SC09-IntegerOverflowUnderflow/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-sc10-proxyandupgradeabilityvulnerabilities-a913f15b.md,SC10:2026 Proxy & Upgradeability Vulnerabilities,https://scs.owasp.org/sctop10/SC10-ProxyAndUpgradeabilityVulnerabilities/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-sctop10-web3-attack-vectors-top15-fd29449f.md,Alternate Top 15: Web3 Attack Vectors (Beyond Smart Contracts)¶,https://scs.owasp.org/sctop10/Web3-Attack-Vectors-Top15/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-8d9cd245.md,Smart Contract Security Weakness Enumeration (SCWE),https://scs.owasp.org/SCWE/,scs.owasp.org,0,packaged
+docs/scs-owasp-org-scwe-8d9cd245.md,Smart Contract Security Weakness Enumeration (SCWE),https://scs.owasp.org/SCWE/,scs.owasp.org,2,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-001-f4eb4450.md,SCWE-001: Improper Contract Architecture,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-001/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-002-f4ed82e7.md,SCWE-002: Excessive Contract Complexity,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-002/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-003-54f0589e.md,SCWE-003: Lack of Modularity,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-003/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-004-54df0f7d.md,SCWE-004: Uncaught Exceptions,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-004/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-005-74e18074.md,SCWE-005: Insecure Upgradeable Proxy Design,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-005/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-006-54e38cab.md,SCWE-006: Inconsistent Inheritance Hierarchy,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-006/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-051-ae31d403.md,SCWE-051: Improper Use of CREATE2 for Contract Deployment,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-051/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-052-8e2f630c.md,SCWE-052: Transaction Order Dependence,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-052/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-064-fbff6433.md,SCWE-064: Incorrect Inheritance Order,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-064/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-070-68518984.md,SCWE-070: Incorrect Constructor Name,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-070/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-071-84eb3cd.md,SCWE-071: Uninitialized Storage Pointer,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-071/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-080-6e51ec71.md,SCWE-080: Incorrect Type Conversion,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-080/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-098-7ad5176e.md,SCWE-098: Initialization Front-Running in Upgradeable Contracts,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-098/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-099-5ad2a677.md,SCWE-099: Storage Layout Collision on Upgrade,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-099/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-117-5ae5d18.md,SCWE-117: Proxy Implementation Selfdestruct Exposure,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-117/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-118-a593827b.md,SCWE-118: Unauthenticated Beacon Upgrade,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-118/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-119-85958eb2.md,SCWE-119: Shared Proxy Admin and Logic Owner Key,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-119/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-145-beab4b19.md,SCWE-145: Unvalidated Constructor Parameters,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-145/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-arch-scwe-150-525b645f.md,SCWE-150: Storage Slot Collision When Upgrading Implementation,https://scs.owasp.org/SCWE/SCSVS-ARCH/SCWE-150/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-016-4e2e0c2a.md,SCWE-016: Insufficient Authorization Checks,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-016/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-017-ce2b0413.md,SCWE-017: Privileged Role Mismanagement,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-017/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-018-4e1f01a0.md,SCWE-018: Use of tx.origin for Authorization,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-018/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-019-ee1c2be9.md,SCWE-019: Insecure Signature Verification,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-019/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-020-72f7759.md,SCWE-020: Absence of Time-Locked Functions,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-020/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-038-75177d66.md,SCWE-038: Insecure Use of Selfdestruct,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-038/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-045-2e4846ca.md,SCWE-045: Insecure Use of Modifiers,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-045/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-049-ce3eb54e.md,SCWE-049: Unprotected Ether Withdrawal,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-049/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-050-9a982d84.md,SCWE-050: Unprotected SELFDESTRUCT Instruction,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-050/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-105-e271c057.md,SCWE-105: Permit Signature Replay via Missing Domain Separator or Nonce,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-105/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-106-626eb840.md,SCWE-106: Unauthenticated Meta-Transactions,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-106/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-129-db82714d.md,SCWE-129: Single EOA Admin Without Rotation,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-129/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-139-ef177d96.md,SCWE-139: Single-Step Ownership Transfer Without Confirmation,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-139/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-147-15f34dc5.md,SCWE-147: Permit or Meta-Transaction Signatures Without Expiration,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-147/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-auth-scwe-155-2828934c.md,SCWE-155: Single Point of Failure in Administrative Key Management,https://scs.owasp.org/SCWE/SCSVS-AUTH/SCWE-155/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-024-4188e552.md,SCWE-024: Weak Randomness Sources,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-024/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-031-73c09bd0.md,SCWE-031: Insecure use of Block Variables,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-031/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-065-d11867f.md,SCWE-065: Block Values as a Proxy for Time,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-065/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-073-a07a3caa.md,SCWE-073: Message Call with Hardcoded Gas Amount,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-073/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-127-64859678.md,SCWE-127: EIP-1559 Basefee Assumptions,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-127/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-block-scwe-153-c3569a25.md,SCWE-153: Reliance on block.prevrandao for High-Value Randomness,https://scs.owasp.org/SCWE/SCSVS-BLOCK/SCWE-153/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-032-d014ddb.md,SCWE-032: Dependency on Block Gas Limit,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-032/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-033-6d042392.md,SCWE-033: Chain Split Risks,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-033/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-034-8d069489.md,SCWE-034: Insecure Cross-Chain Messaging,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-034/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-087-baa39587.md,SCWE-087: Missing Payload Size Validation in Cross-Chain Messaging (Denial of Service/Stuck Funds),https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-087/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-094-4d076fc3.md,SCWE-094: Insufficient Gas Limit Validation in LayerZero Message Sending,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-094/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-096-4d02f295.md,SCWE-096: Missing Token Burn During Cross-Chain NFT Withdrawal,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-096/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-132-dc75862a.md,SCWE-132: Mismatched Token Decimals in Bridge Mint/Burn,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-132/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-bridge-scwe-133-5c727e13.md,SCWE-133: Missing Replay Nonce per Bridge Lane,https://scs.owasp.org/SCWE/SCSVS-BRIDGE/SCWE-133/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-007-f9cc483b.md,SCWE-007: Presence of Unused Variables,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-007/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-008-59e722d8.md,SCWE-008: Hardcoded Constants,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-008/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-009-79e516a1.md,SCWE-009: Deprecated Variable and Function Usage,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-009/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-010-ed3c514b.md,SCWE-010: Shadowing Variables and Functions,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-010/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-011-d3ec242.md,SCWE-011: Insecure ABI Encoding and Decoding,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-011/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-013-8d397b94.md,SCWE-013: Unauthorized Parameter Changes,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-013/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-014-8d464787.md,SCWE-014: Lack of Emergency Stop Mechanism,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-014/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-039-930e2860.md,SCWE-039: Insecure Use of Inline Assembly,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-039/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-040-268827ac.md,SCWE-040: Incorrect Storage Packing,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-040/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-041-c68551f5.md,SCWE-041: Unsafe Downcasting,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-041/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-046-c6969b16.md,SCWE-046: Reentrancy Attacks,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-046/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-047-a6942a1f.md,SCWE-047: Integer Overflows and Underflows,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-047/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-048-c67408d4.md,SCWE-048: Unchecked Call Return Value,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-048/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-053-39edd5c0.md,SCWE-053: Improper Deletion of Mappings,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-053/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-060-ec1bc862.md,SCWE-060: Floating Pragma,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-060/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-061-cc19576b.md,SCWE-061: Outdated Compiler Version,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-061/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-062-ec174b34.md,SCWE-062: Dead Code,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-062/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-066-6c210f10.md,SCWE-066: Incorrect Handling of Bitwise Operations,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-066/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-067-4c1e9e19.md,SCWE-067: Assert Violation,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-067/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-068-6c30199a.md,SCWE-068: State Variable Default Visibility,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-068/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-069-ec2d1183.md,SCWE-069: Shadowing State Variables,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-069/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-072-ff89c53b.md,SCWE-072: Use of Deprecated Solidity Functions,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-072/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-076-5f9356b7.md,SCWE-076: Right-To-Left-Override Control Character (U+202E),https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-076/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-089-40a3a419.md,SCWE-089: Vulnerable & Outdated Libraries,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-089/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-090-d4222093.md,SCWE-090: Missing Slippage Protection in Automated Token Swaps,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-090/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-091-542528aa.md,SCWE-091: Lack of Zero Value Check in Token Transfers,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-091/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-092-d41da365.md,SCWE-092: Missing Disable Initializer in Constructor for Proxy Contracts,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-092/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-093-f420145c.md,SCWE-093: Unnamed Function Parameters,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-093/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-095-d42eec86.md,SCWE-095: Missing Destination Address Size Check,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-095/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-097-5429a5d8.md,SCWE-097: Missing Explicit Function Visibility,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-097/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-120-b6e97ddb.md,SCWE-120: Missing Return Data Length Validation,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-120/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-121-16ec5392.md,SCWE-121: Swallowed Revert Reasons,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-121/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-122-b6e500ad.md,SCWE-122: Calldata Length Not Validated Before Decode,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-122/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-123-96e70ce4.md,SCWE-123: Corrupt Free Memory Pointer in Assembly,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-123/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-124-96f3d8d7.md,SCWE-124: Inconsistent Rounding Direction in Financial Math,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-124/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-137-379d98b.md,SCWE-137: Read-Only Reentrancy via View Function State Staleness,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-137/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-141-a93480d4.md,SCWE-141: Lack of Deadline Validation in Time-Sensitive External Calls,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-141/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-143-2939c782.md,SCWE-143: Critical Address Parameters Not Validated for Zero Address,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-143/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-144-93bd3b9.md,SCWE-144: Bypassable Contract Existence Check via extcodesize,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-144/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-146-a9414cc7.md,SCWE-146: Improper Use of try/catch Leading to Silent Failures,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-146/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-152-f5c4dc84.md,SCWE-152: Misuse of Custom Errors Leading to Information Leakage or Wrong Revert Behavior,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-152/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-code-scwe-154-95d34fee.md,SCWE-154: Calldata Decode Without Length Check,https://scs.owasp.org/SCWE/SCSVS-CODE/SCWE-154/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-021-c196e3f2.md,SCWE-021: Unsecured Data Transmission,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-021/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-022-618f910d.md,SCWE-022: Message Replay Vulnerabilities,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-022/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-023-c19266c4.md,SCWE-023: Lack of Communication Authenticity,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-023/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-035-ae1fecbd.md,SCWE-035: Insecure Delegatecall Usage,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-035/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-042-b3e1e6eb.md,SCWE-042: Insecure Use of External Calls,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-042/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-063-2e465c30.md,SCWE-063: Insecure Event Emission,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-063/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-103-85be6817.md,SCWE-103: ERC20 Approval Double-Spend (Allowance Race),https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-103/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-104-85b19c24.md,SCWE-104: Unprotected ERC777 Token Hooks,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-104/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-107-a5b40d1b.md,SCWE-107: Missing Chain ID Validation in Cross-Chain Messages,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-107/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-108-85cfb138.md,SCWE-108: Unverified Cross-Chain Message Proofs,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-108/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-128-ab8af87e.md,SCWE-128: Insecure Multicall Context Forwarding,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-128/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-134-befd7285.md,SCWE-134: Low-Level Call to Non-Contract Address,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-134/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-138-5ef3e109.md,SCWE-138: Reentrancy via ERC721/ERC1155 Safe Transfer Callbacks,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-138/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comm-scwe-149-d11cf1bd.md,SCWE-149: Transfers to Addresses That Cannot Receive Funds,https://scs.owasp.org/SCWE/SCSVS-COMM/SCWE-149/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comp-scwe-057-e22184ce.md,SCWE-057: Write to Arbitrary Storage Location,https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-057/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comp-scwe-083-48d1da19.md,SCWE-083: Failure to Handle Edge Cases,https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-083/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comp-scwe-110-5183dcdc.md,SCWE-110: Fee-On-Transfer Token Misaccounting,https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-110/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comp-scwe-111-31816be5.md,SCWE-111: Rebase Token Balance Drift,https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-111/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-comp-scwe-135-d85c9c17.md,SCWE-135: ERC4626 Share Inflation via Donations,https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-135/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-025-c605c813.md,SCWE-025: Improper Cryptographic Key Management,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-025/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-026-e603bbdc.md,SCWE-026: Insufficient Hash Verification,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-026/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-027-c6014ae5.md,SCWE-027: Vulnerable Cryptographic Algorithms,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-027/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-054-7f04f4ab.md,SCWE-054: Signature Malleability,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-054/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-055-9f0765a2.md,SCWE-055: Missing Protection against Signature Replay Attacks,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-055/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-056-7f00777d.md,SCWE-056: Lack of Proper Signature Verification,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-056/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-074-a5e9e8b9.md,SCWE-074: Hash Collisions with Multiple Variable Length Arguments,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-074/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-084-a70bb19c.md,SCWE-084: Insecure Use of blockhash,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-084/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-114-9c5c573a.md,SCWE-114: ECDSA Nonce Reuse,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-114/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-115-9c5a18a3.md,SCWE-115: Weak VRF Parameterization or Callback Validation,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-115/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-crypto-scwe-131-7680bc49.md,SCWE-131: Missing Domain Separation in Aggregate Signatures,https://scs.owasp.org/SCWE/SCSVS-CRYPTO/SCWE-131/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-036-817fdfcc.md,SCWE-036: Inadequate Gas Limit Handling,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-036/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-058-484c37d4.md,SCWE-058: DoS with Block Gas Limit,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-058/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-059-2849c6dd.md,SCWE-059: Insufficient Gas Griefing,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-059/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-077-cdf6cd19.md,SCWE-077: Lack of Rate Limiting,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-077/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-082-55f5d265.md,SCWE-082: Lack of Proper Gas Management,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-082/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-109-8c54084b.md,SCWE-109: Unbounded Loops on Untrusted Input,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-109/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-116-3fe1c1af.md,SCWE-116: Missing Supply Cap Enforcement,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-116/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-125-868e6609.md,SCWE-125: Missing Post-Operation Health Check,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-125/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-126-695eb4e.md,SCWE-126: Unbounded Withdrawal Queue Growth,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-126/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-148-3fc99346.md,SCWE-148: Gas Exhaustion via Unbounded Loops with External Calls,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-148/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-defi-scwe-151-73206930.md,SCWE-151: Add/Remove Liquidity Without Minimum Output Validation,https://scs.owasp.org/SCWE/SCSVS-DEFI/SCWE-151/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-012-1ad33238.md,SCWE-012: Lack of Multisig Governance,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-012/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-015-9acbacf3.md,SCWE-015: Poor Governance Documentation,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-015/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-037-f3afd56b.md,SCWE-037: Insufficient Protection Against Front-Running,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-037/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-043-196fc362.md,SCWE-043: Insecure Use of Fallback Functions,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-043/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-044-79729919.md,SCWE-044: Insecure Use of Storage,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-044/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-075-e0739ee1.md,SCWE-075: Incorrect Ether Balance Tracking,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-075/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-078-40585f84.md,SCWE-078: Improper Handling of Ether Transfers,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-078/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-079-e05589cd.md,SCWE-079: Insecure Use of Transfer and Send,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-079/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-081-34d9bd70.md,SCWE-081: Improper Handling of Nonce,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-081/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-100-4b46cb80.md,SCWE-100: Missing Quorum Validation in Governance Execution,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-100/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-101-6b44bf49.md,SCWE-101: Flash-Loan-Fueled Governance Manipulation,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-101/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-102-eb4c448e.md,SCWE-102: Missing Checks-Effects-Interactions Pattern,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-102/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-136-848e24b3.md,SCWE-136: Unbounded Proposal Execution Gas,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-136/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-140-16be238c.md,SCWE-140: Ether Locked Due to Missing Withdrawal Path,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-140/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-142-b6c39c9a.md,SCWE-142: Extractable Value from Predictable Transaction Ordering,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-142/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-gov-scwe-156-ca18018d.md,SCWE-156: Missing Emergency Circuit Breaker for Critical Operations,https://scs.owasp.org/SCWE/SCSVS-GOV/SCWE-156/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-028-dd82d169.md,SCWE-028: Price Oracle Manipulation,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-028/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-029-3d85a720.md,SCWE-029: Lack of Decentralized Oracle Sources,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-029/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-030-ca2e6c76.md,SCWE-030: Insecure Oracle Data Updates,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-030/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-085-7ea66b46.md,SCWE-085: Misuse of Oracle Min/Max Price Band Without Validation,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-085/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-086-1e9f1861.md,SCWE-086: Missing Validation of Oracle Response Fields (Stale or Incomplete Data),https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-086/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-088-9e8649fb.md,SCWE-088: Improper Decimal Normalization in Price-Based Calculations,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-088/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-112-c8771b33.md,SCWE-112: Reliance on Low-Liquidity Spot Prices,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-112/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-113-c87959ca.md,SCWE-113: Insufficient TWAP Window or Single Observation,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-113/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-scwe-scsvs-oracle-scwe-130-41a09a8f.md,SCWE-130: Admin-Write Oracle Without Delay,https://scs.owasp.org/SCWE/SCSVS-ORACLE/SCWE-130/,scs.owasp.org,1,packaged
+docs/scs-owasp-org-talks-90ae0e0e.md,🎙 Talks¶,https://scs.owasp.org/talks/,scs.owasp.org,1,packaged
