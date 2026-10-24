@@ -89,6 +89,7 @@ contract SynergiXStakingV1 is ReentrancyGuard {
     error AmountOutOfRange();
     error DurationOutOfRange();
     error InsufficientRewardReserve();
+    error PrincipalCoverageRequired();
     error PositionNotFound();
     error PositionNotMatured();
     error PrincipalAlreadyWithdrawn();
@@ -239,6 +240,10 @@ contract SynergiXStakingV1 is ReentrancyGuard {
 
         if (reward > 0) {
             uint256 contractBalanceBefore = stakingToken.balanceOf(address(this));
+            if (
+                contractBalanceBefore < totalPrincipalLiability ||
+                contractBalanceBefore - totalPrincipalLiability < reward
+            ) revert PrincipalCoverageRequired();
             uint256 recipientBalanceBefore = stakingToken.balanceOf(beneficiary);
 
             stakingToken.safeTransfer(beneficiary, reward);

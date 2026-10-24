@@ -333,7 +333,7 @@ describe("SynergiXStakingV1", function () {
         expect((await instance.positions(1)).rewardClaimed).to.equal(false);
         expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
         expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
-        await expectRevert(instance.connect(user).claimReward(1), "insufficient balance");
+        await expectRevert(instance.connect(user).claimReward(1), "PrincipalCoverageRequired");
         expect((await instance.positions(1)).rewardClaimed).to.equal(false);
         expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
 
@@ -341,6 +341,44 @@ describe("SynergiXStakingV1", function () {
         await instance.connect(user).claimReward(1);
         expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
         expect((await instance.totalReservedRewardLiability()).isZero()).to.equal(true);
+    });
+
+    it("prioritizes aggregate principal coverage when multiple rewards face a partial reserve loss", async function () {
+        const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
+        const mock = await Mock.deploy();
+        await mock.deployed();
+        const instance = await deployStaking(mock);
+        const duration = maximumDuration;
+        const reward = expectedReward(stakeAmount, duration);
+
+        await mock.mint(funder.address, reward.mul(2));
+        await mock.connect(funder).approve(instance.address, reward.mul(2));
+        await instance.connect(funder).fundRewards(reward.mul(2));
+        await mock.mint(user.address, stakeAmount.mul(2));
+        await mock.connect(user).approve(instance.address, stakeAmount.mul(2));
+        await instance.connect(user).stake(stakeAmount, duration);
+        await instance.connect(user).stake(stakeAmount, duration);
+
+        await mock.burn(instance.address, reward);
+        const second = await instance.positions(2);
+        await ethers.provider.send("evm_setNextBlockTimestamp", [second.maturityTimestamp.toNumber()]);
+        await instance.connect(user).claimReward(1);
+        await expectRevert(instance.connect(user).claimReward(2), "PrincipalCoverageRequired");
+
+        expect((await mock.balanceOf(instance.address)).eq(stakeAmount.mul(2))).to.equal(true);
+        expect((await instance.totalPrincipalLiability()).eq(stakeAmount.mul(2))).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
+        expect((await instance.positions(2)).rewardClaimed).to.equal(false);
+
+        await instance.connect(user).withdrawPrincipal(1);
+        await instance.connect(user).withdrawPrincipal(2);
+        expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
+
+        await mock.mint(instance.address, reward);
+        await instance.connect(user).claimReward(2);
+        expect((await instance.totalReservedRewardLiability()).isZero()).to.equal(true);
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount.mul(2).add(reward.mul(2)))).to.equal(true);
     });
 
     it("rolls back paused payout and allows withdrawal after transfers resume", async function () {

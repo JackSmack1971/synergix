@@ -64,23 +64,23 @@ Disposition: RETIRED_FROM_V1_SCOPE based on owner attestation recorded in docs/V
 Regression risk: Changing historical reward semantics may alter entitlements.
 Status: OPEN
 
-### M-01 — Combined V1 payout can block principal when reward delivery fails
+### M-01 — Reward payout failure can block or consume principal coverage
 
 Severity: Medium, conditional on a reward shortfall or reward-only transfer failure while principal remains transferable.
-Impact: The original `withdraw` transfers `principal + reward` together; a failure involving the reward portion reverts the transaction and blocks principal return.
-Likelihood: Low under the intended fully reserved, exact-transfer token model; higher under a reserve shortfall or token-specific reward transfer restriction.
-Confidence: High for the demonstrated shortfall counterexample.
-Calibration: [VERIFIED: pre-change reproduction and post-change regression output]
+Impact: The original `withdraw` transfers `principal + reward` together; a reward failure blocks principal return. A first split-claim implementation also allowed partial reserve loss to be consumed by successive reward claims, leaving principal undercollateralized. The final diff rejects a reward claim unless remaining balance will cover all principal liabilities.
+Likelihood: Low under the intended fully reserved, exact-transfer token model; conditional on reserve loss or token-specific reward transfer restriction.
+Confidence: High for the original combined-payout reproduction and the partial-shortfall counterexample.
+Calibration: [VERIFIED: pre-change reproduction, independent review counterexample, and final regression output]
 SCWE: SCWE-083, general edge-case mapping only; https://scs.owasp.org/SCWE/SCSVS-COMP/SCWE-083/.
 SCSVS: SCSVS-DEFI-1; https://scs.owasp.org/SCSVS/controls/SCSVS-DEFI-1/.
-Locations: Base `contracts/SynergiXStakingV1.sol:187-215` combines both liabilities in one transfer. Searched the base source with `rg -n 'principal.*reward|withdraw\\(' contracts/SynergiXStakingV1.sol`; no guard exists to preserve principal independently, and no separate principal claim path was found. Final code has independent `withdrawPrincipal` and `claimReward` paths.
-Root cause: Principal and reward accounting/transfer were coupled in one settlement call.
-Attack scenario: (1) A position matures. (2) A reserve shortfall leaves at least principal but less than principal plus reward. (3) The original combined payout reverts; the final implementation lets the beneficiary withdraw principal and preserves the unpaid reward liability.
-PoC: Base reproduction on e13f7fc passed by observing `insufficient balance` while the staking balance equaled principal; the temporary test was removed. Final regressions in `test/SynergiXStakingV1.test.js` pass for reward failure independence and reward reserve shortfall/retry.
-Falsification: With full reserve and an exact-transfer token, both entitlements settle successfully; this does not disprove the shortfall counterexample.
-Impact detail: Principal return is no longer conditional on reward delivery, but token-level restrictions affecting all transfers can still block both operations.
-Recommendation: Keep independent, at-most-once claims and separately update liabilities before each checked token transfer.
-Regression risk: The settlement ABI and position tuple changed. The owner states V1 is not deployed; no on-chain storage migration is required for the current scope. Existing integrations must use the new function names.
+Locations: Base `contracts/SynergiXStakingV1.sol:187-215` combines both liabilities in one transfer. Searched the base source with `rg -n 'principal.*reward|withdraw\\(' contracts/SynergiXStakingV1.sol`; no guard exists to preserve principal independently, and no separate principal claim path was found. Final `claimReward` enforces aggregate principal coverage before transfer at `contracts/SynergiXStakingV1.sol:240-244`.
+Root cause: Combined settlement couples principal return to reward delivery; without a principal-coverage invariant, independent reward transfers can consume assets backing other positions' principal after partial reserve loss.
+Attack scenario: (1) Two matured positions each hold principal 100 and reward 10. (2) External loss reduces token balance from 220 to 210 while principal liability is 200. (3) Without a guard, two successive reward claims reduce balance to 190, so the remaining principal claim fails. The owner has now selected ECON-04 principal priority; final code blocks the second reward claim until principal is returned or assets restored.
+PoC: Base reproduction on e13f7fc passed by observing `insufficient balance` while the staking balance equaled principal; temporary test was removed. Independent review reproduced the two-position partial-loss counterexample on intermediate head effab999. Final `test/SynergiXStakingV1.test.js` adds that scenario and asserts `PrincipalCoverageRequired`, successful principal returns, and reward retry after reserve restoration.
+Falsification: With full reserve and exact-transfer token, both entitlements settle; this does not disprove shortfall behavior. The principal-coverage check prevents the reviewed partial-loss counterexample but cannot recover external losses.
+Impact detail: The owner selected that reward claims may remain unavailable after a reserve loss while principal is outstanding; token-level restrictions affecting all transfers can still block both operations.
+Recommendation: Preserve separate, at-most-once claims and enforce ECON-04 before each reward transfer.
+Regression risk: The settlement ABI and position tuple changed. The owner states V1 is not deployed; no on-chain storage migration is required for the current scope. Existing integrations must use the new function names. TDR-08 loss behavior is clarified for principal priority in the owner addendum.
 Status: OPEN
 
 ## 5. Centralization and trust risks
@@ -96,7 +96,8 @@ The bundled OWASP pack was present; its manifest identifies an OWASP SCS corpus 
 | Category | Control/test | Status | Evidence | Finding |
 |---|---|---|---|---|
 | DeFi staking | SCWE-083 Failure to Handle Edge Cases; SCSVS-DEFI-1 | FAIL | contracts/SynergiXStaking.sol:222-230; executed H-01 PoC | H-01 |
-| V1 payout isolation | Principal and reward claim independently under reward shortfall | PASS | contracts/SynergiXStakingV1.sol:187-250; focused regression tests | M-01 |
+| V1 payout isolation | Principal and reward claim independently under reward shortfall | PASS | contracts/SynergiXStakingV1.sol:193-265; focused regression tests | M-01 |
+| Principal solvency | Reward claims cannot reduce balance below aggregate principal liabilities | PASS | contracts/SynergiXStakingV1.sol:240-244; multi-position partial-shortfall regression | M-01 |
 | Architecture/upgrade | SCSVS-ARCH-2; SCSTG-TEST-0007 | NOT TESTED | contracts/SynergiXToken.sol:18,89; test/poc/upgrade-validation.test.js; deployed layout absent | — |
 | Authorization | SCSVS-AUTH-2; selected mint path | PASS | contracts/SynergiXToken.sol:89-96; test/SynergiXToken.test.js | — |
 | External token | SCSVS-COMP-2; SCSTG-TEST-0012 | NOT TESTED | SafeERC20 and exact-receipt checks at contracts/SynergiXStaking.sol:116-128; rebasing/blacklist behavior not tested | — |

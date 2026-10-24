@@ -11,7 +11,9 @@ The owner states that the contracts have not been deployed and confirms there ar
 
 The owner selects separate principal withdrawal and reward claim operations for a matured V1 position. A failed or unavailable reward transfer must not make the principal entitlement unclaimable when the token can transfer the principal amount. Each entitlement can be settled at most once by its beneficiary at or after the recorded maturity timestamp. A failed claim leaves that entitlement and its liability unchanged for a later retry.
 
-This decision does not select a reward rate, duration, stake bound, reserve cap, early-exit policy, token behavior beyond the existing exact-transfer assumptions, or reserve-loss recovery mechanism. A token pause, blacklist, or failure affecting all transfers can still prevent principal transfer; this slice does not claim to override token-level restrictions.
+For reserve-loss handling, the owner selects principal priority: reward claims must revert unless paying the reward leaves contract token balance at least equal to aggregate outstanding principal liability. The failed reward entitlement and liability remain available for retry after reserve restoration or principal withdrawals reduce that liability. This implements the existing ECON-04 principal-coverage criterion; it does not restore lost tokens or promise reward payment without assets.
+
+This decision does not select a reward rate, duration, stake bound, reserve cap, early-exit policy, or token behavior beyond the existing exact-transfer assumptions. A token pause, blacklist, or failure affecting all transfers can still prevent principal transfer; this slice does not claim to override token-level restrictions.
 
 ## Implementation authorization and boundary
 
