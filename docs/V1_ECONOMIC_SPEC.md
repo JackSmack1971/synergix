@@ -1,8 +1,8 @@
 # SynergiX V1 Economic Specification
 
-**Status:** Proposed economic scenario v0.3 — draft for product and engineering review. The architecture direction has conditional approval; this document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. Numeric parameters remain open; testnet selection is deferred to deployment planning. Decision owners, exact open choices, and closure evidence are tracked in [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md).
+**Status:** Proposed economic scenario v0.4 — preferred candidate for accountable owner review; all values remain unapproved. This document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. The complete candidate is in [`V1_APPROVED_PARAMETER_SCHEDULE.md`](V1_APPROVED_PARAMETER_SCHEDULE.md). Phase 1 remains on HOLD; see [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md).
 
-The decision register, illustrative sustainability sensitivities, and machine-testable economic acceptance criteria are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). That draft does not approve parameters; this specification remains subject to its Phase 1 approval gate.
+The decision register, illustrative sustainability sensitivities, and machine-testable economic acceptance criteria are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). The supporting candidate is scenario v0.4, schedule v1.4, and model v1.4-draft; all remain unapproved. `T0`, token symbol clearance, recipient/custody identities, and compatibility remain unresolved.
 
 Candidate staking bounds, maturity/withdrawal behavior, shortfall response, and administrative custody/pause policy are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md). All detailed rules remain open for owner approval.
 
@@ -19,11 +19,11 @@ The audit report is historical evidence and must not be rewritten to make this p
 - A stake transfers the user's SNX principal into the staking contract as escrow.
 - The principal remains segregated in accounting from reward funds and cannot be minted as a substitute for returning escrow.
 - On an eligible withdrawal, the contract returns the recorded principal once and closes the position. A second withdrawal must fail.
-- Early-exit behavior, if any, must be explicitly specified before implementation; V1 should not imply an unreviewed penalty or forfeiture rule.
+- Preferred candidate: early exit returns principal only and forfeits the unpaid reward on that position. This is unapproved and requires explicit owner approval before implementation.
 
 ### Rewards
 
-- Interest and referral rewards are separate liabilities from principal and are paid only from an explicitly funded reward reserve.
+- Candidate reward is 3% simple, noncompounding, with 30/90/180 elapsed-day terms; paid referrals are zero. These values remain unapproved. Rewards are separate liabilities from principal and are paid only from an explicitly funded reserve.
 - A stake or claim must not create an unfunded reward promise. At all times, the reward reserve must cover accrued and claimable rewards under the chosen accounting model.
 - Reward funding and payout accounting must be observable on chain. If a reserve is depleted, the specification must define whether new stakes stop, claims queue, or another bounded behavior applies; principal withdrawals remain available.
 - V1 must not rely on unrestricted minting to satisfy rewards. Any token mint authority and its limits are a separate supply-policy decision.
@@ -52,6 +52,10 @@ These are design requirements, not claims about the current contracts. Their exa
 ## Proposed exclusions from the first release
 
 Unless product review explicitly adds and specifies them, V1 excludes proxy upgrades, arbitrary reward minting, price oracles, cross-chain functionality, compounding, transferable stake positions, discretionary changes to open-position terms, and unbounded referral traversal. Each exclusion reduces the initial state space; it does not establish that excluded behavior is unsafe in every design.
+
+## Candidate definitions (all unapproved)
+
+The candidate uses a 100M fixed supply and schedule in the parameter artifact. A 30-day epoch is exactly 30 elapsed 24-hour days, with epoch `k = [T0 + 30k days, T0 + 30(k+1) days)`. The exact `T0` remains unresolved and must be approved before genesis allocations or tokenholder terms are finalized. Reward per position is `floor(P_units * 300 * D / (10,000 * 365))`, independently floored in smallest units; `D` is exact elapsed 24-hour days. Monthly allocation releases use UTC calendar-month anniversaries from an illustrative date and are not epoch-based. Liability is the sum of unpaid individually floored rewards, bounded by both actual prefunded reserve and a candidate 500,000 SNX aggregate cap. Principal remains separately escrowed. See the schedule for allocation totals, release rules, limits, and custody recommendations.
 
 ## Open decisions (no values are approved)
 

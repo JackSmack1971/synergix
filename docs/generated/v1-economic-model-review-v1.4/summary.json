@@ -1,0 +1,42 @@
+{
+  "status": "DRAFT / NOT APPROVED; hypothetical scenario only",
+  "scenario_version": "0.4-draft",
+  "parameter_schedule_version": "1.4-draft",
+  "model_version": "1.4-draft",
+  "model_source": "scripts/v1_economic_model.py",
+  "canonical_output_directory": "docs/generated/v1-economic-model-review-v1.4",
+  "genesis_utc": "2027-04-01T00:00:00Z (illustrative only; exact T0 unresolved)",
+  "epoch_definition": "30 elapsed 24-hour days from approved T0; epoch k is [T0+30k days, T0+30(k+1) days); T0 must be owner-approved before terms are finalized",
+  "release_timing": "allocation releases occur at UTC calendar-month boundaries relative to illustrative genesis; not epoch-based",
+  "rounding": "floor each position reward in integer token base units; monthly vesting uses cumulative floor and final-tranche remainder",
+  "token_decimals": 18,
+  "genesis_supply_units": "100000000000000000000000000",
+  "horizon_months": 48,
+  "reward_formula": "floor(P_units * 300 * D / (10000 * 365))",
+  "reward_rate": "3% simple, noncompounding; draft candidate",
+  "reward_reserve_snx": 2000000,
+  "aggregate_outstanding_reward_cap_snx": 500000,
+  "maximum_active_principal_snx": 20000000,
+  "maximum_liability_upper_bound_base_units": "295890410958904109589041",
+  "maximum_liability_upper_bound_zero_referral_units": "295890410958904109589041",
+  "liability_cap_headroom_upper_bound_zero_referral_units": "204109589041095890410959",
+  "continuous_max_principal_base_outflow_snx_per_year": 600000,
+  "reserve_runway_years_at_continuous_max_principal": 3.3333333333,
+  "reserve_to_global_cap_multiple": 4,
+  "global_cap_is_binding_at_given_max_principal": false,
+  "referrals": "zero paid referrals; no referral liability is generated",
+  "reserve_cohort_ledger": "80 wallets each enter two 100K and one 50K SNX positions (240 positions, 20M principal total); all mature together at 180 days; claims are serialized before a same-size re-entry attempt; no top-ups; elapsed-day timeline.",
+  "reserve_cohort_ledger_limitations": [
+    "one fixed cohort size and duration only",
+    "claim transactions are modeled as serial transitions at the same maturity boundary",
+    "no token loss, transfer failure, reserve diversion, or governance action is modeled",
+    "re-entry failure is not a forecast of user behavior"
+  ],
+  "release_proxy_definition": "cumulative unlocked allocations less an assumed 2M SNX ring-fenced reserve; not observed circulation, liquid float, holder distribution, or on-chain balances",
+  "limitations": [
+    "released-token proxy assumes the 2M reward reserve remains segregated; recipient wallet behavior and actual custody are unknown",
+    "allocation release dates use UTC calendar months; reward cohorts use exact elapsed days",
+    "no legacy deployment, wallet, beneficiary, or enforceable obligation verified",
+    "runway assumes constant full exposure, all claims paid, no top-ups and no reserve diversion"
+  ]
+}

@@ -1,6 +1,10 @@
 # SynergiX V1 Administrative Authority and Custody Policy
 
-**Status:** Proposed policy for accountable owner review — **no detailed rule in this document is approved**. Architecture-only approval of escrowed principal, separately funded rewards, solvency, immutable versioned V1 contracts, and no administrator withdrawal of committed funds is recorded in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). This document evaluates candidate rules for TDR-02 and TDR-06–08 and their interactions with TDR-03–05 and TDR-09. It does not release the Phase 1 hold in [`V1_REMEDIATION_PLAN.md`](V1_REMEDIATION_PLAN.md).
+**Status:** Proposed policy for accountable owner review — **no detailed rule in this document is approved**. Conditional architecture direction for escrowed principal, separately funded rewards, solvency, immutable versioned V1 contracts, and no administrator withdrawal of committed funds is recorded in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md); the directing user's identity and owner authority are unverified, so this is not attributable owner approval. This document evaluates candidate rules for TDR-02 and TDR-06–08 and their interactions with TDR-03–05 and TDR-09. It does not release the Phase 1 hold in [`V1_REMEDIATION_PLAN.md`](V1_REMEDIATION_PLAN.md).
+
+**Version:** 0.2 draft, prepared 2026-10-24. This version identifies a proposal only; it has no accountable owner approval.
+
+**Preferred candidate alignment:** schedule v1.4 proposes early exit with principal returned only and unpaid reward forfeited; paid referrals are zero. The recommended governance arrangement remains a 3-of-5 Safe with enforced 72-hour timelock, plus a separate 2-of-3 emergency Safe limited to new-stake pause for at most 72 hours. Signer thresholds, operational rules, custody, and all candidate parameters remain recommendations awaiting approval. No role may withdraw committed principal or reserved rewards.
 
 No signer, owner, treasury, reserve, Safe, deployed address, signature, or operational configuration is established by this proposal. The proposed thresholds and numerical examples below are not approved parameters. The accountable owner must record each decision and evidence individually in the decision table at the end.
 
@@ -8,10 +12,10 @@ No signer, owner, treasury, reserve, Safe, deployed address, signature, or opera
 
 | Topic | Present status | This document's treatment |
 |---|---|---|
-| Escrow principal returned at maturity; no mint substitute; administrators cannot withdraw committed funds | Approved architecture principle only | Preserve as a hard design boundary; the detailed lifecycle below still needs policy approval and implementation proof. |
+| Escrow principal returned at maturity; no mint substitute; administrators cannot withdraw committed funds | Conditional user direction only; identity and owner authority unverified | Preserve as a proposed design boundary; the detailed lifecycle below still needs attributable owner approval and implementation proof. |
 | Stake limits: 100–100,000 SNX per position; 250,000 SNX per wallet; 16 active positions per wallet; 20M SNX globally | Open under TDR-06 | Evaluate as a candidate envelope; approve each bound and its address/accounting semantics separately. |
 | Terms: 30/90/180 days | Open under TDR-04/TDR-06 | Evaluate as candidate terms; no reward rate or reward formula is implied. |
-| Reward reserve, funding and liabilities | Architecture principle approved; details open under TDR-03–05/TDR-08–09 | Define measurable accounting and fail-closed behavior without choosing the reserve asset or reward schedule. |
+| Reward reserve, funding and liabilities | Conditional user direction recorded; identity/owner authority unverified. Details open under TDR-03–05/TDR-08–09 | Define measurable accounting and fail-closed behavior without choosing the reserve asset or reward schedule. |
 | Governance, custody and emergency control | Open under TDR-07 | Evaluate 3-of-5 governance Safe, 72-hour timelock and separate 2-of-3 emergency Safe as proposals only. |
 | Actual owner, signer identities, addresses, threshold deployment and chain | Not supplied / cannot verify | Blocking for Phase 4 configuration and any claim that governance is operational. Never fill with invented identities or addresses. |
 
@@ -41,7 +45,7 @@ Candidate lifecycle, subject to individual owner approval:
 3. Principal is an unconditional recorded liability from acceptance until successful repayment. Any reward formula is separately specified and reserved; reward schedule changes apply only to future entries and cannot change existing entitlements.
 4. After maturity, the beneficiary may withdraw principal once. Candidate interface permits any caller to trigger payment to the recorded beneficiary, avoiding a keeper or beneficiary-transaction dependency; callers cannot redirect payment. Update the closed/withdrawn state and liability accounting atomically with the transfer. A failed token transfer reverts the full operation. Repeats revert and cannot pay twice.
 5. Reward claims are separate from principal withdrawal and separate in accounting. The entitled beneficiary may claim only its recorded, vested/claimable amount, paid only from reward reserve. Candidate policy permits a third party to trigger payment only to the recorded beneficiary, with no caller fee. Whether reward claims are allowed before maturity depends on the approved reward schedule; no reward claim may draw on principal escrow.
-6. There is no ordinary early exit. Do not provide an admin, emergency, or discretionary path to accelerate, cancel, haircut, forfeit, or rewrite a position. If an owner later wants an early-exit feature, it requires a new explicit decision, user disclosure, reserve analysis and security review before implementation.
+6. Preferred candidate: early exit returns principal only and forfeits that position's unpaid reward. This is not approved. No administrator may accelerate, cancel, redirect, haircut, or rewrite an entitlement. Any early-exit implementation requires owner approval, user disclosure, reserve analysis, and security review.
 
 **Required user disclosure if maturity-only withdrawal is approved:** principal is locked until its fixed maturity; the user cannot ordinarily exit early, even if they need liquidity, market conditions change, governance changes, or rewards are suspended. A pause, reserve incident, congestion, token transfer failure, or chain outage can delay on-chain execution. Once mature, principal withdrawal remains permissionless under the stated rule and must not depend on reward reserve availability or administrator action. This is a liquidity-risk disclosure, not a promise about transaction inclusion or asset value.
 
@@ -119,6 +123,29 @@ Proposed V1 is immutable and has no proxy upgrade, arbitrary mint, admin princip
 | Deployer-role handoff / renounce | Current deployer may only transfer residual setup authority to the verified governance/timelock addresses, then renounce all temporary roles. Must be one-way and logged. | Before user funds/production use; governance delay if after launch | Cannot use deployer role to pause/withdraw | Cannot override invariant | Required deployment gate; actual deployer/address unknown |
 | Mint, upgrade, withdraw principal, edit open position, redirect beneficiary, cancel entitlement, haircut entitlement | No caller or role exists in proposed immutable V1 | Not available | Not available | Not available | Prohibited by proposed policy; architecture forbids committed asset extraction |
 
+### Privileged-action verification crosswalk
+
+This table maps every privileged or custody-sensitive action above to the proposed economic criteria and the security/adversarial evidence needed. It describes draft controls; it does not grant or approve any role.
+
+| Action | TDR | ECON criteria | Security invariants | Required adversarial verification |
+|---|---|---|---|---|
+| User creates stake (permissionless, custody-sensitive) | 01, 03, 04, 05, 06, 09 | ECON-01/03/05/08/11/12 | SEC-04/05/07/09 | Concurrent reserve/principal boundary, referral expansion, reentrancy, fee-on-transfer, and atomic rejection. |
+| Beneficiary or caller returns matured principal | 02, 06, 08 | ECON-01/02/04/06/12 | SEC-02/04/08/09 | Duplicate, reentrant, wrong-destination, pause, reward-reserve depletion, and token-transfer failure. |
+| Beneficiary or caller claims approved reward | 03, 04, 05, 08, 09 | ECON-03/04/05/06/08/11/12 | SEC-02/04/07/09 | Same-timestamp claims, reserve race, referral rounding, payout failure, and principal coverage after each serialized transition. |
+| Fund reward vault | 03, 07, 08 | ECON-03/05/12 | SEC-01/04/09 | Unauthorized funder; false-return, fee-on-transfer, callback, and reverting asset; actual received balance must match credit. |
+| Pause new staking | 07, 08 | ECON-06/10/12 | SEC-01/02/08 | Unauthorized caller, pause expiry, repeat/extension attempts, and matured-principal/funded-claim liveness. |
+| Lift, expire, extend, or restart pause | 07, 08 | ECON-06/10/12 | SEC-01/02/08 | Timelock bypass, premature lift, emergency renewal, governance restart, and pause-state race. |
+| Set future-only parameters | 04, 06, 07 | ECON-08/09/10/12 | SEC-01/02/07/08 | Unauthorized/malformed value, timelock bypass, boundary value, and proof existing positions remain unchanged. |
+| Treasury disbursement | 01, 03, 07, 08 | ECON-03/04/05/06/07/12 | SEC-01/02/03/09 | Compromised quorum, alternate Safe module/controller path, queued-operation mutation, and reserve/principal coverage after execution. |
+| Withdraw excess reward reserve | 03, 07, 08, 09 | ECON-03/04/05/06/12 | SEC-01/02/07/09 | Concurrent stake/claim race, stale excess calculation, discrepancy state, and post-transfer reserve predicate. Default proposal is no withdrawal path. |
+| Change vault controller or timelock configuration | 07 | ECON-09/10/12 | SEC-01/02/03/08 | Direct owner, guardian, module, delegate-call, or emergency bypass; verify old controller remains effective through the delay. |
+| Rotate governance/emergency signers | 07 | ECON-09/10/12 | SEC-01/02/08 | Threshold takeover, signer replacement validation, malicious module, and role-separation failure. |
+| Recover lost signer access | 07 | ECON-09/10/12 | SEC-01/02/08 | Lost-quorum and collusion scenarios; no recovery authority may seize principal or rewrite entitlements. |
+| Deployer-role handoff / renounce | 07 | ECON-09/10/12 | SEC-01/02/03 | Incomplete handoff, residual deployer authority, wrong custody destination, or renounce-before-safe-handoff. |
+| Mint, upgrade, withdraw principal, edit positions, redirect beneficiaries, cancel or haircut entitlements | 01, 02, 07, 09 | ECON-01/02/04/06/07/09/12 | SEC-01/02/03/08 | Enumerate every role, proxy, token, vault, and direct-call bypass; prove no privileged path can create supply, extract committed assets, or alter existing terms. |
+
+The ECON/SEC identifiers resolve to the acceptance and invariant oracles in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md) and [`V1_INVARIANT_TEST_MATRIX.md`](V1_INVARIANT_TEST_MATRIX.md). Until approved roles and a V1 implementation exist, each verification row remains pending.
+
 The pause is deliberately narrow: it stops creation of new positions only. It does not pause matured principal return, cannot pause token transfers globally, cannot change terms, and cannot grant mint/upgrade/withdrawal authority. The reserve-solvency guard is a separate objective restriction on new stakes and affected reward payments; it does not authorize an administrator to block independent matured principal withdrawals.
 
 ### Timelock and treasury bypass requirements
@@ -172,7 +199,7 @@ No approvals are inferred from the conditional architecture approval, legacy cod
 | D-02 Wallet aggregate / active position cap (250,000 SNX / 16) | Evaluate; define wallet identity and position counting | Not supplied | — | Required: address/account semantics, multi-address limitation, test oracle | — | OPEN |
 | D-03 Protocol principal cap (20M SNX) | Evaluate active-liability cap | Not supplied | — | Required: concurrency and reward stress scenarios under TDR-04/09 | — | OPEN |
 | D-04 Terms and maturity rule (30/90/180 days; `timestamp + days*86400`) | Evaluate fixed entry-time maturity and exact boundary | Not supplied | — | Required: owner approval and lifecycle/boundary examples | — | OPEN |
-| D-05 No ordinary early exit; exactly-once permissionless matured principal return | Proposed policy | Not supplied | — | Required: user terms and ECON-01/02/06/10 mapping | — | OPEN |
+| D-05 Early exit returns principal only; unpaid reward forfeited; exactly-once principal return | Candidate policy | Not supplied | — | Required: owner approval, user terms, reserve and ECON-01/02/06/10 mapping | — | OPEN |
 | D-06 Atomic reserve refusal and reserve discrepancy behavior | Proposed objective triggers, affected reward suspension, new-stake stop, principal-withdrawal independence | Not supplied | — | Required: TDR-03/08 asset/accounting oracle, recovery record and adversarial review | — | OPEN |
 | D-07 Governance Safe / timelock (3-of-5 / 72 hours) | Evaluate candidate controls | Not supplied | — | Required: named accountable signers, address/config evidence, no-bypass proof and permitted action list | — | OPEN |
 | D-08 Emergency Safe (separate 2-of-3; new-stake pause <=72 hours) | Evaluate narrow temporary pause | Not supplied | — | Required: named signers, exact on-chain expiry/no-renew rule and no broader permissions | — | OPEN |
