@@ -24,6 +24,8 @@ The audit report is historical evidence and must not be rewritten to make this p
 
 `SynergiXStakingV1.sol` is the current implementation of this limited architecture. It uses a simple annualized basis-point formula with floor rounding over a 365-day year and accepts term bounds as immutable constructor parameters. Those formula details and any chosen constructor values require owner schedule approval before deployment.
 
+The V1 implementation is asset-agnostic at source level but assumes a fixed-balance ERC20 with exact transfers. It supports optional-return and no-return transfers, rejects fee-on-transfer amounts, and fails atomically if an outbound transfer is paused. A token-level pause, blacklist, or negative rebase can still make a matured withdrawal unavailable; the exact token address and its admin powers must be reviewed before deployment. A temporary-pause regression confirms the position stays open and can settle after transfers resume, but it cannot guarantee recovery from a permanent restriction.
+
 ### Principal
 
 - A stake transfers the user's SNX principal into the staking contract as escrow.

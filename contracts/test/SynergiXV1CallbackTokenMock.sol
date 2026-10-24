@@ -26,6 +26,10 @@ contract SynergiXV1CallbackTokenMock {
     bool public returnFalseFrom;
     /// @notice Fee deducted from transfers in basis points.
     uint16 public transferFeeBps;
+    /// @notice Whether this fixture returns empty data from token transfers.
+    bool public returnNoData;
+    /// @notice Whether this fixture rejects token transfers while paused.
+    bool public transfersPaused;
 
     /// @notice Mints tokens for test setup.
     /// @param account Account receiving tokens.
@@ -63,12 +67,26 @@ contract SynergiXV1CallbackTokenMock {
         transferFeeBps = feeBps;
     }
 
+    /// @notice Configures empty return data to model nonstandard ERC20 tokens.
+    /// @param shouldReturnNoData Whether transfer and transferFrom return no data.
+    function configureNoReturn(bool shouldReturnNoData) external {
+        returnNoData = shouldReturnNoData;
+    }
+
+    /// @notice Pauses or resumes test token transfers.
+    /// @param isPaused Whether transfers are paused.
+    function setTransfersPaused(bool isPaused) external {
+        transfersPaused = isPaused;
+    }
+
     /// @notice Transfers tokens in the test fixture.
     /// @param to Recipient account.
     /// @param amount Amount to transfer.
     /// @return success Whether the transfer succeeded.
     function transfer(address to, uint256 amount) external returns (bool success) {
+        _runCallback();
         _transfer(msg.sender, to, amount);
+        if (returnNoData) assembly { return(0, 0) }
         return true;
     }
 
@@ -79,19 +97,25 @@ contract SynergiXV1CallbackTokenMock {
     /// @return success Whether the transfer succeeded.
     function transferFrom(address from, address to, uint256 amount) external returns (bool success) {
         if (returnFalseFrom) return false;
-        if (callbackTarget != address(0)) {
-            callbackAttempted = true;
-            (callbackSucceeded,) = callbackTarget.call(callbackData);
-        }
+        _runCallback();
 
         uint256 permitted = allowance[from][msg.sender];
         require(permitted >= amount, "insufficient allowance");
         if (permitted != type(uint256).max) allowance[from][msg.sender] = permitted - amount;
         _transfer(from, to, amount);
+        if (returnNoData) assembly { return(0, 0) }
         return true;
     }
 
+    function _runCallback() private {
+        if (callbackTarget != address(0)) {
+            callbackAttempted = true;
+            (callbackSucceeded,) = callbackTarget.call(callbackData);
+        }
+    }
+
     function _transfer(address from, address to, uint256 amount) private {
+        require(!transfersPaused, "transfers paused");
         require(to != address(0), "zero receiver");
         require(balanceOf[from] >= amount, "insufficient balance");
         balanceOf[from] -= amount;

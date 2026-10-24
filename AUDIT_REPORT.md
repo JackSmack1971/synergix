@@ -24,13 +24,13 @@ Legacy project versions remain Hardhat 2.29.1, OpenZeppelin 4.9.6, ethers 5.8.0 
 
 ### Current state and test gaps
 
-The token is UUPS-upgradeable while staking is constructor-based. Staking escrows principal on entry, but `stakeEnd` zeroes the position and mints payout instead of returning the escrowed principal; the intended economic model is unresolved. `dailyData` is append-only and zero-based, while payout reads it at Unix-day indexes. Referral eligibility and ancestry traversal scan unbounded arrays/chains. Existing tests cover selected role paths, settings bounds, callback reentrancy, false-return/fee-on-transfer behavior, referral cycles, same-layout upgrade behavior, and the H-01 reproducer. Gaps include full role matrices, no-return/rebasing/blacklisting token behavior, fuzz/property and invariant testing, reward solvency, broad payout boundary cases, deep traversal ceilings, and historical storage-layout compatibility. Public/external NatSpec is incomplete, notably interface functions and multiple staking entry points/setters.
+The token is UUPS-upgradeable while legacy staking is constructor-based. Legacy `stakeEnd` clears a position and mints payout instead of returning escrowed principal; V1 terms are separately approved. Legacy `dailyData` is append-only and zero-based, while payout reads it at Unix-day indexes. Referral eligibility and ancestry traversal scan unbounded arrays/chains. Existing tests cover selected role paths, settings bounds, callback reentrancy, false-return/fee-on-transfer behavior, referral cycles, same-layout upgrade behavior, and H-01. V1 tests additionally cover no-return tokens, exact incoming/outgoing delivery, pause recovery, reentrancy during deposit and payout, zero-rounded reward, and configured amount/duration boundaries. Remaining gaps include adversarial `balanceOf`, negative rebasing, blacklisting/permanent pause, property/invariant fuzzing, historical storage-layout compatibility, full legacy role matrices, and deep traversal ceilings. Public/external NatSpec in legacy contracts remains incomplete.
 
 ### Verification evidence
 
-- `npm test` — exit 0; 30 passing, 1 pending. H-01 PoC passed by asserting the legacy matured claim reverts. The pending legacy payout case passes with the epoch configuration below.
+- `npm test` — exit 0; 34 passing, 1 pending. H-01 PoC passed by asserting the legacy matured claim reverts. The pending legacy payout case passes with the epoch configuration below.
 - `node scripts/hardhat.js --config hardhat.epoch.config.js test test/poc/positive-payout.test.js` — exit 0; 2 passing, including the aligned matured payout and zero-share rejection.
-- V1-focused suite — 7 passing tests cover fixed-at-entry reward, reserve accounting/overcommit, bounds, exact timestamp maturity, delayed claim, false-return and fee-on-transfer intake/payout, and callback reentrancy.
+- V1-focused suite — 11 passing tests cover fixed-at-entry reward, reserve accounting/overcommit, bounds, exact timestamp maturity, delayed claim, no-return/false-return/fee-on-transfer behavior, temporary pause recovery, zero-rounded reward, and callback reentrancy.
 - `npm run compile -- --force` — exit 0; 54 Solidity files compiled for Paris using local Solidity 0.8.38. Hardhat emitted its compiler-support warning and legacy OpenZeppelin 4.9 assembly annotation warnings.
 - `npm audit` — 36 development-tree findings (19 low, 4 moderate, 13 high; 0 critical). `npm audit --omit=dev` — 0 runtime dependency findings. High findings trace to the existing Hardhat 2 / ethers v5 / upgrades-plugin toolchain; remediation requires a separate major toolchain migration and remains a merge blocker under the requested no-open-High rule.
 - Coverage — not configured/installed (`solidity-coverage` unavailable).
@@ -74,7 +74,7 @@ Token admin can authorize arbitrary UUPS implementation upgrades and administer 
 | Category | Control/test | Status | Evidence | Finding |
 |---|---|---|---|---|
 | legacy payout availability | Matured claim under current-only daily data | FAIL | H-01 PoC in `test/poc/H-01.test.js`; full suite asserts the revert | H-01 |
-| V1 settlement | Fixed-entry reward, full reservation, maturity, duplicate claim, token edge and callback behavior | PARTIAL PASS | `test/SynergiXStakingV1.test.js`, 7 passing; numeric schedule and token/deployment identity remain unapproved | — |
+| V1 settlement | Fixed-entry reward, full reservation, maturity, duplicate claim, token edge and callback behavior | PARTIAL PASS | `test/SynergiXStakingV1.test.js`, 11 passing; numeric schedule and token/deployment identity remain unapproved | — |
 | reward schedule | Aligned payout and boundary semantics | NOT TESTED | Positive payout test pending under default clock; no approved schedule semantics | H-01 |
 | authorization | Selected token/admin/operator role paths | PARTIAL | `test/SynergiXToken.test.js`, `test/SynergiXStaking.test.js`, `test/poc/authorization-validation.test.js` | — |
 | reentrancy | Callback reentry into `stakeStart` | PARTIAL | `test/poc/reentrancy-validation.test.js`; other cross-function callbacks not covered | — |

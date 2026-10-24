@@ -193,6 +193,66 @@ describe("SynergiXStakingV1", function () {
         expect((await instance.nextPositionId()).eq(1)).to.equal(true);
     });
 
+    it("supports no-return ERC20 transfers through OpenZeppelin SafeERC20", async function () {
+        const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
+        const mock = await Mock.deploy();
+        await mock.deployed();
+        const instance = await deployStaking(mock);
+        const duration = maximumDuration;
+        const reward = expectedReward(stakeAmount, duration);
+        await mock.configureNoReturn(true);
+        await mock.mint(funder.address, reward);
+        await mock.connect(funder).approve(instance.address, reward);
+        await instance.connect(funder).fundRewards(reward);
+        await mock.mint(user.address, stakeAmount);
+        await mock.connect(user).approve(instance.address, stakeAmount);
+        await instance.connect(user).stake(stakeAmount, duration);
+
+        const position = await instance.positions(1);
+        await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
+        await instance.connect(user).withdraw(1);
+
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
+        expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).isZero()).to.equal(true);
+    });
+
+    it("accepts the configured amount and duration boundaries", async function () {
+        const minReward = expectedReward(minimumStake, minimumDuration);
+        const maxReward = expectedReward(maximumStake, maximumDuration);
+        await fundReserve(staking, token, minReward.add(maxReward));
+        await token.connect(admin).mint(user.address, minimumStake.add(maximumStake));
+        await token.connect(user).approve(staking.address, minimumStake.add(maximumStake));
+
+        await staking.connect(user).stake(minimumStake, minimumDuration);
+        await staking.connect(user).stake(maximumStake, maximumDuration);
+
+        expect((await staking.positions(1)).principal.eq(minimumStake)).to.equal(true);
+        expect((await staking.positions(2)).principal.eq(maximumStake)).to.equal(true);
+        expect((await staking.totalPrincipalLiability()).eq(minimumStake.add(maximumStake))).to.equal(true);
+        expect((await staking.totalReservedRewardLiability()).eq(minReward.add(maxReward))).to.equal(true);
+    });
+
+    it("allows a zero-rounded reward without consuming reserve", async function () {
+        const Factory = await ethers.getContractFactory("SynergiXStakingV1");
+        const zeroRewardStaking = await Factory.deploy(
+            token.address,
+            1,
+            1,
+            1,
+            1,
+            1
+        );
+        await zeroRewardStaking.deployed();
+        await token.connect(admin).mint(user.address, 1);
+        await token.connect(user).approve(zeroRewardStaking.address, 1);
+
+        await zeroRewardStaking.connect(user).stake(1, 1);
+
+        expect((await zeroRewardStaking.positions(1)).fixedReward.isZero()).to.equal(true);
+        expect((await zeroRewardStaking.totalReservedRewardLiability()).isZero()).to.equal(true);
+    });
+
     it("keeps a mature position open if the token cannot deliver the exact payout", async function () {
         const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
         const mock = await Mock.deploy();
@@ -222,6 +282,38 @@ describe("SynergiXStakingV1", function () {
         expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
         expect((await mock.balanceOf(instance.address)).eq(stakeAmount.add(reward))).to.equal(true);
         expect(block.timestamp).to.be.lessThan(position.maturityTimestamp.toNumber());
+    });
+
+    it("rolls back paused payout and allows withdrawal after transfers resume", async function () {
+        const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
+        const mock = await Mock.deploy();
+        await mock.deployed();
+        const instance = await deployStaking(mock);
+        const duration = maximumDuration;
+        const reward = expectedReward(stakeAmount, duration);
+        await mock.mint(funder.address, reward);
+        await mock.connect(funder).approve(instance.address, reward);
+        await instance.connect(funder).fundRewards(reward);
+        await mock.mint(user.address, stakeAmount);
+        await mock.connect(user).approve(instance.address, stakeAmount);
+        await instance.connect(user).stake(stakeAmount, duration);
+        const position = await instance.positions(1);
+
+        await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
+        await mock.setTransfersPaused(true);
+        await expectRevert(instance.connect(user).withdraw(1), "transfers paused");
+        expect((await instance.positions(1)).withdrawn).to.equal(false);
+        expect((await instance.totalPrincipalLiability()).eq(stakeAmount)).to.equal(true);
+
+        await mock.setTransfersPaused(false);
+        const reentry = instance.interface.encodeFunctionData("fundRewards", [1]);
+        await mock.configureCallback(instance.address, reentry);
+        await instance.connect(user).withdraw(1);
+
+        expect(await mock.callbackAttempted()).to.equal(true);
+        expect(await mock.callbackSucceeded()).to.equal(false);
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
+        expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
     });
 
     it("blocks callback reentrancy without duplicating a position", async function () {
