@@ -77,8 +77,8 @@ Token admin can authorize arbitrary UUPS implementation upgrades and administer 
 | V1 settlement | Fixed-entry reward, full reservation, maturity, duplicate claim, token edge and callback behavior | PARTIAL PASS | `test/SynergiXStakingV1.test.js`, 11 passing; numeric schedule and token/deployment identity remain unapproved | — |
 | reward schedule | Aligned payout and boundary semantics | NOT TESTED | Positive payout test pending under default clock; no approved schedule semantics | H-01 |
 | authorization | Selected token/admin/operator role paths | PARTIAL | `test/SynergiXToken.test.js`, `test/SynergiXStaking.test.js`, `test/poc/authorization-validation.test.js` | — |
-| reentrancy | Callback reentry into `stakeStart` | PARTIAL | `test/poc/reentrancy-validation.test.js`; other cross-function callbacks not covered | — |
-| ERC20 intake | False return and fee-on-transfer rejection | PARTIAL | `test/poc/erc20-interaction.test.js`; no-return/rebase/blacklist untested | — |
+| reentrancy | Callback reentry during V1 deposit and payout | PARTIAL | `test/SynergiXStakingV1.test.js`; legacy cross-function callbacks and production token behavior not covered | — |
+| ERC20 intake and payout | False-return, fee-on-transfer, no-return, pause rollback/recovery, exact transfer behavior | PARTIAL | `test/poc/erc20-interaction.test.js`, `test/SynergiXStakingV1.test.js`; production rebase/blacklist/token-admin behavior untested | — |
 | upgradeability | UUPS authorization and same-layout state | PARTIAL | `test/poc/upgrade-validation.test.js`; historical/deployed layout unverified | — |
 | gas/resource bounds | Referral ancestry and active-stake scan | PARTIAL | `test/poc/gas-traversal-profile.test.js` profiles finite sizes only | — |
 | build | Forced local compile | PASS | `npm run compile -- --force`; 54 files, Solidity 0.8.38, Paris | — |
@@ -89,6 +89,10 @@ Token admin can authorize arbitrary UUPS implementation upgrades and administer 
 ## 7. Discarded candidates and implementation decision
 
 The owner approved replacing the legacy daily-index mechanism with a position-based V1. A separate immutable-terms implementation now exists; it does not migrate or rewrite legacy positions because deployment and off-chain obligations remain unverified. Numeric schedule terms and the existing Hardhat 2 development dependency advisories also remain open. No candidate was claimed disproven; deployment/release requires those gates to close.
+
+## 9. PR and independent review status
+
+PR [#7](https://github.com/JackSmack1971/synergix/pull/7) is open on `feat/v1-position-based-staking` at commit `c354c919aff7c2009e1856b61c37cc7f4fef6ef8`. GitHub reported `MERGEABLE`, no configured status checks, and no GitHub reviews at last inspection. The independent follow-up reviewer returned **CHANGES REQUIRED**: the new tests close previously noted V1 coverage gaps and found no new V1 Critical/High code defect, while legacy H-01 and 13 High development dependency advisories remain blocking findings. The selected token's pause/blacklist/admin powers remain a Medium deployment risk. The PR was not merged because the requested no-open-High gate is not met.
 
 **Selected slice:** introduce an immutable-terms V1 lifecycle that does not depend on daily keeper rows. Its constructor requires explicit token, rate, principal bounds, and duration bounds; no draft schedule values are defaults. Acceptance evidence includes exact receipt/payout checks, no underfunded position acceptance, one-time beneficiary withdrawal, inclusive timestamp maturity, delayed-claim fixed rewards, and reentrancy rejection. The owner’s approval is recorded in `docs/V1_TOKENOMICS_DECISION_RECORD.md`; numeric terms remain for an approved deployment schedule. The slice does not migrate or modify legacy positions. Legacy H-01 and 13 high development dependency advisories remain open, so do not merge under the requested gate.
 
