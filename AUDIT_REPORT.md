@@ -1,7 +1,7 @@
 # SynergiX Security Audit and Remediation Gate
 
 STATUS: INCOMPLETE
-Blocker: This PR addresses one owner-approved V1 settlement invariant only. Numeric economics, administrative authority, full per-control checklist verification, static analysis, and independent review of this final diff remain open.
+Blocker: This PR addresses one owner-approved V1 settlement invariant only. Numeric economics, administrative authority, full per-control checklist verification, and static analysis remain open. An independent reviewer approved the implementation diff at commit 5b0ce1fb3fe7cefba6829d93ce7d344fcea22469.
 
 ## 1. Executive summary
 
@@ -108,4 +108,4 @@ Primary evidence: `contracts/SynergiXToken.sol`, `contracts/SynergiXStaking.sol`
 
 **Selected slice:** separate matured V1 principal withdrawal and reward claim operations. Acceptance criteria: each is beneficiary-only, mature-only and independently at-most-once; failure of either operation preserves its own liability and does not block success of the other when the token can transfer the relevant amount; both claim orders work; zero reward settles once without a token transfer; and reentrancy/transfer failure cannot duplicate or erase either entitlement.
 
-**Independent review:** pending against the final PR head. **Pre-merge status:** not ready; keep the PR open pending independent approval, required CI/review gates, and explicit merge authorization.
+**Independent review:** APPROVE on implementation commit `5b0ce1fb3fe7cefba6829d93ce7d344fcea22469`; reviewer confirmed the ECON-04 guard closes the partial-loss counterexample and independently ran its targeted regression. **Pre-merge status:** not ready; hosted CI and required human reviews are absent, and explicit merge authorization is required.
