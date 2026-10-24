@@ -1,0 +1,11 @@
+/docs/V1_APPROVED_PARAMETER_SCHEDULE.md text eol=lf
+/docs/V1_ADMINISTRATIVE_AUTHORITY.md text eol=lf
+/docs/V1_OWNER_DECISIONS.md text eol=lf
+/docs/V1_TOKENOMICS_DECISION_RECORD.md text eol=lf
+/docs/V1_ECONOMIC_SPEC.md text eol=lf
+/docs/V1_COMPATIBILITY_STATUS_2026-10-24.md text eol=lf
+/scripts/v1_economic_model.py text eol=lf
+/docs/generated/v1-economic-model-review-v1.4/allocation_monthly.csv text eol=lf
+/docs/generated/v1-economic-model-review-v1.4/liability_scenarios.csv text eol=lf
+/docs/generated/v1-economic-model-review-v1.4/reserve_cohort_ledger.csv text eol=lf
+/docs/generated/v1-economic-model-review-v1.4/summary.json text eol=lf
