@@ -1,0 +1,6 @@
+interface:
+  display_name: "Tokenomics Adversarial Review"
+  short_description: "Reconcile token economics against on-chain controls"
+  default_prompt: "Audit the supplied tokenomics and contract evidence for 36-month dilution, sinks, admin and governance abuse, then report reproducible findings and gaps."
+policy:
+  allow_implicit_invocation: true

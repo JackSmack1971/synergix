@@ -57,4 +57,28 @@ describe("ERC20 interaction validation: exact principal receipt", function () {
         expect((await staking.numStakes(user.address)).isZero()).to.equal(true);
         expect((await token.totalSupply()).eq(principal)).to.equal(true);
     });
+
+    it("accepts no-return transferFrom and records the exact deposited principal", async function () {
+        const [owner, user] = await ethers.getSigners();
+        const principal = ethers.utils.parseEther("1000000");
+
+        const Token = await ethers.getContractFactory("NoReturnERC20Mock");
+        const token = await Token.deploy();
+        await token.deployed();
+
+        const Staking = await ethers.getContractFactory("SynergiXStaking");
+        const staking = await Staking.deploy(token.address);
+        await staking.deployed();
+
+        await token.mint(user.address, principal);
+        await token.connect(user).approve(staking.address, principal);
+        await staking.connect(owner).stakeStart(principal, 1, user.address);
+
+        expect((await token.balanceOf(user.address)).isZero()).to.equal(true);
+        expect((await token.balanceOf(staking.address)).eq(principal)).to.equal(true);
+        expect((await token.allowance(user.address, staking.address)).isZero()).to.equal(true);
+        expect((await staking.numStakes(user.address)).toNumber()).to.equal(1);
+        const [recordedPrincipal] = await staking.stakes(user.address, 0);
+        expect(recordedPrincipal.eq(principal)).to.equal(true);
+    });
 });
