@@ -78,26 +78,7 @@ cd SynergiX
 
 ## Installation
 
-1. **Clone the Repository**
-
-   ```bash
-   git clone [https://github.com/JackSmack1971/synergix.git]
-   cd SynergiX
-   ```
-
-2. **Install Dependencies**
-
-   Use either `npm` or `yarn` to install the required packages.
-
-   ```bash
-   # Using npm
-   npm install
-   
-   # Using yarn
-   yarn install
-   ```
-
-   This will install all necessary packages, including Hardhat, OpenZeppelin Contracts, and Ethers.js.
+For prerequisites and the reproducible clean install command, see [INSTALL.md](INSTALL.md). The root `package.json` declares the development dependencies and `package-lock.json` records the resolved versions; use `npm ci` from the repository root.
 
 ---
 
