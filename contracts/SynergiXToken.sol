@@ -2,28 +2,17 @@
 pragma solidity ^0.8.0;
 
 // Import OpenZeppelin Contracts
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
-/// @title ISynergiXStaking Interface
-/// @notice Interface for the SynergiX Staking Contract
-interface ISynergiXStaking {
-    function stakeStart(uint256 stakeValue, uint256 stakeDays, address staker) external returns (uint256);
-    function stakeEnd(uint256 stakeIndex, address staker) external;
-    function setReferrer(address staker, address referrer) external;
-    function MAX_STAKE_DAYS() external view returns (uint256);
-    function numStakes(address staker) external view returns (uint256);
-    function stakeActive(uint256 stakeIndex, address staker) external view returns (bool);
-    function isTrustedStakingContract(address contractAddress) external view returns (bool);
-    function getStakeInfo(uint256 stakeIndex, address staker) external view returns (uint256, uint256, uint256, uint256);
-}
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "./ISynergiXStaking.sol";
 
 /// @title SynergiXToken
 /// @notice ERC20 Token with Staking, Access Control, and Upgradeability Features
-contract SynergiXToken is Initializable, ERC20Burnable, AccessControl, UUPSUpgradeable, ReentrancyGuard {
+contract SynergiXToken is Initializable, ERC20BurnableUpgradeable, AccessControlUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable {
     // Roles Definitions
     bytes32 public constant STAKING_ROLE = keccak256("STAKING_ROLE");
     bytes32 public constant TRUSTED_CONTRACT_ROLE = keccak256("TRUSTED_CONTRACT_ROLE");
@@ -35,8 +24,14 @@ contract SynergiXToken is Initializable, ERC20Burnable, AccessControl, UUPSUpgra
     // Pausable State
     bool private _paused;
 
+    // Lockup state retained by the transfer hook. Zero defaults preserve the
+    // current behavior until a reward-distribution policy is defined.
+    uint256 private _lastRewardDistribution;
+    uint256 private _lockupPeriod;
+
     // Constants
-    uint256 public constant MAX_STAKING_VALUE = 100000 ether;
+    // Keep this limit above the staking contract's 1,000,000 SNX minimum.
+    uint256 public constant MAX_STAKING_VALUE = 1000000 ether;
     uint256 public constant SECONDS_IN_DAY = 86400;
     uint32 public constant MIN_STAKING_DAYS = 1;
     uint32 public constant MAX_STAKING_DAYS = 365;
@@ -47,15 +42,16 @@ contract SynergiXToken is Initializable, ERC20Burnable, AccessControl, UUPSUpgra
     event RewardPoolPercentageUpdated(uint256 newRewardPoolPercentage);
     event TrustedContractAdded(address indexed contractAddress);
     event TrustedContractRemoved(address indexed contractAddress);
+    event StakeStarted(address indexed staker, uint256 stakeValue, uint256 stakeDays, uint256 stakeIndex, address stakingContract);
+    event StakeEnded(address indexed staker, uint256 stakeIndex, uint256 payout, uint256 penalty, address stakingContract);
 
     /// @notice Initializes the token contract
     /// @param admin The address to be granted the ADMIN_ROLE
     /// @param _staking The address of the staking contract
     function initialize(address admin, ISynergiXStaking _staking) public initializer {
         require(admin != address(0), "Admin address cannot be zero");
-        require(address(_staking) != address(0), "Staking contract address cannot be zero");
-
         __ERC20_init("SynergiX Token", "SNX");
+        __ERC20Burnable_init();
         __AccessControl_init();
         __UUPSUpgradeable_init();
         __ReentrancyGuard_init();
@@ -63,12 +59,24 @@ contract SynergiXToken is Initializable, ERC20Burnable, AccessControl, UUPSUpgra
         // Setup Roles
         _setupRole(ADMIN_ROLE, admin);
         _setupRole(DEFAULT_ADMIN_ROLE, admin);
-        _setupRole(TRUSTED_CONTRACT_ROLE, address(_staking));
-        _setupRole(STAKING_ROLE, address(_staking));
+        if (address(_staking) != address(0)) {
+            _setupRole(TRUSTED_CONTRACT_ROLE, address(_staking));
+            _setupRole(STAKING_ROLE, address(_staking));
+        }
 
         // Initialize Variables
         staking = _staking;
         _paused = false;
+    }
+
+    /// @notice Completes the token/staking wiring after the token proxy is deployed.
+    /// @dev May only be called once, by an admin, when initialized with no staking address.
+    function setStakingContract(ISynergiXStaking _staking) external onlyRole(ADMIN_ROLE) {
+        require(address(staking) == address(0), "Staking contract already set");
+        require(address(_staking) != address(0), "Staking contract address cannot be zero");
+        staking = _staking;
+        grantRole(TRUSTED_CONTRACT_ROLE, address(_staking));
+        grantRole(STAKING_ROLE, address(_staking));
     }
 
     /// @notice Authorizes contract upgrades, restricted to ADMIN_ROLE
@@ -168,7 +176,7 @@ contract SynergiXToken is Initializable, ERC20Burnable, AccessControl, UUPSUpgra
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(AccessControl, ERC20)
+        override(AccessControlUpgradeable)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

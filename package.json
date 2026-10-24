@@ -4,11 +4,11 @@
   "description": "SynergiX smart contracts: ERC20 token and staking contract with referral system.",
   "main": "index.js",
   "scripts": {
-    "test": "hardhat test",
-    "compile": "hardhat compile",
-    "deploy": "hardhat run scripts/SynergixDeployment.js --network rinkeby",
-    "deploy:mainnet": "hardhat run scripts/SynergixDeployment.js --network mainnet",
-    "upgrade": "hardhat run scripts/UpgradeSynergixContracts.js --network rinkeby"
+    "test": "node scripts/hardhat.js test",
+    "compile": "node scripts/hardhat.js compile",
+    "deploy": "node scripts/hardhat.js run scripts/SynergixDeployment.js --network rinkeby",
+    "deploy:mainnet": "node scripts/hardhat.js run scripts/SynergixDeployment.js --network mainnet",
+    "upgrade": "node scripts/hardhat.js run scripts/UpgradeSynergixContracts.js --network rinkeby"
   },
   "keywords": [
     "ethereum",
