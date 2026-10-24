@@ -6,7 +6,7 @@ const { TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD } = require("hardhat/builtin-tasks/
 
 // Use the locked local solc-js package; ordinary builds must not fetch a compiler.
 subtask(TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD).setAction(async ({ solcVersion }, _hre, runSuper) => {
-    if (solcVersion === "0.8.26") {
+    if (solcVersion === "0.8.38") {
         const solc = require("solc");
         return {
             compilerPath: require.resolve("solc/soljson.js"),
@@ -26,7 +26,7 @@ const mainnetAccounts = process.env.MAINNET_PRIVATE_KEY
     : [];
 
 module.exports = {
-    solidity: "0.8.26",
+    solidity: "0.8.38",
     networks: {
         rinkeby: {
             url: process.env.RINKEBY_RPC_URL || "https://rinkeby.infura.io/v3/YOUR_INFURA_PROJECT_ID",
