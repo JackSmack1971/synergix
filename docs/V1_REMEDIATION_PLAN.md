@@ -14,7 +14,7 @@ The proposed economic direction is in [`V1_ECONOMIC_SPEC.md`](V1_ECONOMIC_SPEC.m
 
 ### Formal Phase 1 hold point — economics and authority
 
-**HOLD:** Do not implement contract behavior that depends on unresolved economic parameters or administrative authority. The architecture principles in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md) have conditional approval only; the owner-approved economic schedule and administrative authority specification are not yet present. This hold point remains in force until both artifacts are reviewed, versioned, and approved by the accountable owner.
+**HOLD:** Do not implement contract behavior that depends on unresolved economic parameters or administrative authority. The architecture principles in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md) have conditional approval only. The owner-approved economic schedule is not present; [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) is a proposed policy artifact, not an approved authority specification. This hold point remains in force until both artifacts are reviewed, versioned, and approved by the accountable owner.
 
 The hold point does not block independent preparation. The following lanes may proceed without selecting tokenomics or deployment parameters:
 

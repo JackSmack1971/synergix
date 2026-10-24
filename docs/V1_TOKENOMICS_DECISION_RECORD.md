@@ -1,11 +1,13 @@
 # SynergiX V1 Tokenomics Decision Record
 
 **Record:** TDR-V1-001
-**Version:** 0.2 (conditional architecture approval; owner review pending)
+**Version:** 0.3 (draft decision preparation; conditional architecture approval; owner review pending)
 **Status:** PROPOSED / AWAITING OWNER APPROVAL — architecture only.
 **Date:** 2026-10-24
 
-This record documents the user's conditional approval of V1 architecture principles and the still-open tokenomics and authority decisions. The approval is **CONDITIONAL — Architecture only**; it does not approve final tokenomics, parameter selection, implementation that depends on open decisions, deployment, or production release. Non-economic preparation, including test planning and source-integrity work, may proceed independently. The current compile and test baseline is recorded in [`V1_BASELINE_VERIFICATION_2026-10-24.md`](V1_BASELINE_VERIFICATION_2026-10-24.md), and the full test plan is in [`V1_INVARIANT_TEST_MATRIX.md`](V1_INVARIANT_TEST_MATRIX.md); the hold point is in [`V1_REMEDIATION_PLAN.md`](V1_REMEDIATION_PLAN.md). [`audit/REPORT.md`](../audit/REPORT.md) remains incomplete. Do not infer deployed behavior or tokenholder commitments from this proposal.
+This record documents the user's conditional approval of V1 architecture principles and the still-open tokenomics and authority decisions. Version 0.3 adds a draft economic scenario label and links the role-assigned closure ledger in [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md); it does not resolve or approve any TDR-01–09 parameter. The approval is **CONDITIONAL — Architecture only**; it does not approve final tokenomics, parameter selection, implementation that depends on open decisions, deployment, or production release. Non-economic preparation, including test planning and source-integrity work, may proceed independently. The current compile and test baseline is recorded in [`V1_BASELINE_VERIFICATION_2026-10-24.md`](V1_BASELINE_VERIFICATION_2026-10-24.md), and the full test plan is in [`V1_INVARIANT_TEST_MATRIX.md`](V1_INVARIANT_TEST_MATRIX.md); the hold point is in [`V1_REMEDIATION_PLAN.md`](V1_REMEDIATION_PLAN.md). [`audit/REPORT.md`](../audit/REPORT.md) remains incomplete. Do not infer deployed behavior or tokenholder commitments from this proposal.
+
+**Working scenario label:** Proposed economic scenario v0.3 — draft sensitivity only; not an approved schedule, forecast, or commitment. The complete illustrative schedule and reproducible model are in [`V1_APPROVED_PARAMETER_SCHEDULE.md`](V1_APPROVED_PARAMETER_SCHEDULE.md), whose filename is reserved for eventual approved use but whose current contents are unmistakably **DRAFT / NOT APPROVED**. All proposed amounts, beneficiaries, timing, signers, and policies require accountable approval.
 
 ## Approved design principles
 
@@ -32,7 +34,7 @@ These principles are approved as architectural direction only. They do not suppl
 | TDR-07 | Governance and administrative powers | Immutable, versioned V1 contracts; no authority may withdraw committed user funds. | OPEN. Owner must approve governance addresses, multisig threshold, timelock, mutable settings (if any), emergency-control authority/scope, and recovery procedure. |
 | TDR-08 | Reward shortfall | Reward commitments must be fully reserved. | OPEN. Specify operational behavior when new commitments cannot be fully funded or a reserve discrepancy/loss occurs; no committed user funds may be withdrawn by an administrator. |
 | TDR-09 | Referral / reward cap interactions | All reward liabilities, including any referral component, must fit within the approved funded commitment. | OPEN under TDR-04/TDR-05. Specify reservation timing and concurrent-position accounting in the approved schedule. |
-| TDR-10 | Initial deployment network | No network selected. Network choice is deferred to deployment planning. | OPEN for Phase 4; not a tokenomics or Phase 1 approval prerequisite. |
+| TDR-10 | Initial deployment network | User preference: BASE if possible. No network selected; assess in Phase 4. | DEFERRED to Phase 4; preference only, not chain selection or deployment approval. |
 
 Approval must be recorded per row with approver identity/role, date, rationale, and a versioned parameter schedule. The approval recorded below covers architecture principles only. Code defaults, historical tests, and legacy deployment configuration do not count as approval of V1 economics. If an owner chooses a direction different from a principle above, update this record and the economic spec before implementation.
 
@@ -54,7 +56,7 @@ These observations do not establish the behavior of any deployed instance. Recon
 
 ### Repository authority check
 
-A repository search on 2026-10-24 covered `README.md`, `docs/`, `contracts/`, `test/`, `scripts/`, and `audit/` (excluding dependencies, generated build output, and the bundled OWASP reference corpus). It found no separately approved tokenomics schedule, allocation decision, reward APR, treasury commitment, governance charter, or administrative custody record. Existing tests assert selected legacy behavior, including 1%/2% referral minting, but do not establish approval or intended V1 economics. The user's conditional direction now approves architecture principles only; the numerical schedule and administrative authority details remain unresolved under TDR-01 through TDR-09. TDR-10 is intentionally deferred to Phase 4.
+A repository search on 2026-10-24 covered `README.md`, `docs/`, `contracts/`, `test/`, `scripts/`, and `audit/` (excluding dependencies, generated build output, and the bundled OWASP reference corpus). It found no separately approved tokenomics schedule, allocation decision, reward APR, treasury commitment, governance charter, or administrative custody record. Existing tests assert selected legacy behavior, including 1%/2% referral minting, but do not establish approval or intended V1 economics. The user's conditional direction now approves architecture principles only; the numerical schedule and administrative authority details remain unresolved under TDR-01 through TDR-09. The policy proposal in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) evaluates candidate rules but records no detailed owner approval. TDR-10 is intentionally deferred to Phase 4.
 
 ## Quantitative sustainability sensitivities
 
@@ -161,7 +163,7 @@ The repository does not identify accountable economic or governance approvers. A
 | Decision ID | Approver / role | Date | Rationale or linked evidence | Approved version |
 |---|---|---|---|---|
 | Architecture principles only | User (identity/owner authority not established in this record) | 2026-10-24 | Conditional approval stated in conversation; disposition: `CONDITIONAL — Architecture only` | V1 architecture direction |
-| TDR-01, TDR-04 through TDR-09 | **Owner approval pending** | — | Open decisions listed above; next gate is an explicit owner-approved economic schedule and administrative authority specification | — |
+| TDR-01, TDR-04 through TDR-09 | **Owner approval pending** | — | Open decisions listed above; next gate is an explicit owner-approved economic schedule and administrative authority specification. [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) is a proposal only. | — |
 | TDR-02 and TDR-03 | User-approved design principles only | 2026-10-24 | Escrowed principal returned at maturity; separate reward funding with fully reserved commitments. Detailed policies remain open. | V1 architecture direction |
 | TDR-10 | Deferred to deployment planning | — | Select initial network during Phase 4; no deployment authorization is granted | — |
 
@@ -175,4 +177,4 @@ Phase 1 economics are ready for implementation planning only when:
 4. Each applicable ECON criterion has a concrete test oracle tied to the approved model and schedule.
 5. The source/build baseline and any deployment or compatibility question are reconciled under Phase 1 of the remediation plan.
 
-Until the owner-approved schedule and administrative authority specification exist, this record remains **PROPOSED / AWAITING OWNER APPROVAL**. No implementation depending on unresolved economic parameters may begin. Testnet selection remains deferred to deployment planning, consistent with the remediation plan.
+Until the owner-approved schedule and administrative authority specification are approved, this record remains **PROPOSED / AWAITING OWNER APPROVAL**. The proposal in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) does not release the hold. No implementation depending on unresolved economic parameters may begin. Testnet selection remains deferred to deployment planning, consistent with the remediation plan.

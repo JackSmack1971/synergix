@@ -1,8 +1,10 @@
 # SynergiX V1 Economic Specification
 
-**Status:** Proposal for product and engineering review. The architecture direction has conditional approval; this document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. Numeric parameters remain open; testnet selection is deferred to deployment planning.
+**Status:** Proposed economic scenario v0.3 — draft for product and engineering review. The architecture direction has conditional approval; this document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. Numeric parameters remain open; testnet selection is deferred to deployment planning. Decision owners, exact open choices, and closure evidence are tracked in [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md).
 
 The decision register, illustrative sustainability sensitivities, and machine-testable economic acceptance criteria are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). That draft does not approve parameters; this specification remains subject to its Phase 1 approval gate.
+
+Candidate staking bounds, maturity/withdrawal behavior, shortfall response, and administrative custody/pause policy are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md). All detailed rules remain open for owner approval.
 
 ## Purpose and baseline
 

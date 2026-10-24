@@ -1,0 +1,138 @@
+# SynergiX V1 Owner Decision Ledger
+
+**Ledger:** TDR-V1-001 companion, version 0.3
+**Status:** Draft for accountable review; no owner identities, signatures, or economic parameters are supplied by this ledger.
+**Source snapshot:** local worktree revision `21863c078ac39936c6fb210568c3b5d00a9237a`, sampled 2026-10-24. The worktree has an unrelated untracked `.agents/skills/tokenomics-adversarial-review/` directory; this ledger does not treat it as project evidence.
+**Decision boundary:** this is preparation only. The conditional architecture direction remains escrowed principal, separately funded and reserved rewards, solvency, immutable versioned V1 contracts, and no administrative withdrawal of committed funds. It does not authorize economics-dependent implementation, deployment, migration, or release. `audit/REPORT.md` remains historical evidence and is not amended.
+
+The matching working scenario is **Proposed economic scenario v0.3 — draft sensitivity only** in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). It is not a schedule, forecast, or commitment. Every number, beneficiary, schedule, signer, and policy remains unapproved unless separately approved and recorded with evidence.
+
+The candidate staking, withdrawal, shortfall and custody rules are collected in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md). It is a proposed policy artifact only; none of its detailed rules or sample thresholds closes a ledger decision.
+
+## Authority and evidence boundaries
+
+- The applicable economic proposal is [`V1_ECONOMIC_SPEC.md`](V1_ECONOMIC_SPEC.md); the architecture-only conditional decision and hypothetical sensitivities are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). The hold and phase gates are in [`V1_REMEDIATION_PLAN.md`](V1_REMEDIATION_PLAN.md).
+- [`V1_BASELINE_VERIFICATION_2026-10-24.md`](V1_BASELINE_VERIFICATION_2026-10-24.md) records an earlier source snapshot and explicitly points to later evidence. [`SECURITY_REMEDIATION_STATUS_2026-10-24.md`](SECURITY_REMEDIATION_STATUS_2026-10-24.md) records a separate remediation state and its limits. Neither proves current deployment state or tokenholder commitments.
+- [`audit/REPORT.md`](../audit/REPORT.md) is an incomplete, historical source review. Preserve it unchanged; its observations are not approval of product economics.
+- Repository `AGENTS.md` says current Solidity source had previously compiled, while explicitly warning that compilation does not prove economic correctness or security approval. The current checkout revision differs from the historical revision named in those documents. This ledger does not claim that historical commands were freshly rerun against this revision.
+- Current repository artifacts include contracts, tests, scripts, README, and Hardhat configuration. They show legacy implementation behavior and deployment mechanics, not authorization for V1 terms. Searches documented in the existing records found no approved allocation schedule, reward APR, treasury commitment, governance charter, custody record, or attributable deployment. The current config contains legacy Rinkeby/Mainnet settings; those are not V1 chain approval.
+- No chain/address/bytecode, proxy state, role-holder inventory, deployment history, or independently verified legacy tokenholder obligation is established by the evidence available here. This means **cannot verify**, not proof of absence. If an instance or enforceable off-chain commitment is discovered, stop implementation planning and complete the compatibility/migration assessment below.
+
+## Decision entries
+
+Each entry remains open until its closure evidence is attached and the appropriate accountable roles approve it. Role labels are responsibilities, not names or claims that a person has accepted the role.
+
+### TDR-01 — Supply and issuance
+
+- **Current disposition:** OPEN. Fixed supply is a preferred architecture direction; cap, genesis supply, allocations, and issuance policy are undecided.
+- **Exact unresolved decisions:** total/genesis supply; maximum supply definition (outstanding vs cumulative); initial mint recipients and amounts; vesting/release schedule and cliffs; treatment of treasury, team, contributors, liquidity, and community allocations; whether any post-genesis mint path exists; burn policy; decimals/base units; circulating/liquid-float definition; treatment of escrowed, staked, bridge-wrapped, and vested-but-unclaimed balances.
+- **Accountable roles:** economic owner (allocation and supply intent); treasury (recipient accounts, custody, funding, and release operations); governance-security (mint/burn authority, cap enforcement, concentration and capture review); engineering (implementable supply invariants, accounting definitions, and independent model).
+- **Rationale / evidence:** current token source has role-gated minting without a cap and an upgradeable token architecture per the decision record and audit; neither establishes V1 supply intent. Source constants and historical test values are not decisions.
+- **Alternatives to decide among:** fixed genesis supply with no further mint; capped scheduled issuance with explicit authority and constraints; other issuance model only if separately justified and reconciled against the fixed-supply preference.
+- **Required approval evidence:** versioned integer-unit supply/allocation table; beneficiary/account class and vesting schedule; supply conservation and float definitions; explicit mint/burn authority decision; scenario model including concentration and release shocks; signed or otherwise attributable approval record from accountable economic and treasury approvers plus governance-security review.
+- **Dependencies:** TDR-04, TDR-07, TDR-09; discovered deployment/legacy obligations; initial allocation and reserve choices.
+- **Closure criteria:** one internally reconciled schedule is approved and versioned, all totals conserve supply, each beneficiary/release is accounted for, authority is explicit, and the decision's assumptions are reproducible. No TBD amount may be substituted by code defaults.
+
+### TDR-02 — Principal custody and return
+
+- **Current disposition:** APPROVED ARCHITECTURE PRINCIPLE; implementation policy details OPEN. Principal is escrowed and returned at maturity, never minted as a substitute.
+- **Exact unresolved decisions:** maturity timestamp/day boundary and timezone convention; withdrawal transaction timing and repeat behavior; handling of paused operation or delayed claims; whether any early exit exists and its exact principal/reward treatment; treatment of token transfer failure or nonstandard asset behavior; recovery if accounting and actual escrow differ; whether positions are transferable (proposal excludes them absent explicit addition).
+- **Accountable roles:** economic owner (withdrawal entitlement and early-exit policy); treasury (segregated custody/reconciliation); governance-security (invariant and pause/recovery review); engineering (state machine, transfer semantics, test oracle).
+- **Rationale / evidence:** economic spec requires principal coverage, single return, and reward-failure isolation. Legacy source escrows stake input but its maturity path mints principal plus interest; payout intent is unknown and this behavior is not a V1 commitment.
+- **Alternatives to decide among:** maturity-only return; maturity-only plus a precisely defined early exit; other exit treatment only after explicit economic and security review. No administrator-withdrawal option for committed principal is compatible with the accepted principle.
+- **Required approval evidence:** position lifecycle table and boundary examples; approved maturity and early-exit rule; accounting model proving escrow ≥ outstanding principal; recovery rule preserving user entitlement; ECON-01/02/04/06/09/10 and atomicity test mapping once values are approved.
+- **Dependencies:** TDR-06, TDR-07, TDR-08; deployment/legacy position discovery.
+- **Closure criteria:** exact position state transitions and exits are approved, principal remains fully covered through all states, repeat withdrawal is impossible, and no privileged path can remove committed principal.
+
+### TDR-03 — Reward source and reserve asset
+
+- **Current disposition:** APPROVED ARCHITECTURE PRINCIPLE; funding asset, reserve operations, and accounting details OPEN. Rewards are funded separately and fully reserved before commitment.
+- **Exact unresolved decisions:** reserve asset (SNX or another explicitly supported asset); funding source and authorized funders; definition of available vs reserved/accrued/claimable funds; whether reserve donations/top-ups are permitted and how they are recorded; token behavior assumptions; reserve solvency reconciliation cadence and events; treatment of accidental transfers and excess funds.
+- **Accountable roles:** economic owner (reward source and promises); treasury (funding source, custody, reconciliation, top-up process); governance-security (asset and reserve-control review); engineering (liability ledger and measurable reserve invariants).
+- **Rationale / evidence:** legacy code mints rewards and referrals; no separate reserve exists. Current tests do not prove the V1 reserve principle.
+- **Alternatives to decide among:** SNX-denominated reserve funded before commitments; another approved reserve asset with transfer and valuation assumptions; exclude rewards until a reserve mechanism is specified. Do not treat mint authority as reserve funding.
+- **Required approval evidence:** funding-flow diagram and asset specification; reserve accounting definitions; treasury source/custody approval; balance/liability scenario model; tests for funding, reservations, payout, and principal isolation.
+- **Dependencies:** TDR-01, TDR-04, TDR-05, TDR-08, TDR-09.
+- **Closure criteria:** every reward liability maps to funded reserve assets under an approved accounting method; no unfunded promise can be created; funding and payout evidence is observable and reconciled.
+
+### TDR-04 — Reward schedule and liability bounds
+
+- **Current disposition:** OPEN. No V1 rate, formula, duration schedule, or maximum liability is approved.
+- **Exact unresolved decisions:** reward formula and rate(s); whether rate varies by duration or other attributes; time basis and maturity boundary; simple/compound accrual; entry-time lock vs shared schedule; rounding direction and precision; per-position and global caps; liability accrual/reservation timing; treatment of paused time, late claims, and schedule changes; base reward beneficiary.
+- **Accountable roles:** economic owner (benefit and schedule); treasury (reserve affordability and stress cases); governance-security (bounded liability and manipulation review); engineering (integer formula, reference model, and boundary/property tests).
+- **Rationale / evidence:** legacy payout derives from indexed daily data and shares, not a specified fixed APR; H-01 and malformed/missing schedule concerns remain in current security remediation status. Existing illustrative rates in the decision record are sensitivities only.
+- **Alternatives to decide among:** fixed rate locked at entry; discrete duration schedule locked at entry; funded epoch schedule with immutable per-position snapshots; no reward feature for initial version until a schedule is approved.
+- **Required approval evidence:** versioned parameter schedule in integer units; formula examples including rounding; low/base/high active-principal and duration mix; peak liabilities, annual outflow, reserve runway, zero-top-up and clustered-maturity stress; test vectors checked independently by economic owner and engineering.
+- **Dependencies:** TDR-01, TDR-03, TDR-06, TDR-08, TDR-09; H-01 semantics if any legacy schedule reuse is proposed.
+- **Closure criteria:** all formulas and bounds are deterministic and implementable; maximum commitment can be computed before acceptance; every promised liability is covered; reproducible model and approved tests agree at boundaries.
+
+### TDR-05 — Referral rewards
+
+- **Current disposition:** OPEN. Referral feature inclusion and every parameter are unapproved.
+- **Exact unresolved decisions:** include/exclude referrals; eligibility and attribution timing; beneficiary rules; depth; percentage/amount and denominator; add-on vs partition of base reward; treatment of missing/changed referral links; cycle handling; self-referral and Sybil assumptions; lifetime/per-position caps; whether referrals vest or pay with base reward.
+- **Accountable roles:** economic owner (feature and incentive intent); treasury (incremental reserve exposure); governance-security (abuse, bounded traversal, and identity assumptions); engineering (bounded graph and reservation accounting).
+- **Rationale / evidence:** legacy 1%/2% constants and referral tests are historical behavior, not approved V1 terms; traversal and reserve exposure are not established as bounded by the approved design.
+- **Alternatives to decide among:** exclude referrals; one-level fixed/percentage reward; bounded multi-level schedule; partition an already capped base reward. Any choice requires an explicit maximum aggregate liability.
+- **Required approval evidence:** eligibility and graph rules; maximum cost per position and aggregate cap; abuse/threat analysis; reserve model under maximum depth/concurrent activity; tests for cycles, maximum depth, caps, and accounting.
+- **Dependencies:** TDR-03, TDR-04, TDR-07, TDR-09.
+- **Closure criteria:** feature inclusion is explicit; if included, all paths are bounded, liabilities are reserved under the same solvency invariant, and eligible beneficiaries/rules are unambiguous.
+
+### TDR-06 — Stake bounds, durations, and exits
+
+- **Current disposition:** OPEN except the TDR-02 maturity-return principle.
+- **Exact unresolved decisions:** minimum/maximum amount; per-user and global active principal/position count; allowed durations; concurrency and concentration limits; stake acceptance at exact boundaries; maturity/claim windows; early exit and penalties (if any); emergency stop scope; behavior for positions during pause; maximum referral traversal/stake-list work bounds if those operations remain.
+- **Accountable roles:** economic owner (participation terms); treasury (aggregate exposure and liquidity); governance-security (denial-of-service and concentration review); engineering (bounds, gas limits, and stateful acceptance tests).
+- **Rationale / evidence:** legacy wrapper and staking limits conflict in scope and are not approved product rules. The current source review records an exact 1,000,000 SNX wrapper range and an unreachable bonus threshold; do not carry these values into V1 by default. Measured loop samples do not establish safe limits.
+- **Alternatives to decide among:** fixed supported durations and hard stake-count caps; bounded amount tiers; no early exit; defined early exit with explicit liability and penalty rules; omit unbounded referral or position iteration.
+- **Required approval evidence:** complete user-facing bounds table; concurrent exposure model; gas measurements at the proposed maximum counts/depth; exact boundary tests; explanation of who can change each bound.
+- **Dependencies:** TDR-02, TDR-04, TDR-05, TDR-07, TDR-08.
+- **Closure criteria:** supported amounts, time units, concurrency, exits, and emergency behavior are fully specified and tested at boundaries and aggregate maxima; no implementation default becomes an implicit policy.
+
+### TDR-07 — Governance and administrative authority
+
+- **Current disposition:** OPEN. Immutable versioned V1 and prohibition on administrator withdrawal of committed funds are preserved principles; identities and operational powers are unapproved. Candidate controls are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md), with no owner approval recorded.
+- **Exact unresolved decisions:** accountable governance/custody identities; role map and separation of duties; signer threshold and signer replacement; timelock duration and scope; who may fund reserves; any mutable parameters and whether they affect only future positions; pause authority, trigger, scope, duration, and unpause; rescue/recovery powers and excluded assets; incident and key-loss procedures; event and notice policy; whether owner/admin roles may coexist.
+- **Accountable roles:** governance-security (privilege design, signer custody, timelock and incident controls); treasury (treasury custody and funding signer policy); economic owner (acceptable controls and user commitments); engineering (role graph, immutable boundary, event and test mapping). Actual identity assignment must be supplied by the accountable organization; this record intentionally names no people or wallets.
+- **Rationale / evidence:** the economic spec proposes minimal administration; the current legacy token is UUPS-upgradeable and staking combines Ownable/AccessControl. Remediation evidence notes transferring staking ownership does not transfer `DEFAULT_ADMIN_ROLE`; no deployed role holders or multisig evidence are known.
+- **Alternatives to decide among:** immutable contracts with narrowly scoped pause/funding roles; governance timelock for future-position settings only; no mutable economic settings; other explicitly bounded controls. Arbitrary upgrade or withdrawal of committed funds conflicts with the direction.
+- **Required approval evidence:** role/permission matrix; named organization-approved custody addresses and verified control evidence (provided separately, not invented here); signer threshold and timelock rationale; pause/recovery runbook; threat review and tests proving no role can withdraw committed principal or reserved rewards.
+- **Dependencies:** all TDRs; deployment compatibility facts; treasury and governance custody arrangements.
+- **Closure criteria:** every privileged action has an accountable owner, exact scope, custody proof, and tested boundary; no role can alter existing terms, violate solvency, or withdraw committed funds; governance/security review accepts the residual risks.
+
+### TDR-08 — Reward shortfall and reserve discrepancy
+
+- **Current disposition:** OPEN under the approved full-reservation principle. Principal may not be impaired to cure reward shortfall. Candidate objective triggers and recovery behavior are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md), with no owner approval recorded.
+- **Exact unresolved decisions:** behavior when a proposed commitment exceeds available reserve; response to an actual balance shortfall, token loss, or accounting discrepancy; whether new stakes stop entirely or only reward-bearing stakes; treatment of already committed reward claims; queueing/order/fairness; pause and notice rules; reconciliation authority and proof; recovery funding and whether any haircut is ever contemplated (none may be assumed).
+- **Accountable roles:** treasury (monitoring, reconciliation, and funding response); economic owner (promise and user-facing consequences); governance-security (incident controls and fairness review); engineering (atomic rejection and withdrawal isolation).
+- **Rationale / evidence:** full reservation is approved as architecture, but the economic spec explicitly leaves operational behavior open. Existing code's minting path does not provide evidence for reserve shortfall handling.
+- **Alternatives to decide among:** reject new commitments atomically and continue funded claims; pause new stakes while preserving matured principal and funded claims; bounded queue only if ordering and priority are approved. No path may administratively withdraw committed user funds.
+- **Required approval evidence:** state transition/incident table for underfunding and discrepancy; treasury monitoring and response runbook; tests for exact reserve boundary, reserve exhaustion, simultaneous principal exit, and claim fairness.
+- **Dependencies:** TDR-02, TDR-03, TDR-04, TDR-06, TDR-07, TDR-09.
+- **Closure criteria:** no underfunded reward promise is accepted; approved shortfall handling preserves principal and fully funded obligations; operational detection, owner and recovery evidence are concrete.
+
+### TDR-09 — Aggregate reward/referral cap and concurrency accounting
+
+- **Current disposition:** OPEN. All base and referral liabilities must fit within funded commitments; exact reservation model and caps are undecided.
+- **Exact unresolved decisions:** whether caps are per position, user, epoch, contract, or lifetime; when liability is reserved and released; whether unclaimed/expired amounts remain liabilities; concurrent-position aggregation; referral overlap; rounding aggregation; reserve allocation between base/referral; reservation under schedule changes; treatment of cancelled or early-exit positions.
+- **Accountable roles:** economic owner (cap scope and entitlement); treasury (fund segregation and concurrent commitment capacity); governance-security (race/overcommit and bypass review); engineering (atomic reservation, aggregate invariants, and model testing).
+- **Rationale / evidence:** ECON-03/05 and the economic spec require covering aggregate accrued and claimable liabilities. No current legacy reserve or cap system exists; annual-runway sensitivities alone do not bound clustered maturity obligations.
+- **Alternatives to decide among:** reserve full worst-case liability at stake acceptance; reserve bounded epoch allocation before positions open; reject new commitments when aggregate headroom is insufficient. Any alternative must prove simultaneous commitments cannot overrun available funds.
+- **Required approval evidence:** formal liability definitions and invariant equations; race-safe reservation flow; peak concurrent exposure and clustered-claim scenario; reference model with exact integer rounding; stateful/property tests including referrals and simultaneous acceptance.
+- **Dependencies:** TDR-03, TDR-04, TDR-05, TDR-06, TDR-08.
+- **Closure criteria:** aggregate liability is deterministically computable and bounded before commitment; reservation is atomic; all concurrent paths preserve nonnegative available reserve; model, specification, and tests reconcile.
+
+## Cross-cutting deployment and legacy-obligation gate
+
+**Current state:** no deployment is verified. Existing records say no attributable address, chain, bytecode, role inventory, or deployment history was supplied or established; a repository scan is not proof of non-deployment. No enforceable legacy tokenholder promise or off-chain commitment has been verified either. The status for both is **cannot verify from available evidence**.
+
+Before V1 implementation planning, obtain either (a) an accountable owner's documented scope statement that there is no deployed instance or legacy commitment in scope, supported by available repository and organization records, or (b) a complete inventory of chain, token/proxy/staking addresses, implementation and bytecode, deployment transactions, balances and supply snapshots, role holders, open positions/liabilities, treasury reserves, bridge/wrapper representations, published terms, and any enforceable off-chain commitments. For any discovered deployment or commitment, perform and approve a separate compatibility/migration assessment covering user rights, storage/proxy layout, token supply and balances, active positions, reserve solvency, role custody, migration consent/transaction design, and coexistence/rollback. Do not infer compatibility or migration authority from source code or the legacy deployment script.
+
+## Approval and closure record
+
+| Decision | Disposition | Accountable approver(s) | Evidence / version | Date | Status |
+|---|---|---|---|---|---|
+| TDR-01 through TDR-09 | Open as detailed above; no numeric or policy approval recorded | Not supplied | No approval artifact supplied | — | OPEN |
+| Deployment/legacy-obligation gate | Cannot verify | Not supplied | No address, chain, bytecode, holder inventory, or commitment evidence supplied | — | OPEN |
+| TDR-10 network | Deferred to Phase 4; user preference is BASE if possible | Final network decision owner not supplied | BASE is a preference only; Phase 4 chain/readiness evidence required | — | DEFERRED |
+
+Close the Phase 1 hold only after TDR-01–09 have evidence-backed decisions, required economic/treasury/governance-security approvals are attributable, the versioned scenario and specifications reconcile, and deployment/legacy obligations are addressed. TDR-10 remains a Phase 4 decision and is not a Phase 1 prerequisite.
