@@ -12,6 +12,7 @@ verify approval, authorship, or the truth of artifact contents.
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -38,6 +39,8 @@ def verify_manifest(manifest_path):
     artifacts = data.get("hashed_artifacts") if isinstance(data, dict) else None
     if not isinstance(artifacts, list):
         return ["manifest must contain a hashed_artifacts array"]
+    if not artifacts:
+        return ["manifest hashed_artifacts array must not be empty"]
 
     root = repository_root(manifest_path)
     errors = []
@@ -56,25 +59,29 @@ def verify_manifest(manifest_path):
         if relative_path.is_absolute() or ".." in relative_path.parts:
             errors.append(f"{label} ({relative}): path must stay inside repository")
             continue
-        normalized = relative_path.as_posix()
-        if normalized in seen:
-            errors.append(f"{label} ({relative}): duplicate artifact path")
-            continue
-        seen.add(normalized)
         if not isinstance(expected, str) or not SHA256_RE.fullmatch(expected):
             errors.append(f"{label} ({relative}): sha256 must be 64 hexadecimal characters")
             continue
 
-        artifact_path = (root / relative_path).resolve()
+        try:
+            artifact_path = (root / relative_path).resolve()
+        except (OSError, RuntimeError, ValueError):
+            errors.append(f"{label} ({relative}): artifact path cannot be resolved")
+            continue
         try:
             artifact_path.relative_to(root)
         except ValueError:
             errors.append(f"{label} ({relative}): resolved path escapes repository")
             continue
+        normalized = os.path.normcase(str(artifact_path))
+        if normalized in seen:
+            errors.append(f"{label} ({relative}): duplicate artifact path")
+            continue
+        seen.add(normalized)
         try:
             actual = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
-        except OSError:
-            errors.append(f"{label} ({relative}): file is missing or unreadable")
+        except (OSError, ValueError):
+            errors.append(f"{label} ({relative}): file is missing, unreadable, or has an invalid path")
             continue
         if actual.lower() != expected.lower():
             errors.append(f"{label} ({relative}): SHA-256 mismatch")

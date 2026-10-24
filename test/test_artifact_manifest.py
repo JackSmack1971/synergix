@@ -1,10 +1,12 @@
+import contextlib
 import hashlib
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.verify_artifact_manifest import verify_manifest
+from scripts.verify_artifact_manifest import main, verify_manifest
 
 
 class ArtifactManifestTests(unittest.TestCase):
@@ -51,6 +53,28 @@ class ArtifactManifestTests(unittest.TestCase):
     def test_rejects_malformed_manifest(self):
         self.manifest.write_text("[]", encoding="utf-8")
         self.assertIn("hashed_artifacts array", verify_manifest(self.manifest)[0])
+
+    def test_rejects_empty_artifact_list(self):
+        self.write_manifest([])
+        self.assertIn("must not be empty", verify_manifest(self.manifest)[0])
+
+    def test_rejects_equivalent_path_spellings(self):
+        record = self.artifact()
+        alias = dict(record, path="docs/./artifact.txt")
+        self.write_manifest([record, alias])
+        self.assertIn("duplicate artifact path", verify_manifest(self.manifest)[0])
+
+    def test_reports_invalid_path_without_raising(self):
+        self.write_manifest([{"path": "docs/artifact.txt\0", "sha256": "0" * 64}])
+        self.assertIn("invalid path", verify_manifest(self.manifest)[0])
+
+    def test_cli_returns_failure_for_invalid_manifest(self):
+        self.write_manifest([])
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            result = main([str(self.manifest)])
+        self.assertEqual(1, result)
+        self.assertIn("must not be empty", stderr.getvalue())
 
 
 if __name__ == "__main__":
