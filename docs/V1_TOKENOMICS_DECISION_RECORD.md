@@ -1,42 +1,42 @@
 # SynergiX V1 Tokenomics Decision Record
 
 **Record:** TDR-V1-001
-**Version:** 0.4 (preferred candidate assembled for owner review; owner approval pending)
-**Status:** PROPOSED / AWAITING OWNER APPROVAL — no attributable owner approvals recorded.
+**Version:** 0.5 (preferred candidate assembled for owner review; partial architecture approval recorded)
+**Status:** PARTIALLY APPROVED — payout architecture is approved; numeric economics, administrative authority, custody, and deployment decisions remain open.
 **Date:** 2026-10-24
 
-This record presents the preferred candidate for accountable owner review, not owner-approved terms. Scenario v0.4, schedule v1.4, and model v1.4-draft reconcile the supplied candidate values. Every TDR-01–09 remains OPEN pending attributable approval. Token-symbol clearance, exact T0, recipient/custody identities, and compatibility inventory remain unresolved. The candidate does not authorize economics-dependent implementation, migration, deployment, or release. Preserve the Phase 1 HOLD. The audit report remains historical and unchanged.
+This record presents the preferred candidate for accountable owner review; only the architecture and payout principles below are approved. Scenario v0.4, schedule v1.4, and model v1.4-draft reconcile candidate values that remain unapproved. Numeric economics and administration decisions remain open. Token-symbol clearance, exact T0, recipient/custody identities, and compatibility inventory remain unresolved. This approval authorizes design and implementation of the approved payout architecture as a separate V1, but does not approve numeric terms, migration, deployment, or release. Preserve the Phase 1 HOLD for unresolved gates. The historical audit report remains unchanged.
 
 **Preferred candidate:** Proposed economic scenario v0.4; schedule v1.4; model v1.4-draft; outputs in [`generated/v1-economic-model-review-v1.4/`](generated/v1-economic-model-review-v1.4/). All values and policies remain DRAFT / NOT APPROVED. The unsigned manifest pins artifact bytes only and grants no assent or release authority.
 
-## Conditional architecture direction — not attributable owner approval
+## Owner-approved V1 payout architecture (partial)
 
-The following direction was provided in conversation. The user's identity and owner authority are not established here, so this section is not an owner approval. It does not supply the numeric schedule, governance identities, or operational policies needed for implementation.
+On 2026-10-24, the user identified themself as owner `JackSmack1971` and instructed that these decisions be treated as durable owner approval. This is an attributable in-session owner attestation, not an independently verified legal identity, wallet signature, or deployment authorization. The approval applies to the V1 architecture and payout semantics below:
 
-- **Principal:** escrow and return principal to the staker at maturity.
-- **Rewards:** fund rewards separately and fully reserve commitments before creating them.
-- **Supply:** prefer a fixed-supply model; exact cap remains open.
-- **Staking contracts:** use immutable, versioned V1 contracts.
-- **Solvency:** keep principal and reward liabilities covered at all times.
-- **Administration:** no authority may withdraw committed user funds.
-- **Legacy behavior:** retain legacy source behavior as historical observation, not approved V1 economics.
+- **Position accounting:** V1 uses position-based accounting with immutable entry terms and a fixed reward entitlement recorded at entry. Rewards are simple and noncompounding; waiting beyond maturity does not increase entitlement.
+- **Maturity:** use an exact Unix timestamp measured in elapsed seconds. Withdrawal is permitted when `block.timestamp >= maturityTimestamp`.
+- **Payout data:** V1 must not depend on operator-supplied daily reward records. Missing keeper updates must not block a valid withdrawal.
+- **Custody and reserve:** escrow principal and return it to the staker; fund rewards separately and reserve the full commitment before accepting a position. Principal and reward liabilities must remain covered.
+- **Legacy boundary:** these decisions govern a new, versioned V1 design. They do not reinterpret legacy positions or prove the legacy contract has no obligations. No migration or deployment is authorized.
+
+This approval does not set APR/reward rate, allowed duration values, stake bounds, supply cap, referral policy, rounding/caps, governance roles, reserve-shortfall/recovery procedure, chain, or custody addresses. Those remain open and must not be filled with draft values by implementation defaults.
 
 ## Decision summary
 
 | ID | Decision | Draft direction | State / required approval |
 |---|---|---|---|
 | TDR-01 | Supply and issuance | Candidate: 100M fixed supply, allocations and release rules per schedule v1.4. | OPEN; no value approved. Token-symbol clearance required before allocations/terms finalized. |
-| TDR-02 | Principal custody | Escrow principal and return it to the staker at maturity; do not mint principal as a substitute for repayment. | Conditional user direction recorded; identity and owner authority are unverified. Detailed withdrawal behavior and implementation remain open. |
-| TDR-03 | Reward source | Fund rewards separately; fully reserve each commitment before creating it. | Conditional user direction recorded; identity and owner authority are unverified. Funding source, reserve accounting, and exact handling of unavailable funds remain open. |
-| TDR-04 | Reward schedule and liability | Candidate: 3% simple; 30/90/180 elapsed-day terms; 500K aggregate liability cap. | OPEN; owner approval required for formula, T0, rounding, and caps. |
+| TDR-02 | Principal custody | Escrow and return principal at maturity using exact timestamp boundary; no legacy migration implied. | **PARTIALLY APPROVED:** architecture and `now >= maturityTimestamp` rule approved. Legacy obligations, token, bounds, and migration remain open. |
+| TDR-03 | Reward source | Separate prefunded reward liabilities; fixed entitlement recorded at entry; no keeper daily records. | **PARTIALLY APPROVED:** architecture approved. Reward asset, numeric formula, rounding, and operational shortfall handling remain open. |
+| TDR-04 | Reward schedule and liability | Simple, noncompounding fixed-at-entry reward; candidate numeric schedule remains 3% / 30-90 days / 500K cap. | **PARTIALLY APPROVED:** fixed-entry entitlement and no accrual after maturity approved. Rate, durations, cap, rounding, and formula remain open; candidate values are not approval. |
 | TDR-05 | Referral rewards | Candidate excludes paid referrals (zero). | OPEN; exclusion requires owner approval. |
-| TDR-06 | Stake bounds and exits | Candidate: 100–100,000 SNX per position; 250,000 SNX per wallet; 16 positions; 20M protocol cap; early exit returns principal only. | OPEN; all candidate bounds and exit terms require approval. |
+| TDR-06 | Stake bounds and exits | Candidate: 100–100,000 SNX per position; 250,000 SNX per wallet; 16 positions; 20M protocol cap; early exit returns principal only. | **PARTIALLY APPROVED:** exact elapsed-second maturity rule only. Candidate bounds and early exit remain unapproved. |
 | TDR-07 | Governance and administrative powers | Immutable, versioned V1 contracts; no authority may withdraw committed user funds. | OPEN. Owner must approve governance addresses, multisig threshold, timelock, mutable settings (if any), emergency-control authority/scope, and recovery procedure. |
-| TDR-08 | Reward shortfall | Reward commitments must be fully reserved. | OPEN. Specify operational behavior when new commitments cannot be fully funded or a reserve discrepancy/loss occurs; no committed user funds may be withdrawn by an administrator. |
+| TDR-08 | Reward shortfall | Reward commitments must be fully reserved before position creation; missing daily keeper data is irrelevant to V1 settlement. | **PARTIALLY APPROVED:** pre-funding and keeper independence approved. Specify discrepancy/loss and already-committed shortfall behavior. |
 | TDR-09 | Referral / reward cap interactions | All reward liabilities, including any referral component, must fit within the approved funded commitment. | OPEN under TDR-04/TDR-05. Specify reservation timing and concurrent-position accounting in the approved schedule. |
 | TDR-10 | Initial deployment network | User preference: BASE if possible. No network selected; assess in Phase 4. | DEFERRED to Phase 4; preference only, not chain selection or deployment approval. |
 
-Approval must be recorded per row with approver identity/role, date, rationale, and a versioned parameter schedule. The conversation direction recorded below is not verified owner approval. Code defaults, historical tests, and legacy deployment configuration do not count as approval of V1 economics. If an accountable owner chooses a different direction, update this record and the economic spec before implementation.
+Approval must be recorded per row with approver identity/role, date, rationale, and a versioned parameter schedule. The conversation approval below covers only the listed architecture/payout principles; it does not approve draft numeric values or unrelated decisions. Code defaults, historical tests, and legacy deployment configuration do not count as approval of V1 economics. If the owner changes an approved direction, update this record and the economic spec before implementation.
 
 The deployment and legacy-obligation gate is recorded as [`COMPATIBILITY_UNDETERMINED`](V1_COMPATIBILITY_STATUS_2026-10-24.md) until a deployment/off-chain commitment inventory is completed. Token-symbol clearance is required before genesis allocations or tokenholder terms are finalized. H-01 disposition, independent security review, and separate deployment authorization remain gates. Legal/commercialization review is outside the selected gate scope and required before a token sale or promoted staking rewards.
 
@@ -58,7 +58,7 @@ These observations do not establish the behavior of any deployed instance. Recon
 
 ### Repository authority check
 
-A repository search on 2026-10-24 covered `README.md`, `docs/`, `contracts/`, `test/`, `scripts/`, and `audit/` (excluding dependencies, generated build output, and the bundled OWASP reference corpus). It found no separately approved tokenomics schedule, allocation decision, reward APR, treasury commitment, governance charter, or administrative custody record. Existing tests assert selected legacy behavior, including 1%/2% referral minting, but do not establish approval or intended V1 economics. The user's conditional architecture direction is recorded, but identity and owner authority are unverified and it is not attributable approval; the numerical schedule and administrative authority details remain unresolved under TDR-01 through TDR-09. The policy proposal in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) evaluates candidate rules but records no detailed owner approval. TDR-10 is intentionally deferred to Phase 4.
+A repository search on 2026-10-24 covered `README.md`, `docs/`, `contracts/`, `test/`, `scripts/`, and `audit/` (excluding dependencies, generated build output, and the bundled OWASP reference corpus). It found no separately approved numeric tokenomics schedule, allocation decision, reward APR, treasury commitment, governance charter, or administrative custody record. Existing tests assert selected legacy behavior, including 1%/2% referral minting, but do not establish V1 economics. The owner-approved V1 payout architecture is recorded above; numeric schedule and administrative authority details remain unresolved. The policy proposal in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) evaluates candidate rules but records no detailed owner approval. TDR-10 is intentionally deferred to Phase 4.
 
 ## Quantitative sustainability sensitivities
 
@@ -164,9 +164,8 @@ The repository does not identify accountable economic or governance approvers. A
 
 | Decision ID | Approver / role | Date | Rationale or linked evidence | Approved version |
 |---|---|---|---|---|
-| Conditional architecture direction | User (identity/owner authority not established in this record) | 2026-10-24 | Direction stated in conversation; no attributable owner approval or signature evidence | V1 architecture direction only |
-| TDR-01, TDR-04 through TDR-09 | **Owner approval pending** | — | Open decisions listed above; next gate is an explicit owner-approved economic schedule and administrative authority specification. [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) is a proposal only. | — |
-| TDR-02 and TDR-03 | User-provided conditional architecture direction only; identity and owner authority are not established | 2026-10-24 | Escrowed principal returned at maturity; separate reward funding with fully reserved commitments. Detailed policies remain open. This is not an attributable economic-owner approval. | V1 architecture direction |
+| V1 payout architecture | JackSmack1971 (self-identified project owner in this conversation) | 2026-10-24 | Explicit durable approval: position-based fixed entry entitlement; simple noncompounding reward; exact elapsed-second timestamp with inclusive maturity; no daily keeper dependency; escrowed principal return; separately prefunded reward liabilities. Not a wallet signature or deployment authorization. | TDR-02/03/04/06/08 architectural principles |
+| TDR-01, remaining TDR-04 through TDR-09 details | **Owner approval pending** | — | Numeric economics, referral policy, supply, authority/custody, bounds, reserve-loss policy and administration remain open. [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md) is still a proposal only. | — |
 | TDR-10 | Deferred to deployment planning | — | Select initial network during Phase 4; no deployment authorization is granted | — |
 
 ## Exit gate for Phase 1

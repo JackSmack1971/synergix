@@ -1,10 +1,10 @@
 # SynergiX V1 Economic Specification
 
-**Status:** Proposed economic scenario v0.4 — preferred candidate for accountable owner review; all values remain unapproved. This document does not approve final tokenomics, deployment, or production release, and it does not certify the current contracts. The complete candidate is in [`V1_APPROVED_PARAMETER_SCHEDULE.md`](V1_APPROVED_PARAMETER_SCHEDULE.md). Phase 1 remains on HOLD; see [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md).
+**Status:** Partial owner approval for the V1 payout architecture; scenario v0.4 values remain unapproved. On 2026-10-24, owner `JackSmack1971` approved position-based accounting, entry-fixed simple rewards, pre-funded reward liabilities, escrowed principal return, no daily keeper dependency, and an inclusive exact-timestamp maturity boundary. This approval does not set numeric economics, authorize migration/deployment, or certify the legacy contracts. The complete candidate remains in [`V1_APPROVED_PARAMETER_SCHEDULE.md`](V1_APPROVED_PARAMETER_SCHEDULE.md). Phase 1 remains on HOLD for unresolved terms and compatibility; see [`V1_OWNER_DECISIONS.md`](V1_OWNER_DECISIONS.md).
 
 The decision register, illustrative sustainability sensitivities, and machine-testable economic acceptance criteria are in [`V1_TOKENOMICS_DECISION_RECORD.md`](V1_TOKENOMICS_DECISION_RECORD.md). The supporting candidate is scenario v0.4, schedule v1.4, and model v1.4-draft; all remain unapproved. `T0`, token symbol clearance, recipient/custody identities, and compatibility remain unresolved.
 
-Candidate staking bounds, maturity/withdrawal behavior, shortfall response, and administrative custody/pause policy are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md). All detailed rules remain open for owner approval.
+Candidate staking bounds, early-exit behavior, shortfall response, and administrative custody/pause policy are evaluated in [`V1_ADMINISTRATIVE_AUTHORITY.md`](V1_ADMINISTRATIVE_AUTHORITY.md). Numeric rate, supported term set, stake bounds, referral treatment, reserve-loss response, and administrative rules remain open for owner approval.
 
 ## Purpose and baseline
 
@@ -14,17 +14,29 @@ The audit report is historical evidence and must not be rewritten to make this p
 
 ## Proposed economic model
 
+### Approved V1 payout architecture
+
+- Each position stores its beneficiary, principal, fixed reward entitlement, and exact maturity timestamp at entry. These terms do not change afterward.
+- Reward is simple and noncompounding. Time is elapsed seconds; a position becomes withdrawable when `block.timestamp >= maturityTimestamp`. Waiting after maturity does not increase reward.
+- V1 settlement does not read operator-supplied daily data. Missing keeper updates cannot block a valid matured withdrawal.
+- Principal is escrowed and returned once to the recorded beneficiary. Reward commitments are funded separately and reserved in full before a position is accepted. No administrator can withdraw principal or committed reward funds.
+- This architectural approval does not approve the annual rate, allowed durations, min/max principal, rounding policy, referral terms, shortfall behavior, authority/custody configuration, chain, or deployment. The implementation slice uses explicit immutable constructor parameters for numeric values, but no deployment values are approved by that fact.
+
+`SynergiXStakingV1.sol` is the current implementation of this limited architecture. It uses a simple annualized basis-point formula with floor rounding over a 365-day year and accepts term bounds as immutable constructor parameters. Those formula details and any chosen constructor values require owner schedule approval before deployment.
+
+The V1 implementation is asset-agnostic at source level but assumes a fixed-balance ERC20 with exact transfers. It supports optional-return and no-return transfers, rejects fee-on-transfer amounts, and fails atomically if an outbound transfer is paused. A token-level pause, blacklist, or negative rebase can still make a matured withdrawal unavailable; the exact token address and its admin powers must be reviewed before deployment. A temporary-pause regression confirms the position stays open and can settle after transfers resume, but it cannot guarantee recovery from a permanent restriction.
+
 ### Principal
 
 - A stake transfers the user's SNX principal into the staking contract as escrow.
 - The principal remains segregated in accounting from reward funds and cannot be minted as a substitute for returning escrow.
-- On an eligible withdrawal, the contract returns the recorded principal once and closes the position. A second withdrawal must fail.
-- Preferred candidate: early exit returns principal only and forfeits the unpaid reward on that position. This is unapproved and requires explicit owner approval before implementation.
+- At or after the exact maturity timestamp, withdrawal returns the recorded principal once and closes the position. A second withdrawal must fail.
+- Early-exit behavior remains unapproved and is outside the current implementation slice.
 
 ### Rewards
 
-- Candidate reward is 3% simple, noncompounding, with 30/90/180 elapsed-day terms; paid referrals are zero. These values remain unapproved. Rewards are separate liabilities from principal and are paid only from an explicitly funded reserve.
-- A stake or claim must not create an unfunded reward promise. At all times, the reward reserve must cover accrued and claimable rewards under the chosen accounting model.
+- Rewards are simple and noncompounding, fixed at entry, and separate from principal. Candidate 3% rate, 30/90/180-day terms, and zero referrals remain unapproved. Rewards are paid only from an explicitly funded reserve.
+- A stake or claim must not create an unfunded reward promise. At position entry, the full fixed reward is reserved from already funded reward assets. No daily keeper records are used for V1 settlement.
 - Reward funding and payout accounting must be observable on chain. If a reserve is depleted, the specification must define whether new stakes stop, claims queue, or another bounded behavior applies; principal withdrawals remain available.
 - V1 must not rely on unrestricted minting to satisfy rewards. Any token mint authority and its limits are a separate supply-policy decision.
 
