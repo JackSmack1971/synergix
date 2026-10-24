@@ -1,0 +1,46 @@
+---
+name: tokenomics-adversarial-review
+description: Design, stress-test, or audit token supply, vesting/unlocks, emissions, sinks, governance capture, and enforcement against token or vesting contracts. Use for tokenomics architecture, dilution models, whitepaper-vs-code reconciliation, or protocol economic-security reviews. Do not use for price forecasts, trade advice, general smart-contract bug hunts without economic implications, marketing, legal opinions, or deployments.
+---
+
+# Tokenomics adversarial review
+
+**Workflow owned:** Reconcile token economic claims, supply schedules, and privileged controls with inspectable implementation evidence, then test adverse supply and governance conditions. This is an economic design/review workflow, not a general security audit or an investment thesis.
+
+## Boundaries
+
+- Produce design options, review findings, reproducible offline models, and *proposed* implementation or test changes. Never execute on-chain transactions, deploy contracts, change governance, sign messages, or administer keys under this skill. Code edits require a separate explicit implementation request, applicable repository instructions, and focused tests; do not present edits as audited/deployable.
+- Do not offer investment advice, prices/returns, promotional claims, or legal conclusions. For a legal determination, hand off to qualified counsel; for a pure out-of-scope request, state the boundary without running the review.
+- Always anchor assessment to provided artifacts or independently retrieved authoritative records when access and authorization permit. If neither is available, offer a **provisional design** with labeled inputs or a **gap-only assessment**, never a verified audit.
+
+## Procedure
+
+1. **Establish scope and evidence.** Identify chain, token identity (address + chain), contract/implementation addresses if proxy, block or snapshot date, whitepaper version, allocation/vesting tables, admin/governance role holders, circulating-supply definition, and requested review or design objective. Inspect repository instructions and relevant code/status before modifying anything. Record each assertion as **explicit**, **derived**, **ambiguous**, **not disclosed**, or **cannot verify from provided sources**, with locator (file:line, function, block, transaction, or document section). Treat marketing/docs as claims, not proof. Contract source is stronger evidence for *possible* behavior; storage, role grants, transactions, and effective proxy implementations are required for *current* behavior. A verified source alone does not prove deployment configuration.
+2. **Reconcile supply definitions before drawing curves.** Distinguish genesis minted, outstanding total supply, lifetime issuance, cap (outstanding vs cumulative), circulating/released, liquid float, vested-but-unclaimed, bridge escrow/wrappers, staked/locked balances, burns, and cross-chain representations. Identify double counts. Where sources disagree, preserve both and mark **UNRECONCILED**; do not silently pick one.
+3. **Model distributions first.** If amounts and timing are sufficient, create a month-0 to month-36-or-longer ledger covering every allocation, immediate float, cliff, unlocks, emissions, burns, and supply conservation. Use `scripts/supply_model.py` for complete integer-base-unit schedules following `references/model-contract.md`. Never use synthetic numbers without labeling each assumption. Missing material amounts/timing means **UNQUANTIFIABLE**, not zero; a partial verified subset may be computed but cannot be represented as total circulating supply. Flag concentrations and peak unlock shocks relative to *prior modeled float*, showing the denominator and source. For on-chain holder/voting concentration, require holder/delegation snapshots; scheduled allocations are not proof of current ownership.
+4. **Trace economic flows into executable permissions.** For each mint/burn, transfer, fee, sink, reward, vesting, treasury and governance claim, trace who can call it, constraints, upgrade/role-admin paths, effective parameters, and reachable bypasses. Include timelock/multisig threshold and *who can change or bypass them*. Explicitly separate **enforced**, **mutable with controls**, **off-chain discretionary**, **contradicted**, and **unverified**. Load `references/economic-security-checks.md` when investigating design thresholds, privilege graphs, sinks, governance or cross-chain supply.
+5. **Stress-test credible adversarial states.** Evaluate (a) base case using documented behavior, (b) high-emission/low-usage or zero-sink stress *within reachable permissions*, and (c) governance/admin compromise or malicious-but-authorized parameter change. For hypotheticals outside present contract constraints, label **counterfactual/bypass required** rather than claiming they are feasible. State shocked monthly float, newly released tokens / prior float, remaining allowable mint headroom, and voting-power capture requirements where measurable. Quantify exposure, not price pressure or profit. If data is absent, assess the attack pathway qualitatively and identify what evidence would resolve it.
+6. **Make and verify findings.** Each material finding must include mechanism, supporting source/code path, affected invariant, severity, concrete mitigation, and a falsification/verification step. Run arithmetic invariants and cross-check independent source data where available. Confirm a proposed control closes the described path, including privileged upgrade or owner escape routes. Do not assert certainty of exploit, failure, or value accrual without the needed evidence. Rank critical active controls above discretionary economic weaknesses; label uncertain severity provisional.
+7. **Finish with the six-part report** in `references/report-contract.md`. Stop when every in-scope material mechanism is addressed or visibly unresolved; never conceal missing coverage with a clean bill of health. For research/design-only tasks, keep all edits inside explicitly requested artifacts. If asked for numerical work and validation fails, report the exact error and do not substitute mental arithmetic as verified output.
+
+## Decision rules
+
+- **Mandatory:** provenance by claim, explicit time and chain context, monthly 36-month-or-longer schedule when input suffices, three bounded scenarios or documented impossibility, trace privilege changes, risk register, and assumptions/gaps.
+- **Prohibited:** inventing adoption, sinks, circulating supply, equilibrium prices, verified current role holders, or enforceable claims from prose alone; silently substituting bridged/wrapped supply; treating scheduled unlocks as minted inflation; treating burns or fees as guaranteed value accrual; performing live changes.
+- **Judgment with criteria:** A fixed calendar vesting schedule is *not automatically defective*—test whether unlock size, disclosures, liquidity, and value flows make it unsustainable. A combined team/investor share above ~20%, short cliffs, low TGE float, or a 12-month cliff / 36–48-month linear benchmark are **investigation prompts**, not universal industry rules. Emissions need an economic funding and incentive rationale; some bootstrapping inflation is defensible if bounded, measurable and transparently stress-tested. Prefer enforceable caps and limited authority but examine upgrade, bridge and governance escape routes before calling them hard constraints.
+
+## Failure handling and evidence requirements
+
+| Situation | Required action |
+| --- | --- |
+| No source, broken explorer, tool unavailable | Bound the scope; mark **not disclosed** vs **cannot verify** correctly; use read-only alternatives if authoritative, otherwise stop at provisional/gap-only status. |
+| Proxy, upgrade or chain representation unresolved | Do not claim implementation matches deployment; mark **UNVERIFIED** and identify slot/address/bridge proof needed. |
+| Claimed supply conflicts with code or on-chain balances | Preserve discrepancies, recompute only common verifiable components; flag **UNRECONCILED**. |
+| Unknown future emissions/usage or admin discretion | Produce explicit parameterized sensitivity bounds, not a fabricated base path; refrain from full supply forecasts if unspecifiable. |
+| Script rejects inputs, cap, burn or conservation conditions | Fix supplied input if justified by evidence; otherwise report failure and no verified curve. |
+| Permissions permit high-impact changes | Prioritize reachable privilege path and control remediation; avoid active exploitation or on-chain tests. |
+| Requested legal or deployment action | Limit response to risk flags or proposed controls; do not provide definitive legal status or execute changes. |
+
+For skill maintenance and baseline testing only, load `references/evaluation-plan.md`; do not load it during a token review.
+
+**Completion evidence:** A source ledger; source-to-mechanism crosswalk; 36+ months of reconciled projections *or a stated material blocker*; three traceable stress conditions *or specific untestable branches*; severity and mitigations tied to code/evidence; and a limitations section that distinguishes unperformed validation from passing results.

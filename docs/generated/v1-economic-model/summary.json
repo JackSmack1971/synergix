@@ -1,0 +1,22 @@
+{
+  "status": "DRAFT / NOT APPROVED; hypothetical scenario only",
+  "genesis_utc": "2027-04-01T00:00:00Z",
+  "token_decimals": 18,
+  "genesis_supply_units": "100000000000000000000000000",
+  "horizon_months": 48,
+  "reward_formula": "floor(P_units * 400 * D / (10000 * 365))",
+  "reward_reserve_snx": 2000000,
+  "aggregate_outstanding_reward_cap_snx": 500000,
+  "maximum_active_principal_snx": 20000000,
+  "continuous_max_principal_base_outflow_snx_per_year": 800000,
+  "reserve_runway_years_at_continuous_max_principal": 2.5,
+  "reserve_to_global_cap_multiple": 4,
+  "global_cap_is_binding_at_given_max_principal": false,
+  "referrals": "base case zero; optional alternative is single-level 5% of rounded base reward, within same 500,000 SNX cap",
+  "limitations": [
+    "projected circulation assumes treasury 20m and reward reserve 2m remain segregated in custody; recipient wallet behavior not known",
+    "calendar month schedule; not block-level",
+    "no legacy deployment, wallet, beneficiary, or enforceable obligation verified",
+    "runway assumes constant full exposure, all claims paid, no top-ups and no reserve diversion"
+  ]
+}
