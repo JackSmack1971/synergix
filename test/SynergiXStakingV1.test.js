@@ -82,7 +82,8 @@ describe("SynergiXStakingV1", function () {
         expect(position.beneficiary).to.equal(user.address);
         expect(position.principal.eq(stakeAmount)).to.equal(true);
         expect(position.fixedReward.eq(reward)).to.equal(true);
-        expect(position.withdrawn).to.equal(false);
+        expect(position.principalWithdrawn).to.equal(false);
+        expect(position.rewardClaimed).to.equal(false);
         expect((await staking.totalPrincipalLiability()).eq(stakeAmount)).to.equal(true);
         expect((await staking.totalReservedRewardLiability()).eq(reward)).to.equal(true);
         expect((await staking.availableRewardReserve()).isZero()).to.equal(true);
@@ -142,20 +143,27 @@ describe("SynergiXStakingV1", function () {
         const position = await staking.positions(1);
         const maturity = position.maturityTimestamp.toNumber();
         expect(maturity).to.equal(stakeBlock.timestamp + duration);
+        await expectRevert(staking.connect(user).withdrawPrincipal(1), "PositionNotMatured");
+        await expectRevert(staking.connect(user).claimReward(1), "PositionNotMatured");
         await staking.connect(user).stake(stakeAmount, duration);
         const delayedMaturity = (await staking.positions(2)).maturityTimestamp.toNumber();
 
-        await expectRevert(staking.connect(other).withdraw(1), "NotBeneficiary");
+        await expectRevert(staking.connect(other).withdrawPrincipal(1), "NotBeneficiary");
+        await expectRevert(staking.connect(other).claimReward(1), "NotBeneficiary");
         await ethers.provider.send("evm_setNextBlockTimestamp", [maturity]);
-        await staking.connect(user).withdraw(1);
+        await staking.connect(user).withdrawPrincipal(1);
+        await staking.connect(user).claimReward(1);
 
         expect((await token.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
         expect((await token.balanceOf(other.address)).isZero()).to.equal(true);
-        expect((await staking.positions(1)).withdrawn).to.equal(true);
-        await expectRevert(staking.connect(user).withdraw(1), "PositionAlreadyWithdrawn");
+        expect((await staking.positions(1)).principalWithdrawn).to.equal(true);
+        expect((await staking.positions(1)).rewardClaimed).to.equal(true);
+        await expectRevert(staking.connect(user).withdrawPrincipal(1), "PrincipalAlreadyWithdrawn");
+        await expectRevert(staking.connect(user).claimReward(1), "RewardAlreadyClaimed");
 
         await ethers.provider.send("evm_setNextBlockTimestamp", [delayedMaturity + 7 * 24 * 60 * 60]);
-        await staking.connect(user).withdraw(2);
+        await staking.connect(user).claimReward(2);
+        await staking.connect(user).withdrawPrincipal(2);
         expect((await token.balanceOf(user.address)).eq(stakeAmount.mul(2).add(reward.mul(2)))).to.equal(true);
         expect((await staking.totalPrincipalLiability()).isZero()).to.equal(true);
         expect((await staking.totalReservedRewardLiability()).isZero()).to.equal(true);
@@ -210,7 +218,8 @@ describe("SynergiXStakingV1", function () {
 
         const position = await instance.positions(1);
         await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
-        await instance.connect(user).withdraw(1);
+        await instance.connect(user).withdrawPrincipal(1);
+        await instance.connect(user).claimReward(1);
 
         expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
         expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
@@ -251,9 +260,15 @@ describe("SynergiXStakingV1", function () {
 
         expect((await zeroRewardStaking.positions(1)).fixedReward.isZero()).to.equal(true);
         expect((await zeroRewardStaking.totalReservedRewardLiability()).isZero()).to.equal(true);
+        const position = await zeroRewardStaking.positions(1);
+        await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
+        await zeroRewardStaking.connect(user).withdrawPrincipal(1);
+        await zeroRewardStaking.connect(user).claimReward(1);
+        expect((await zeroRewardStaking.positions(1)).principalWithdrawn).to.equal(true);
+        expect((await zeroRewardStaking.positions(1)).rewardClaimed).to.equal(true);
     });
 
-    it("keeps a mature position open if the token cannot deliver the exact payout", async function () {
+    it("keeps a failed reward claim open without coupling it to principal withdrawal", async function () {
         const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
         const mock = await Mock.deploy();
         await mock.deployed();
@@ -266,22 +281,66 @@ describe("SynergiXStakingV1", function () {
         await mock.mint(user.address, stakeAmount);
         await mock.connect(user).approve(instance.address, stakeAmount);
         const receipt = await (await instance.connect(user).stake(stakeAmount, duration)).wait();
-        const block = await ethers.provider.getBlock(receipt.blockNumber);
+        await ethers.provider.getBlock(receipt.blockNumber);
         const position = await instance.positions(1);
 
         await mock.configureTransferBehavior(false, 100);
         await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
         await expectRevert(
-            instance.connect(user).withdraw(1),
+            instance.connect(user).claimReward(1),
             "UnsupportedTokenBehavior"
         );
 
         const stillOpen = await instance.positions(1);
-        expect(stillOpen.withdrawn).to.equal(false);
+        expect(stillOpen.principalWithdrawn).to.equal(false);
+        expect(stillOpen.rewardClaimed).to.equal(false);
         expect((await instance.totalPrincipalLiability()).eq(stakeAmount)).to.equal(true);
         expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
         expect((await mock.balanceOf(instance.address)).eq(stakeAmount.add(reward))).to.equal(true);
-        expect(block.timestamp).to.be.lessThan(position.maturityTimestamp.toNumber());
+
+        await mock.configureTransferBehavior(false, 0);
+        await instance.connect(user).withdrawPrincipal(1);
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount)).to.equal(true);
+        expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
+
+        await instance.connect(user).claimReward(1);
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).isZero()).to.equal(true);
+    });
+
+    it("returns principal when the reward reserve is short and preserves the reward liability", async function () {
+        const Mock = await ethers.getContractFactory("SynergiXV1CallbackTokenMock");
+        const mock = await Mock.deploy();
+        await mock.deployed();
+        const instance = await deployStaking(mock);
+        const duration = maximumDuration;
+        const reward = expectedReward(stakeAmount, duration);
+        await mock.mint(funder.address, reward);
+        await mock.connect(funder).approve(instance.address, reward);
+        await instance.connect(funder).fundRewards(reward);
+        await mock.mint(user.address, stakeAmount);
+        await mock.connect(user).approve(instance.address, stakeAmount);
+        await instance.connect(user).stake(stakeAmount, duration);
+        const position = await instance.positions(1);
+
+        await mock.burn(instance.address, reward);
+        await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
+        await instance.connect(user).withdrawPrincipal(1);
+
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount)).to.equal(true);
+        expect((await instance.positions(1)).principalWithdrawn).to.equal(true);
+        expect((await instance.positions(1)).rewardClaimed).to.equal(false);
+        expect((await instance.totalPrincipalLiability()).isZero()).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
+        await expectRevert(instance.connect(user).claimReward(1), "insufficient balance");
+        expect((await instance.positions(1)).rewardClaimed).to.equal(false);
+        expect((await instance.totalReservedRewardLiability()).eq(reward)).to.equal(true);
+
+        await mock.mint(instance.address, reward);
+        await instance.connect(user).claimReward(1);
+        expect((await mock.balanceOf(user.address)).eq(stakeAmount.add(reward))).to.equal(true);
+        expect((await instance.totalReservedRewardLiability()).isZero()).to.equal(true);
     });
 
     it("rolls back paused payout and allows withdrawal after transfers resume", async function () {
@@ -301,14 +360,17 @@ describe("SynergiXStakingV1", function () {
 
         await ethers.provider.send("evm_setNextBlockTimestamp", [position.maturityTimestamp.toNumber()]);
         await mock.setTransfersPaused(true);
-        await expectRevert(instance.connect(user).withdraw(1), "transfers paused");
-        expect((await instance.positions(1)).withdrawn).to.equal(false);
+        await expectRevert(instance.connect(user).withdrawPrincipal(1), "transfers paused");
+        await expectRevert(instance.connect(user).claimReward(1), "transfers paused");
+        expect((await instance.positions(1)).principalWithdrawn).to.equal(false);
+        expect((await instance.positions(1)).rewardClaimed).to.equal(false);
         expect((await instance.totalPrincipalLiability()).eq(stakeAmount)).to.equal(true);
 
         await mock.setTransfersPaused(false);
         const reentry = instance.interface.encodeFunctionData("fundRewards", [1]);
         await mock.configureCallback(instance.address, reentry);
-        await instance.connect(user).withdraw(1);
+        await instance.connect(user).withdrawPrincipal(1);
+        await instance.connect(user).claimReward(1);
 
         expect(await mock.callbackAttempted()).to.equal(true);
         expect(await mock.callbackSucceeded()).to.equal(false);

@@ -39,6 +39,15 @@ contract SynergiXV1CallbackTokenMock {
         balanceOf[account] += amount;
     }
 
+    /// @notice Removes tokens to model an external reserve shortfall in tests.
+    /// @param account Account whose balance is reduced.
+    /// @param amount Amount of tokens to remove.
+    function burn(address account, uint256 amount) external {
+        require(balanceOf[account] >= amount, "insufficient balance");
+        balanceOf[account] -= amount;
+        totalSupply -= amount;
+    }
+
     /// @notice Sets an allowance for test transfers.
     /// @param spender Account allowed to transfer tokens.
     /// @param amount Maximum transfer amount.
